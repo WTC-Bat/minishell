@@ -1,10 +1,5 @@
 #include "../libft/libft.h"
-
-#include "msh_bltn_env.c"
-#include "msh_bltn_echo.c"
-#include "msh_bltn_setenv.c"
-#include "msh_bltn_unsetenv.c"
-#include "msh_funcs.c"
+#include "../includes/minishell.h"
 
 static int		handle_input(char **args, t_env *tenv)
 {
