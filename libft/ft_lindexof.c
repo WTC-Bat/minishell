@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		ft_lindexof(const char *str, int c)
+int		ft_lindexof(const char *str, char c)
 {
 	int		cnt;
 

@@ -27,7 +27,7 @@ SRCS = ./ft_itoa.c ./ft_itobase.c ./ft_strcat.c ./ft_strchr.c ./ft_strcmp.c \
         ./ft_printf/has_checks.c ./ft_printf/is_checks.c \
         ./ft_printf/mod_ops.c ./ft_printf/type_handling.c ./ft_strcmp_low.c \
         ./ft_endswith.c ./ft_startswith.c ./ft_putnbr_endl.c ./ft_lstnew.c \
-        ./ft_lstdelone.c ./ft_lstdel.c
+        ./ft_lstdelone.c ./ft_lstdel.c ./ft_wordcnt.c ./ft_splitcnt.c
 
 OBJS = ./ft_itoa.o ./ft_itobase.o ./ft_strcat.o ./ft_strchr.o ./ft_strcmp.o \
 	   	./ft_strcpy.o ./ft_strdup.o ./ft_strjoin.o ./ft_strmap.o \
@@ -50,7 +50,8 @@ OBJS = ./ft_itoa.o ./ft_itobase.o ./ft_strcat.o ./ft_strchr.o ./ft_strcmp.o \
         ./handle_cap_s.o ./handle_i.o ./handle_o.o ./handle_p.o ./handle_s.o \
         ./handle_u.o ./handle_x.o ./has_checks.o ./is_checks.o ./mod_ops.o \
         ./type_handling.o ./ft_strcmp_low.o ./ft_endswith.o ./ft_startswith.o \
-        ./ft_putnbr_endl.o ./ft_lstnew.o ./ft_lstdelone.o ./ft_lstdel.o
+        ./ft_putnbr_endl.o ./ft_lstnew.o ./ft_lstdelone.o ./ft_lstdel.o \
+		./ft_wordcnt.o ./ft_splitcnt.o
 
 all: $(NAME)
 

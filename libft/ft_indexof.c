@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_indexof(char const *str, int c)
+int		ft_indexof(char const *str, char c)
 {
 	int		cnt;
 
@@ -21,5 +21,5 @@ int		ft_indexof(char const *str, int c)
 			return (cnt);
 		cnt++;
 	}
-	return (0);
+	return (-1);
 }
