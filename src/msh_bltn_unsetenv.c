@@ -1,4 +1,5 @@
 #include "../libft/libft.h"
+#include "../includes/minishell.h"
 
 int		unsetenv_args_valid(t_env *tenv, char **args)
 {
@@ -25,7 +26,7 @@ int		unsetenv_args_valid(t_env *tenv, char **args)
 	return (1);
 }
 
-
+/*
 static void	remove_var(t_env **tenv, char *varname)
 {
 	//t_env	*tmp;
@@ -78,7 +79,7 @@ static void	remove_var(t_env **tenv, char *varname)
 	//	*tenv = (*tenv)->next;
 	//}
 }
-
+*/
 
 /*
 static t_env	*remove_var(t_env *tenv, char *varname)

@@ -61,6 +61,28 @@ static int	has_arg(char **argv, char c)
 	return (0);
 }
 
+//
+static void	plines(char **lines)
+{
+	int		scnt;
+	int		ccnt;
+
+	scnt = 0;
+	ccnt = 0;
+	ft_putendl("|||");
+	while (lines[scnt] != NULL)
+	{
+		while (lines[scnt][ccnt] != '\0')
+		{
+			ft_putchar(lines[scnt][ccnt]);
+			ccnt++;
+		}
+		scnt++;
+	}
+	ft_putendl("|||");
+}
+//
+
 int		main(int argc, char **argv)
 {
 	int		done;
@@ -68,6 +90,11 @@ int		main(int argc, char **argv)
 	char	**args;
 	t_env	*tenv;
 
+	if (argc < 1)
+	{
+		ft_putendl("???");
+		return (1);
+	}
 	done = 0;
 	tenv = get_env();
 	if (has_arg(argv, 'c') == 1)
@@ -75,16 +102,18 @@ int		main(int argc, char **argv)
 	while (done == 0)
 	{
 		put_prompt(tenv);
-		lines = (char **)malloc(sizeof(char**));
+		lines = (char **)malloc(sizeof(char**));//!!?
 		get_next_line(0, &*lines);
+		plines(lines);
 		if (lines[0][0] != '\0')
 		{
 			args = ft_strsplit(lines[0], ' ');
 			done = handle_input(args, tenv);
-			free(lines);
+			//free(lines);
+			//free(args);
 		}
 	}
-	free(args);//?
-	free(tenv);//?
+	//free(args);//?
+	//free(tenv);//?
 	return (0);
 }
