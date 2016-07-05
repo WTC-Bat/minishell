@@ -15,6 +15,10 @@ all: $(NAME)
 
 $(NAME):
 	make -C ./libft/
+	gcc $(FLAGS) -I$(HEAD) -I$(HEADLFT) $(SRCS) $(LIB_FT) -o minishell
+
+dbg:
+	make -C ./libft/
 	gcc -g $(FLAGS) -I$(HEAD) -I$(HEADLFT) $(SRCS) $(LIB_FT) -o minishell
 
 clean:

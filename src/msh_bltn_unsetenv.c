@@ -101,6 +101,48 @@ static t_env	*remove_var(t_env *tenv, char *varname)
 }
 */
 
+//The two remove_var functions are supplementary and must be dissected
+//Iterative
+void	remove_var(t_env **tenv, char *varname)
+{
+	t_env	*tmp;
+	t_env	*prev;
+
+	prev = NULL;
+	tmp = *tenv;
+	while (tmp != NULL)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+		if ((ft_strequ((*tenv)->var, varname)) == 1)
+		{
+			if (prev == NULL)
+				*tenv = tmp->next;
+			else
+				prev->next = tmp->next;
+			free(tmp);
+			//break;
+		}
+	}
+}
+
+/*
+//Recursive
+t_env	*remove_var(t_env *tenv, char *varname)
+{
+	t_env	*tmp;
+
+	if ((ft_strequ(tenv->var, varname)) == 1)
+	{
+		tmp = tenv->next;
+		free(tenv);
+		return(tmp);
+	}
+	tenv->next = remove_var(tenv->next, varname);
+	return (tenv);
+}
+*/
+
 void	msh_unsetenv(t_env **tenv, char **args)
 {
 	if (unsetenv_args_valid(*tenv, args) == 1)

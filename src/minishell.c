@@ -61,6 +61,7 @@ static int	has_arg(char **argv, char c)
 	return (0);
 }
 
+/*
 //
 static void	plines(char **lines)
 {
@@ -82,6 +83,7 @@ static void	plines(char **lines)
 	ft_putendl("|||");
 }
 //
+*/
 
 int		main(int argc, char **argv)
 {
@@ -104,7 +106,7 @@ int		main(int argc, char **argv)
 		put_prompt(tenv);
 		lines = (char **)malloc(sizeof(char**));//!!?
 		get_next_line(0, &*lines);
-		plines(lines);
+		//plines(lines);
 		if (lines[0][0] != '\0')
 		{
 			args = ft_strsplit(lines[0], ' ');
