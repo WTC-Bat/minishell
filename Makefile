@@ -8,9 +8,6 @@ LIB_FT = -L ./libft/ -lft
 SRCS = $(SRC)minishell.c $(SRC)msh_bltn_echo.c $(SRC)msh_bltn_env.c \
 	   $(SRC)msh_bltn_setenv.c $(SRC)msh_bltn_unsetenv.c $(SRC)msh_funcs.c
 
-#OBJS = ./msh_bltn_echo.o ./msh_bltn_env.o ./msh_bltn_setenv.o \
-#	   ./msh_bltn_unsetenv.o ./msh_funcs.o
-
 all: $(NAME)
 
 $(NAME):
@@ -22,7 +19,7 @@ dbg:
 	gcc -g $(FLAGS) -I$(HEAD) -I$(HEADLFT) $(SRCS) $(LIB_FT) -o minishell
 
 clean:
-	rm -f *.o
+	rm -f ./libft/libft.a
 
 fclean: clean
 	rm -f $(NAME)

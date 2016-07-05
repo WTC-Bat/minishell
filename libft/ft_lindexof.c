@@ -23,5 +23,5 @@ int		ft_lindexof(const char *str, char c)
 			return (cnt);
 		cnt--;
 	}
-	return (0);
+	return (-1);
 }

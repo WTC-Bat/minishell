@@ -49,11 +49,11 @@ char		**ft_strsplit(char const *s, char c)
 			if (s[scnt + 1] == c || s[scnt + 1] == '\0')
 			{
 				end = scnt - start + 1;
-				strs[strcnt] = ft_strsub(s, start, end);
-				strcnt++;
+				strs[strcnt++] = ft_strsub(s, start, end);
 			}
 		}
 		scnt++;
 	}
+	strs[strcnt] = NULL;
 	return (strs);
 }

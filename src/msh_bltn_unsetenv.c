@@ -26,83 +26,10 @@ int		unsetenv_args_valid(t_env *tenv, char **args)
 	return (1);
 }
 
-/*
-static void	remove_var(t_env **tenv, char *varname)
-{
-	//t_env	*tmp;
-
-	//while (*tenv != NULL)
-	//{
-	//	if ((ft_strequ((*tenv)->var, varname)) == 1)
-	//	{
-	//		ft_putendl("IS EQU");
-	//		(*tenv)->var = (*tenv)->next->var;
-	//		(*tenv)->val = (*tenv)->next->val;
-	//		tmp = (*tenv)->next;
-	//		(*tenv)->next = (*tenv)->next->next;
-	//		free(tmp);
-	//	}
-	//	*tenv = (*tenv)->next;
-	//}
-
-	/////////////////////////
-
-	//while (*tenv != NULL)
-	//{
-	//	if ((ft_strequ((*tenv)->var, varname)) == 1)
-	//	{
-	//		(*tenv)->var = NULL;
-	//		(*tenv)->val = NULL;
-	//		free(*tenv);
-	//	}
-	//	*tenv = (*tenv)->next;
-	//}
-
-	//////////////////////
-
-	//int		found;
-	//int		end;
-
-	//found = 0;
-	//while ((*tenv)->next != NULL)
-	//{
-	//	if ((ft_strequ((*tenv)->var, varname)) == 1)
-	//		found = 1;
-
-	//	ft_putendl((*tenv)->var);
-	//	ft_putendl(varname);
-	//	if (found == 1)
-	//	{
-	//		(*tenv)->var = (*tenv)->next->var;
-	//		(*tenv)->val = (*tenv)->next->val;
-	//	}
-	//	*tenv = (*tenv)->next;
-	//}
-}
-*/
-
-/*
-static t_env	*remove_var(t_env *tenv, char *varname)
-{
-	t_env	*new_env;
-
-	while (tenv != NULL)
-	{
-		new_env = (t_env *)malloc(sizeof(t_env));
-		if ((ft_strequ(tenv->var, varname)) == 0)
-		{
-			new_env = tenv;
-			new_env = new_env->next;
-		}
-		tenv = tenv->next;
-	}
-	free(tenv);
-	return (new_env);
-}
-*/
-
 //The two remove_var functions are supplementary and must be dissected
+//Not Working
 //Iterative
+/*
 void	remove_var(t_env **tenv, char *varname)
 {
 	t_env	*tmp;
@@ -112,6 +39,7 @@ void	remove_var(t_env **tenv, char *varname)
 	tmp = *tenv;
 	while (tmp != NULL)
 	{
+		tmp = *tenv;
 		prev = tmp;
 		tmp = tmp->next;
 		if ((ft_strequ((*tenv)->var, varname)) == 1)
@@ -121,13 +49,14 @@ void	remove_var(t_env **tenv, char *varname)
 			else
 				prev->next = tmp->next;
 			free(tmp);
-			//break;
+			break;
 		}
 	}
 }
+*/
 
-/*
 //Recursive
+//Works
 t_env	*remove_var(t_env *tenv, char *varname)
 {
 	t_env	*tmp;
@@ -141,11 +70,10 @@ t_env	*remove_var(t_env *tenv, char *varname)
 	tenv->next = remove_var(tenv->next, varname);
 	return (tenv);
 }
-*/
 
 void	msh_unsetenv(t_env **tenv, char **args)
 {
 	if (unsetenv_args_valid(*tenv, args) == 1)
-		//remove_var(tenv, args[1]);
-		ft_putendl("REMOVE_VAR");
+		remove_var(tenv, args[1]);
+		//ft_putendl("REMOVE_VAR");
 }
