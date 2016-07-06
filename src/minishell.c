@@ -78,6 +78,7 @@ static void	plines(char **lines)
 			ft_putchar(lines[scnt][ccnt]);
 			ccnt++;
 		}
+		ccnt = 0;
 		scnt++;
 	}
 	ft_putendl("|||");
@@ -110,6 +111,7 @@ int		main(int argc, char **argv)
 		if (lines[0][0] != '\0')
 		{
 			args = ft_strsplit(lines[0], ' ');
+			//plines(args);
 			done = handle_input(args, tenv);
 			//free(lines);
 			//free(args);

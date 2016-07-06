@@ -11,11 +11,11 @@ SRCS = $(SRC)minishell.c $(SRC)msh_bltn_echo.c $(SRC)msh_bltn_env.c \
 all: $(NAME)
 
 $(NAME):
-	make -C ./libft/
+	make re -C ./libft/ && make clean -C ./libft/
 	gcc $(FLAGS) -I$(HEAD) -I$(HEADLFT) $(SRCS) $(LIB_FT) -o minishell
 
 dbg:
-	make -C ./libft/
+	make re -C ./libft/ && make clean -C ./libft/
 	gcc -g $(FLAGS) -I$(HEAD) -I$(HEADLFT) $(SRCS) $(LIB_FT) -o minishell
 
 clean:

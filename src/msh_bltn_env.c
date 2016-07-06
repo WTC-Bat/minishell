@@ -62,6 +62,7 @@ t_env			*get_env()
 	while (environ[cnt] != NULL)
 	{
 		tenv = (t_env *)malloc(sizeof(t_env));
+		ft_putendl("tenv malloc'd");//
 		idx = ft_indexof(environ[cnt], '=');
 		lidx = ft_strlen(environ[cnt]) - idx;
 		tenv->var = ft_strsub(environ[cnt], 0, idx);

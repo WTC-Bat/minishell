@@ -3,6 +3,7 @@
 *.a
 a.out
 minishell
+*.dSYM
 
 # Generated files
 .DS_Store

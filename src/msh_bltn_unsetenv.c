@@ -74,6 +74,6 @@ t_env	*remove_var(t_env *tenv, char *varname)
 void	msh_unsetenv(t_env **tenv, char **args)
 {
 	if (unsetenv_args_valid(*tenv, args) == 1)
-		remove_var(tenv, args[1]);
+		remove_var(*tenv, args[1]);
 		//ft_putendl("REMOVE_VAR");
 }
