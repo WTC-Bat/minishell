@@ -92,7 +92,7 @@ char	*read_line(const int fd)
 	char	*line;
 
 	inchar = '0';
-	line = (char *)malloc(sizeof(char) * 32);//32?
+	line = (char *)malloc(sizeof(char) * 1);//32?
 	while (inchar != '\n')
 	{
 		read(fd, &inchar, 1);
@@ -129,6 +129,7 @@ int		main(int argc, char **argv)
 			args = ft_strsplit(input, ' ');
 			done = handle_input(args, tenv);
 		}
+		free(input);//?
 		/*
 		put_prompt(tenv);
 		lines = (char **)malloc(sizeof(char**));//!!?
