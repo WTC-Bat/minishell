@@ -86,10 +86,28 @@ static void	plines(char **lines)
 //
 */
 
+char	*read_line(const int fd)
+{
+	char	inchar;
+	char	*line;
+
+	inchar = '0';
+	line = (char *)malloc(sizeof(char) * 32);//32?
+	while (inchar != '\n')
+	{
+		read(fd, &inchar, 1);
+		if (inchar != '\n')//?
+			ft_strcat(line, &inchar);
+	}
+	line[ft_strlen(line)] = '\0';
+	return (line);
+}
+
 int		main(int argc, char **argv)
 {
 	int		done;
-	char	**lines;
+	//char	**lines;
+	char	*input;
 	char	**args;
 	t_env	*tenv;
 
@@ -105,6 +123,14 @@ int		main(int argc, char **argv)
 	while (done == 0)
 	{
 		put_prompt(tenv);
+		input = read_line(0);
+		if (input[0] != '\0')
+		{
+			args = ft_strsplit(input, ' ');
+			done = handle_input(args, tenv);
+		}
+		/*
+		put_prompt(tenv);
 		lines = (char **)malloc(sizeof(char**));//!!?
 		get_next_line(0, &*lines);
 		//plines(lines);
@@ -116,6 +142,7 @@ int		main(int argc, char **argv)
 			//free(lines);
 			//free(args);
 		}
+		*/
 	}
 	//free(args);//?
 	//free(tenv);//?

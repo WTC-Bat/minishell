@@ -34,7 +34,7 @@ static void	add_new_var(t_env **tenv, char *var, char *val)
 	ft_putendl("new malloc'd");//
 	new->var = var;
 	new->val = val;
-	//new->next = NULL;
+	new->next = NULL;
 	while ((*tenv)->next != NULL)
 		*tenv = (*tenv)->next;
 	(*tenv)->next = new;
