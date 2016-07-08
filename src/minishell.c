@@ -34,9 +34,9 @@ static void	put_prompt(t_env *tenv)
 	prompt = ft_strjoin(prompt, user);
 	prompt = ft_strjoin(prompt, "@WTC $> ");
 	prompt = ft_strjoin(prompt, COL_DEF);
-	free(user);
+	//free(user);
 	ft_putstr(prompt);
-	free(prompt);
+	//free(prompt);
 }
 
 static int	has_arg(char **argv, char c)
@@ -92,14 +92,18 @@ char	*read_line(const int fd)
 	char	*line;
 
 	inchar = '0';
-	line = (char *)malloc(sizeof(char) * 1);//32?
-	while (inchar != '\n')
+	//inchar = (char)malloc(sizeof(char));
+	//line = (char *)malloc(sizeof(char) * 1);//32?
+	line = ft_strnew(1);
+	while (inchar != '\n' && inchar != '\0')
 	{
 		read(fd, &inchar, 1);
-		if (inchar != '\n')//?
+		if (inchar != '\n' && inchar != '\0')//?
 			ft_strcat(line, &inchar);
 	}
 	line[ft_strlen(line)] = '\0';
+	//ft_putstr("LINE: ");
+	//ft_putendl(line);
 	return (line);
 }
 
@@ -127,25 +131,14 @@ int		main(int argc, char **argv)
 		if (input[0] != '\0')
 		{
 			args = ft_strsplit(input, ' ');
-			done = handle_input(args, tenv);
-		}
-		free(input);//?
-		/*
-		put_prompt(tenv);
-		lines = (char **)malloc(sizeof(char**));//!!?
-		get_next_line(0, &*lines);
-		//plines(lines);
-		if (lines[0][0] != '\0')
-		{
-			args = ft_strsplit(lines[0], ' ');
 			//plines(args);
 			done = handle_input(args, tenv);
-			//free(lines);
 			//free(args);
 		}
-		*/
+		//free(input);//?
+		//free(args);
 	}
 	//free(args);//?
-	//free(tenv);//?
+	free(tenv);//?
 	return (0);
 }

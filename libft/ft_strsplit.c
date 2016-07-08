@@ -35,10 +35,11 @@ char		**ft_strsplit(char const *s, char c)
 	size_t	scnt;
 	size_t	strcnt;
 	size_t	start;
-	size_t	end;
+	//size_t	end;
 
 	scnt = 0;
 	strcnt = 0;
+	start = 0;
 	strs = (char **)malloc(sizeof(*strs) * (word_count(s, c) + 1));
 	while (s[scnt] != '\0')
 	{
@@ -48,8 +49,8 @@ char		**ft_strsplit(char const *s, char c)
 				start = scnt;
 			if (s[scnt + 1] == c || s[scnt + 1] == '\0')
 			{
-				end = scnt - start + 1;
-				strs[strcnt++] = ft_strsub(s, start, end);
+				//end = scnt - start + 1;
+				strs[strcnt++] = ft_strsub(s, start, scnt - start + 1);
 			}
 		}
 		scnt++;
