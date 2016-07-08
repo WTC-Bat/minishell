@@ -128,7 +128,7 @@ int		main(int argc, char **argv)
 	{
 		put_prompt(tenv);
 		input = read_line(0);
-		if (input[0] != '\0')
+		if (input[0] != '\0') // && input[0] != '\n'
 		{
 			args = ft_strsplit(input, ' ');
 			//plines(args);
