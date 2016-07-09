@@ -47,6 +47,19 @@ void	print_env(t_env *tenv)
 	}
 }
 
+int		tenv_count(t_env *tenv)
+{
+	int		cnt;
+
+	cnt = 0;
+	while (tenv != NULL)
+	{
+		cnt++;
+		tenv = tenv->next;
+	}
+	return (cnt + 1);
+}
+
 t_env			*get_env()
 {
 	int		cnt;

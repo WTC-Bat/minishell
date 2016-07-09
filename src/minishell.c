@@ -18,8 +18,9 @@ static int		handle_input(char **args, t_env *tenv)
 		done = 1;
 	else
 	{
-		ft_putstr(args[0]);
-		ft_putendl(": Unknown command");
+		msh_exec(args, tenv);
+		//ft_putstr(args[0]);
+		//ft_putendl(": Unknown command");
 	}
 	return (done);
 }
