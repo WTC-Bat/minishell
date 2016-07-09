@@ -6,15 +6,15 @@ static int		handle_input(char **args, t_env *tenv)
 	int		done;
 
 	done = 0;
-	if ((ft_strequ(args[0], "env")) == 1)
+	if ((ft_strcmp(args[0], "env")) == 0)
 		print_env(tenv);
-	else if ((ft_strequ(args[0], "echo")) == 1)
+	else if ((ft_strcmp(args[0], "echo")) == 0)
 		msh_echo(args);
-	else if ((ft_strequ(args[0], "setenv")) == 1)
+	else if ((ft_strcmp(args[0], "setenv")) == 0)
 		msh_setenv(&tenv, args);
-	else if ((ft_strequ(args[0], "unsetenv")) == 1)
+	else if ((ft_strcmp(args[0], "unsetenv")) == 0)
 		msh_unsetenv(&tenv, args);
-	else if ((ft_strequ(args[0], "exit")) == 1)
+	else if ((ft_strcmp(args[0], "exit")) == 0)
 		done = 1;
 	else
 	{
@@ -61,7 +61,7 @@ static int	has_arg(char **argv, char c)
 	return (0);
 }
 
-/*
+
 //
 static void	plines(char **lines)
 {
@@ -84,7 +84,7 @@ static void	plines(char **lines)
 	ft_putendl("|||");
 }
 //
-*/
+
 
 char	*read_line(const int fd)
 {
@@ -131,7 +131,7 @@ int		main(int argc, char **argv)
 		if (input[0] != '\0') // && input[0] != '\n'
 		{
 			args = ft_strsplit(input, ' ');
-			//plines(args);
+			plines(args);
 			done = handle_input(args, tenv);
 			//free(args);
 		}

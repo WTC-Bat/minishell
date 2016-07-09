@@ -35,7 +35,8 @@ char		**ft_strsplit(char const *s, char c)
 	size_t	scnt;
 	size_t	strcnt;
 	size_t	start;
-	//size_t	end;
+
+	//char	*sub;
 
 	scnt = 0;
 	strcnt = 0;
@@ -49,7 +50,10 @@ char		**ft_strsplit(char const *s, char c)
 				start = scnt;
 			if (s[scnt + 1] == c || s[scnt + 1] == '\0')
 			{
-				//end = scnt - start + 1;
+				//sub = ft_strsub(s, start, scnt - start + 1);
+				//ft_putstr("SUB: ");
+				//ft_putendl(sub);
+				//strs[strcnt++] = sub;
 				strs[strcnt++] = ft_strsub(s, start, scnt - start + 1);
 			}
 		}
