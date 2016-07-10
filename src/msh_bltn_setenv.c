@@ -58,10 +58,7 @@ static void	add_new_var(t_env **tenv, char *var, char *val)
 	t_env	*new;
 
 	if (var_exists(*tenv, var) == 1)
-	{
-		ft_putendl("VAR EXISTS");
 		replace_var(tenv, var, val);
-	}
 	else
 	{
 		new = (t_env *)malloc(sizeof(t_env));
