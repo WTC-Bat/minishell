@@ -27,7 +27,7 @@ static char *get_prog_path(t_env *tenv, char *pname)
 	//	free(pname);
 	//}
 	paths = ft_strsplit(pval, ':');
-	while (paths != NULL)
+	while (*paths != NULL)
 	{
 		//fpath = ft_strjoin(*paths, ammendpn);
 
@@ -39,21 +39,20 @@ static char *get_prog_path(t_env *tenv, char *pname)
 		//check acces on 'fpath'
 		//if fpath exists
 		//	if fpath is executable
-
 		if (access(fpath, F_OK) == 0)
 		{
-			ft_putendl(fpath);
-			ft_putendl("IS FILE");
+			//ft_putendl(fpath);
+			//ft_putendl("IS FILE");
 			if (access(fpath, X_OK) == 0)
 			{
-				ft_putchar('\n');
-				ft_putendl(fpath);
-				ft_putendl("IS EXE");
+				//ft_putchar('\n');
+				//ft_putendl(fpath);
+				//ft_putendl("IS EXE");
 				return (fpath);
 			}
 		}
 		paths++;
-		//free(fpath);
+		free(fpath);
 	}
 	return (NULL);
 }
@@ -89,17 +88,33 @@ char	**tenv_to_star(t_env *tenv)//?
 //
 //}
 
-//int
-void	msh_exec(char **args, t_env *tenv)
+
+int		msh_exec(char **args, t_env *tenv)
 {
 	//char	*pname;
 	//char	**pargs;
 	char	*path;
 	char	**envp;
 	int		er;
+	pid_t	pid;
+	//int		stat;
 
 	er = 0;
-	path = get_prog_path(tenv, args[0]);
+	if ((path = get_prog_path(tenv, args[0])) == NULL)
+	{
+		free(path);
+		return (-1);
+	}
+	//path = get_prog_path(tenv, args[0]);
+	//if (path == NULL)
+	//	return (-1);
 	envp = tenv_to_star(tenv);
-	er = execve(path, &args[1], envp);
+	pid = fork();
+	if (pid == 0)
+		execve(path, args, envp);
+		//exit(0);
+	if (pid > 0)
+		waitpid(pid, 0, 0);
+	free(envp);
+	return (0);
 }

@@ -60,7 +60,7 @@ int		tenv_count(t_env *tenv)
 	return (cnt + 1);
 }
 
-t_env			*get_env()
+t_env			*get_env(void)
 {
 	int		cnt;
 	int		idx;

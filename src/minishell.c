@@ -1,11 +1,13 @@
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
-static int		handle_input(char **args, t_env *tenv)
+static int	handle_input(char **args, t_env *tenv)
 {
 	int		done;
+	int		exec_err;
 
 	done = 0;
+	exec_err = 0;
 	if ((ft_strcmp(args[0], "env")) == 0)
 		print_env(tenv);
 	else if ((ft_strcmp(args[0], "echo")) == 0)
@@ -18,9 +20,11 @@ static int		handle_input(char **args, t_env *tenv)
 		done = 1;
 	else
 	{
-		msh_exec(args, tenv);
-		//ft_putstr(args[0]);
-		//ft_putendl(": Unknown command");
+		if ((exec_err = msh_exec(args, tenv) == -1))
+		{
+			ft_putstr(args[0]);
+			ft_putendl(": Unknown command");
+		}
 	}
 	return (done);
 }
@@ -62,7 +66,7 @@ static int	has_arg(char **argv, char c)
 	return (0);
 }
 
-
+/*
 //
 static void	plines(char **lines)
 {
@@ -85,33 +89,11 @@ static void	plines(char **lines)
 	ft_putendl("|||");
 }
 //
+*/
 
-
-char	*read_line(const int fd)
-{
-	char	inchar;
-	char	*line;
-
-	inchar = '0';
-	//inchar = (char)malloc(sizeof(char));
-	//line = (char *)malloc(sizeof(char) * 1);//32?
-	line = ft_strnew(1);
-	while (inchar != '\n' && inchar != '\0')
-	{
-		read(fd, &inchar, 1);
-		if (inchar != '\n' && inchar != '\0')//?
-			ft_strcat(line, &inchar);
-	}
-	line[ft_strlen(line)] = '\0';
-	//ft_putstr("LINE: ");
-	//ft_putendl(line);
-	return (line);
-}
-
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	int		done;
-	//char	**lines;
 	char	*input;
 	char	**args;
 	t_env	*tenv;
@@ -132,7 +114,7 @@ int		main(int argc, char **argv)
 		if (input[0] != '\0') // && input[0] != '\n'
 		{
 			args = ft_strsplit(input, ' ');
-			plines(args);
+			//plines(args);
 			done = handle_input(args, tenv);
 			//free(args);
 		}
