@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   msh_bltn_unsetenv.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/10 15:57:02 by mvanwyk           #+#    #+#             */
+/*   Updated: 2016/07/10 15:57:03 by mvanwyk          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
@@ -26,37 +38,6 @@ int		unsetenv_args_valid(t_env *tenv, char **args)
 	return (1);
 }
 
-//The two remove_var functions are supplementary and must be dissected
-//Not Working
-//Iterative
-/*
-void	remove_var(t_env **tenv, char *varname)
-{
-	t_env	*tmp;
-	t_env	*prev;
-
-	prev = NULL;
-	tmp = *tenv;
-	while (tmp != NULL)
-	{
-		tmp = *tenv;
-		prev = tmp;
-		tmp = tmp->next;
-		if ((ft_strequ((*tenv)->var, varname)) == 1)
-		{
-			if (prev == NULL)
-				*tenv = tmp->next;
-			else
-				prev->next = tmp->next;
-			free(tmp);
-			break;
-		}
-	}
-}
-*/
-
-//Recursive
-//Works
 t_env	*remove_var(t_env *tenv, char *varname)
 {
 	t_env	*tmp;
@@ -65,7 +46,7 @@ t_env	*remove_var(t_env *tenv, char *varname)
 	{
 		tmp = tenv->next;
 		free(tenv);
-		return(tmp);
+		return (tmp);
 	}
 	tenv->next = remove_var(tenv->next, varname);
 	return (tenv);
@@ -75,5 +56,4 @@ void	msh_unsetenv(t_env **tenv, char **args)
 {
 	if (unsetenv_args_valid(*tenv, args) == 1)
 		remove_var(*tenv, args[1]);
-		//ft_putendl("REMOVE_VAR");
 }

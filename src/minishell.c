@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/10 16:07:04 by mvanwyk           #+#    #+#             */
+/*   Updated: 2016/07/10 16:07:05 by mvanwyk          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
@@ -36,10 +48,8 @@ static void	put_prompt(t_env *tenv)
 	prompt = ft_strjoin(prompt, user);
 	prompt = ft_strjoin(prompt, "@WTC $> ");
 	prompt = ft_strjoin(prompt, COL_DEF);
-	//free(user);
 	ft_putstr(prompt);
 	free(user);
-	//free(prompt);
 }
 
 static int	has_arg(char **argv, char c)
@@ -64,37 +74,29 @@ static int	has_arg(char **argv, char c)
 	return (0);
 }
 
-/*
-//
-static void	plines(char **lines)
+static int	loop(t_env *tenv)
 {
-	int		scnt;
-	int		ccnt;
+	char	*input;
+	char	**args;
+	int		done;
 
-	scnt = 0;
-	ccnt = 0;
-	ft_putendl("|||");
-	while (lines[scnt] != NULL)
+	done = 0;
+	put_prompt(tenv);
+	input = read_line(0);
+	if (input[0] != '\0')
 	{
-		while (lines[scnt][ccnt] != '\0')
-		{
-			ft_putchar(lines[scnt][ccnt]);
-			ccnt++;
-		}
-		ccnt = 0;
-		scnt++;
+		args = ft_strsplit(input, ' ');
+		done = handle_input(args, tenv);
 	}
-	ft_putendl("|||");
+	free(input);
+	return (done);
 }
-//
-*/
 
 int			main(int argc, char **argv)
 {
-	int		done;
-	char	*input;
-	char	**args;
-	t_env	*tenv;
+	int			done;
+	t_env		*tenv;
+	extern char	**environ;
 
 	if (argc < 1)
 	{
@@ -102,25 +104,11 @@ int			main(int argc, char **argv)
 		return (1);
 	}
 	done = 0;
-	tenv = get_env();
+	tenv = get_env(environ);
 	if (has_arg(argv, 'c') == 1)
 		ft_putstr(TRM_CLR);
 	while (done == 0)
-	{
-		put_prompt(tenv);
-		input = read_line(0);
-		if (input[0] != '\0') // && input[0] != '\n'
-		{
-			args = ft_strsplit(input, ' ');
-			//plines(args);
-			done = handle_input(args, tenv);
-		}
-		free(input);//?
-		//free(args);
-		//free_args(args);
-	}
-	//free(args);//?
-	//free_args(args);
-	//free(tenv);//?
+		done = loop(tenv);
+	free(tenv);
 	return (0);
 }

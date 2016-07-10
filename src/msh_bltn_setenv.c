@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   msh_bltn_setenv.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/10 16:13:49 by mvanwyk           #+#    #+#             */
+/*   Updated: 2016/07/10 16:13:52 by mvanwyk          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
@@ -29,14 +41,15 @@ static int	setenv_args_valid(t_env *tenv, char **args)
 	return (1);
 }
 
-void	replace_var(t_env **tenv, char *var, char *val)
+void		replace_var(t_env **tenv, char *var, char *val)
 {
 	while (*tenv != NULL)
 	{
 		if (ft_strcmp((*tenv)->var, var) == 0)
 		{
+			ft_strclr((*tenv)->val);
 			(*tenv)->val = ft_strdup(val);
-			break;
+			return ;
 		}
 		*tenv = (*tenv)->next;
 	}
@@ -71,7 +84,7 @@ static void	add_new_var(t_env **tenv, char *var, char *val)
 	}
 }
 
-void	msh_setenv(t_env **tenv, char **args)
+void		msh_setenv(t_env **tenv, char **args)
 {
 	if (args[1] == NULL)
 		ft_putendl("Missing variable name");
@@ -79,12 +92,6 @@ void	msh_setenv(t_env **tenv, char **args)
 		ft_putendl("Missing value for variable");
 	else
 	{
-		int	cnt = 0;
-		while (args[cnt] != NULL)
-		{
-			ft_putendl(args[cnt]);
-			cnt++;
-		}
 		if (setenv_args_valid(*tenv, args) == 1)
 			add_new_var(tenv, args[1], args[2]);
 	}

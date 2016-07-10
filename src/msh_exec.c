@@ -13,7 +13,7 @@
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
-static char *get_prog_path(t_env *tenv, char *pname)
+static char	*get_prog_path(t_env *tenv, char *pname)
 {
 	char	**paths;
 	char	*pval;
@@ -34,7 +34,7 @@ static char *get_prog_path(t_env *tenv, char *pname)
 	return (NULL);
 }
 
-char	**tenv_to_star(t_env *tenv)
+char		**tenv_to_star(t_env *tenv)
 {
 	char	**star;
 	int		len;
@@ -59,8 +59,7 @@ char	**tenv_to_star(t_env *tenv)
 	return (star);
 }
 
-
-int		msh_exec(char **args, t_env *tenv)
+int			msh_exec(char **args, t_env *tenv)
 {
 	char	*path;
 	char	**env;

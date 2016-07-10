@@ -1,9 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   msh_bltn_env.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2016/07/10 16:03:22 by mvanwyk           #+#    #+#             */
+/*   Updated: 2016/07/10 16:03:23 by mvanwyk          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
-extern char		**environ;
-
-t_env	*t_env_reverse(t_env *tenv)
+t_env		*t_env_reverse(t_env *tenv)
 {
 	t_env	*new;
 	t_env	*next;
@@ -20,7 +30,7 @@ t_env	*t_env_reverse(t_env *tenv)
 	return (new);
 }
 
-char	*get_env_val(t_env *tenv, char *varname)
+char		*get_env_val(t_env *tenv, char *varname)
 {
 	char	*out;
 
@@ -36,7 +46,7 @@ char	*get_env_val(t_env *tenv, char *varname)
 	return (NULL);
 }
 
-void	print_env(t_env *tenv)
+void		print_env(t_env *tenv)
 {
 	while (tenv != NULL)
 	{
@@ -47,7 +57,7 @@ void	print_env(t_env *tenv)
 	}
 }
 
-int		tenv_count(t_env *tenv)
+int			tenv_count(t_env *tenv)
 {
 	int		cnt;
 
@@ -60,7 +70,7 @@ int		tenv_count(t_env *tenv)
 	return (cnt + 1);
 }
 
-t_env			*get_env(void)
+t_env		*get_env(char **env)
 {
 	int		cnt;
 	int		idx;
@@ -72,13 +82,13 @@ t_env			*get_env(void)
 	idx = -1;
 	lidx = -1;
 	root = NULL;
-	while (environ[cnt] != NULL)
+	while (env[cnt] != NULL)
 	{
 		tenv = (t_env *)malloc(sizeof(t_env));
-		idx = ft_indexof(environ[cnt], '=');
-		lidx = ft_strlen(environ[cnt]) - idx;
-		tenv->var = ft_strsub(environ[cnt], 0, idx);
-		tenv->val = ft_strsub(environ[cnt], idx + 1, lidx);
+		idx = ft_indexof(env[cnt], '=');
+		lidx = ft_strlen(env[cnt]) - idx;
+		tenv->var = ft_strsub(env[cnt], 0, idx);
+		tenv->val = ft_strsub(env[cnt], idx + 1, lidx);
 		tenv->next = root;
 		root = tenv;
 		cnt++;
