@@ -6,6 +6,7 @@
 # define TRM_CLR "\e[1;1H\e[2J"
 
 # include <sys/wait.h>
+# include <sys/stat.h>
 
 typedef struct		s_env
 {
@@ -24,12 +25,15 @@ typedef struct		s_msh
 
 t_env	*get_env();
 char	*get_env_val(t_env *tenv, char *varname);
+void	msh_cd(char **args, t_env *tenv);
+void	cd_navigate(char *arg, t_env *tenv);
 void	msh_echo(char **eargv);
 int		msh_exec(char **args, t_env *tenv);
 void	msh_setenv(t_env **tenv, char **args);
 void	msh_unsetenv(t_env **tenv, char **args);
 void	print_env(t_env *tenv);
 char	*read_line(const int fd);
+void	replace_var(t_env **tenv, char *var, char *val);
 int		strcnt(char **args);
 int		tenv_count(t_env *tenv);
 t_env	*t_env_reverse(t_env *tenv);

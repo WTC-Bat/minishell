@@ -3,11 +3,6 @@
 
 static int	handle_input(char **args, t_env *tenv)
 {
-	int		done;
-	int		exec_err;
-
-	done = 0;
-	exec_err = 0;
 	if ((ft_strcmp(args[0], "env")) == 0)
 		print_env(tenv);
 	else if ((ft_strcmp(args[0], "echo")) == 0)
@@ -16,17 +11,19 @@ static int	handle_input(char **args, t_env *tenv)
 		msh_setenv(&tenv, args);
 	else if ((ft_strcmp(args[0], "unsetenv")) == 0)
 		msh_unsetenv(&tenv, args);
+	else if (ft_strcmp(args[0], "cd") == 0)
+		msh_cd(args, tenv);
 	else if ((ft_strcmp(args[0], "exit")) == 0)
-		done = 1;
+		return (1);
 	else
 	{
-		if ((exec_err = msh_exec(args, tenv) == -1))
+		if (msh_exec(args, tenv) == -1)
 		{
 			ft_putstr(args[0]);
 			ft_putendl(": Unknown command");
 		}
 	}
-	return (done);
+	return (0);
 }
 
 static void	put_prompt(t_env *tenv)
