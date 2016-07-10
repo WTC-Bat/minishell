@@ -81,6 +81,6 @@ int		msh_exec(char **args, t_env *tenv)
 	if (pid > 0)
 		waitpid(pid, 0, 0);
 	free(path);
-	free(envp);
+	free(env);
 	return (0);
 }
