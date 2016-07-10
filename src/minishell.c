@@ -38,6 +38,7 @@ static void	put_prompt(t_env *tenv)
 	prompt = ft_strjoin(prompt, COL_DEF);
 	//free(user);
 	ft_putstr(prompt);
+	free(user);
 	//free(prompt);
 }
 
@@ -113,12 +114,13 @@ int			main(int argc, char **argv)
 			args = ft_strsplit(input, ' ');
 			//plines(args);
 			done = handle_input(args, tenv);
-			//free(args);
 		}
-		//free(input);//?
+		free(input);//?
 		//free(args);
+		//free_args(args);
 	}
 	//free(args);//?
-	free(tenv);//?
+	//free_args(args);
+	//free(tenv);//?
 	return (0);
 }

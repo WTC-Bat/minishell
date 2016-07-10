@@ -53,6 +53,7 @@ void	cd_navigate(char *arg, t_env *tenv)
 	}
 	replace_var(&tenv, "OLDPWD", pwd);
 	replace_var(&tenv, "PWD", new_pwd);
+	chdir(new_pwd);
 	free(pwd);
 	free(new_pwd);
 }

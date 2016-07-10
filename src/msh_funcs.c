@@ -26,3 +26,35 @@ char	*read_line(const int fd)
 	line[ft_strlen(line)] = '\0';
 	return (line);
 }
+
+void	free_args(char **args)
+{
+	int		cnt;
+
+	cnt = 0;
+	while (args[cnt] != NULL)
+	{
+		free(args[cnt]);
+		cnt++;
+	}
+	free(args);
+}
+
+void	clear_args(char ***args)
+{
+		int		scnt;
+		int		ccnt;
+
+		scnt = 0;
+		ccnt = 0;
+		while (*args[scnt] != NULL)
+		{
+			while (*args[scnt][ccnt] != '\0')
+			{
+				*args[scnt][ccnt] = '\0';
+				ccnt++;
+			}
+			ccnt = 0;
+			scnt++;
+		}
+}

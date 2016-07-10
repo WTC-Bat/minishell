@@ -23,6 +23,8 @@ typedef struct		s_msh
 	//char			*prev_cmd;
 }					t_msh;
 
+void	clear_args(char ***args);
+void	free_args(char **args);
 t_env	*get_env();
 char	*get_env_val(t_env *tenv, char *varname);
 void	msh_cd(char **args, t_env *tenv);

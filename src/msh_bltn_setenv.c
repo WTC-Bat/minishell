@@ -78,6 +78,14 @@ void	msh_setenv(t_env **tenv, char **args)
 	else if (args[2] == NULL)
 		ft_putendl("Missing value for variable");
 	else
+	{
+		int	cnt = 0;
+		while (args[cnt] != NULL)
+		{
+			ft_putendl(args[cnt]);
+			cnt++;
+		}
 		if (setenv_args_valid(*tenv, args) == 1)
 			add_new_var(tenv, args[1], args[2]);
+	}
 }
