@@ -22,8 +22,8 @@ static char	*get_path_back(char *arg, char *pwd)
 	back_steps = ft_splitcnt(arg, '/');
 	new_path = ft_strdup(pwd);
 	slash = 0;
-	//if (new_path[ft_strlen(new_path) - 1] == '/')
-	//	new_path[ft_strlen(new_path) - 1] = '\0';
+	if (new_path[ft_strlen(new_path) - 1] == '/')
+		new_path[ft_strlen(new_path) - 1] = '\0';
 	while (back_steps > 0)
 	{
 		slash = ft_lindexof(new_path, '/');
@@ -41,7 +41,7 @@ void		cd_navigate(char *arg, t_env *tenv)
 	char	*pwd;
 
 	new_pwd = NULL;
-	//pwd = NULL;
+	pwd = NULL;
 	pwd = get_env_val(tenv, "PWD");
 	if (ft_strcmp(arg, "~") == 0)
 		new_pwd = get_env_val(tenv, "HOME");
