@@ -49,9 +49,8 @@ void	free_tenv(t_env *tenv)
 	//while (root != NULL)
 	while (tenv != NULL)
 	{
-		//tmp = root;
 		tmp = tenv;
-		//root = root->next;
+
 		tenv = tenv->next;
 		free(tmp);
 	}
