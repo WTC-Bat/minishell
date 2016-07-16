@@ -28,8 +28,6 @@ static char	*get_path_back(char *arg, char *pwd)
 	{
 		slash = ft_lindexof(new_path, '/');
 		new_path = ft_strsub(new_path, 0, slash);
-		ft_putstr("NEW_PATH: ");
-		ft_putendl(new_path);
 		back_steps--;
 	}
 	return (new_path);
