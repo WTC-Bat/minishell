@@ -46,9 +46,7 @@ void		cd_navigate(char *arg, t_env *tenv)
 	else if (ft_strcmp(arg, "/") == 0)
 		new_pwd = ft_strdup("/");
 	else if (arg[0] == '.' && arg[1] == '.')
-	{
 		new_pwd = get_path_back(arg, pwd);
-	}
 	else
 	{
 		new_pwd = ft_strjoin(pwd, "/");

@@ -45,10 +45,16 @@ static void	put_prompt(t_env *tenv)
 
 	user = get_env_val(tenv, "USER");
 	prompt = ft_strdup(COL_HGRN_BLD);
-	prompt = ft_strjoin(prompt, user);
-	prompt = ft_strjoin(prompt, "@WTC $> ");
-	prompt = ft_strjoin(prompt, COL_DEF);
+	//prompt = ft_strjoin(prompt, user);
+	ft_strcat(prompt, user);
+	//free(user);
+	//ft_putendl("USER FREED");
+	//prompt = ft_strjoin(prompt, "@WTC $> ");
+	ft_strcat(prompt, "@WTC $> ");
+	//prompt = ft_strjoin(prompt, COL_DEF);
+	ft_strcat(prompt, COL_DEF);
 	ft_putstr(prompt);
+	free(prompt);
 	free(user);
 }
 
@@ -91,7 +97,8 @@ static int	loop(t_env *tenv)
 	}
 	free(input);
 	if (args != NULL)
-		free(args);
+		//free(args);
+		free_star(args);
 	return (done);
 }
 
@@ -103,7 +110,7 @@ int			main(int argc, char **argv)
 
 	if (argc < 1)
 	{
-		ft_putendl("???");
+		ft_putendl("How did you get this far?");
 		return (1);
 	}
 	done = 0;
@@ -112,6 +119,7 @@ int			main(int argc, char **argv)
 		ft_putstr(TRM_CLR);
 	while (done == 0)
 		done = loop(tenv);
-	free(tenv);
+	//free(tenv);
+	free_tenv(tenv);
 	return (0);
 }

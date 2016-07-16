@@ -29,6 +29,8 @@ typedef struct		s_env
 
 void				clear_args(char ***args);
 void				free_args(char **args);
+void				free_star(char **star);
+void				free_tenv(t_env *tenv);
 t_env				*get_env();
 char				*get_env_val(t_env *tenv, char *varname);
 void				msh_cd(char **args, t_env *tenv);

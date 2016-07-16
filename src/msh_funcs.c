@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../libft/libft.h"
+#include "../includes/minishell.h"
 
 int		strcnt(char **args)
 {
@@ -39,17 +40,36 @@ char	*read_line(const int fd)
 	return (line);
 }
 
-void	free_args(char **args)
+void	free_tenv(t_env *tenv)
+{
+	//t_env	*root;
+	t_env	*tmp;
+
+	//root = tenv;
+	//while (root != NULL)
+	while (tenv != NULL)
+	{
+		//tmp = root;
+		tmp = tenv;
+		//root = root->next;
+		tenv = tenv->next;
+		free(tmp);
+	}
+	tenv = NULL;
+	ft_putendl("TENV FREED");
+}
+
+void	free_star(char **star)
 {
 	int		cnt;
 
 	cnt = 0;
-	while (args[cnt] != NULL)
+	while (star[cnt] != NULL)
 	{
-		free(args[cnt]);
+		free(star[cnt]);
 		cnt++;
 	}
-	free(args);
+	free(star);
 }
 
 void	clear_args(char ***args)
