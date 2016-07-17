@@ -31,7 +31,7 @@ static char	*get_prog_path(t_env *tenv, char *pname)
 					return (fpath);
 				paths++;
 		}
-		////free_star(paths);
+		free_star(paths);
 		free(pval);
 		if (fpath != NULL)
 			free(fpath);
@@ -85,7 +85,6 @@ int			msh_exec(char **args, t_env *tenv)
 	if (pid > 0)
 		waitpid(pid, 0, 0);
 	free(path);
-	//free(env);
 	free_star(env);
 	return (0);
 }

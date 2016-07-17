@@ -45,14 +45,9 @@ static void	put_prompt(t_env *tenv)
 
 	user = get_env_val(tenv, "USER");
 	prompt = ft_strdup(COL_HGRN_BLD);
-	//prompt = ft_strjoin(prompt, user);
-	ft_strcat(prompt, user);
-	//free(user);
-	//ft_putendl("USER FREED");
-	//prompt = ft_strjoin(prompt, "@WTC $> ");
-	ft_strcat(prompt, "@WTC $> ");
-	//prompt = ft_strjoin(prompt, COL_DEF);
-	ft_strcat(prompt, COL_DEF);
+	prompt = ft_strcat(prompt, user);
+	prompt = ft_strcat(prompt, "@WTC $> ");
+	prompt = ft_strcat(prompt, COL_DEF);
 	ft_putstr(prompt);
 	free(prompt);
 	free(user);

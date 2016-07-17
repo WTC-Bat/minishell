@@ -29,7 +29,9 @@ char	*read_line(const int fd)
 	char	*line;
 
 	inchar = '0';
-	line = ft_strnew(1);
+	//line = ft_strnew(0);
+	//line = (char *)malloc(sizeof(char) * 2);
+	line = (char *)malloc(sizeof(char));
 	while (inchar != '\n' && inchar != '\0')
 	{
 		read(fd, &inchar, 1);
@@ -42,20 +44,17 @@ char	*read_line(const int fd)
 
 void	free_tenv(t_env *tenv)
 {
-	//t_env	*root;
 	t_env	*tmp;
 
-	//root = tenv;
-	//while (root != NULL)
 	while (tenv != NULL)
 	{
 		tmp = tenv;
-
 		tenv = tenv->next;
+		//free(tmp->var);
+		//free(tmp->val);
 		free(tmp);
 	}
 	tenv = NULL;
-	ft_putendl("TENV FREED");
 }
 
 void	free_star(char **star)
@@ -68,7 +67,8 @@ void	free_star(char **star)
 		free(star[cnt]);
 		cnt++;
 	}
-	free(star);
+	////free(star);
+	////ft_putendl("STAR FREED");
 }
 
 void	clear_args(char ***args)
