@@ -49,7 +49,9 @@ static void	put_prompt(t_env *tenv)
 	prompt = ft_strcat(prompt, "@WTC $> ");
 	prompt = ft_strcat(prompt, COL_DEF);
 	ft_putstr(prompt);
+	//prompt = NULL;
 	free(prompt);
+	//user = NULL;
 	free(user);
 }
 
@@ -84,16 +86,21 @@ static int	loop(t_env *tenv)
 	done = 0;
 	put_prompt(tenv);
 	input = read_line(0);
+	// ft_putstr("INPUT: ");
+	// ft_putendl(input);
 	args = NULL;
 	if (input[0] != '\0' && input[0] != ' ' && input[0] != '\t')
 	{
 		args = ft_strsplit(input, ' ');
 		done = handle_input(args, tenv);
+		free(args);
 	}
+	ft_strclr(input);
 	free(input);
-	if (args != NULL)
+	//if (args != NULL)
+		//clear_star(args);
 		//free(args);
-		free_star(args);
+		//free_star(args);
 	return (done);
 }
 

@@ -27,7 +27,8 @@ typedef struct		s_env
 	struct s_env	*next;
 }					t_env;
 
-void				clear_args(char ***args);
+//void				clear_args(char ***args);
+void				clear_star(char **args);
 void				free_star(char **star);
 void				free_tenv(t_env *tenv);
 t_env				*get_env();

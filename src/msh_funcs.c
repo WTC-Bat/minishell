@@ -64,13 +64,27 @@ void	free_star(char **star)
 	cnt = 0;
 	while (star[cnt] != NULL)
 	{
+		ft_strclr(star[cnt]);
 		free(star[cnt]);
 		cnt++;
 	}
-	////free(star);
+	//free(star);
 	////ft_putendl("STAR FREED");
 }
 
+void	clear_star(char **star)
+{
+	int		cnt;
+
+	cnt = 0;
+	while (star[cnt] != NULL)
+	{
+		ft_strclr(star[cnt]);
+		cnt++;
+	}
+}
+
+/*
 void	clear_args(char ***args)
 {
 	int		scnt;
@@ -89,3 +103,4 @@ void	clear_args(char ***args)
 		scnt++;
 	}
 }
+*/
