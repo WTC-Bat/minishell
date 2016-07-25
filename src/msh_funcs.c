@@ -64,11 +64,11 @@ void	free_star(char **star)
 	cnt = 0;
 	while (star[cnt] != NULL)
 	{
-		ft_strclr(star[cnt]);
+		//ft_strclr(star[cnt]);
 		free(star[cnt]);
+		star[cnt] = NULL;
 		cnt++;
 	}
-	//free(star);
 	////ft_putendl("STAR FREED");
 }
 

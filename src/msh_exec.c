@@ -13,32 +13,73 @@
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
+/*
 static char	*get_prog_path(t_env *tenv, char *pname)
 {
 	char	**paths;
 	char	*pval;
 	char	*fpath;
 
+	fpath = NULL;
 	if ((pval = get_env_val(tenv, "PATH")) != NULL)
 	{
 		paths = ft_strsplit(pval, ':');
+		if (paths == NULL)
+			return (NULL);
 		while (*paths != NULL)
 		{
 			fpath = ft_strjoin(*paths, "/");
 			ft_strcat(fpath, pname);
 			if (access(fpath, F_OK) == 0)
 				if (access(fpath, X_OK) == 0)
-					return (fpath);
-				paths++;
+					break;
+			fpath = NULL;
+			paths++;
 		}
-		////free_star(paths);
-		//free(paths);
 		free(pval);
-		free(fpath);
-		//if (fpath != NULL)
-		//	free(fpath);
+		free_star(paths);
+		//if (paths != NULL)
+			//free_star(paths);
+			//free(paths);
 	}
-	return (NULL);
+	return (fpath);
+}
+*/
+
+static char	*get_prog_path(t_env *tenv, char *pname)
+{
+	char	**paths;
+	char	*pval;
+	char	*fpath;
+	int		cnt;
+
+	fpath = NULL;
+	cnt = 0;
+	if ((pval = get_env_val(tenv, "PATH")) != NULL)
+	{
+		paths = ft_strsplit(pval, ':');
+		if (paths == NULL)
+			return (NULL);
+		//while (*paths != NULL)
+		while (paths[cnt] != NULL)
+		{
+			fpath = ft_strjoin(paths[cnt], "/");
+			ft_strcat(fpath, pname);
+			if (access(fpath, F_OK) == 0)
+				if (access(fpath, X_OK) == 0)
+					break;
+			fpath = NULL;
+			//ft_strclr(fpath);
+			cnt++;
+		}
+		free(pval);
+		//free_star(paths);
+		free(paths);
+		//if (paths != NULL)
+			//free_star(paths);
+			//free(paths);
+	}
+	return (fpath);
 }
 
 char		**tenv_to_star(t_env *tenv)
@@ -59,6 +100,8 @@ char		**tenv_to_star(t_env *tenv)
 		star[cnt] = (char *)malloc(sizeof(varlen + vallen + 2));
 		star[cnt] = ft_strjoin(tenv->var, "=");
 		star[cnt] = ft_strjoin(star[cnt], tenv->val);//strcat??
+		//star[cnt] = ft_strcat(star[cnt], tenv->val);
+		//ft_strcat(star[cnt], tenv->val);
 		cnt++;
 		tenv = tenv->next;
 	}
@@ -67,14 +110,16 @@ char		**tenv_to_star(t_env *tenv)
 }
 
 int			msh_exec(char **args, t_env *tenv)
+//int			msh_exec(t_env *tenv)
 {
 	char	*path;
 	char	**env;
 	pid_t	pid;
 
-	if ((path = get_prog_path(tenv, args[0])) == NULL)
+	path = get_prog_path(tenv, args[0]);
+	if (path == NULL)
 	{
-		//free(path);
+		free(path);
 		return (-1);
 	}
 	env = tenv_to_star(tenv);
@@ -87,7 +132,7 @@ int			msh_exec(char **args, t_env *tenv)
 	if (pid > 0)
 		waitpid(pid, 0, 0);
 	free(path);
-	free(env);//?
-	//free_star(env);
+	free_star(env);//?
+	//free(env);//?
 	return (0);
 }

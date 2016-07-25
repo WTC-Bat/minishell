@@ -37,6 +37,7 @@ void				msh_cd(char **args, t_env *tenv);
 void				cd_navigate(char *arg, t_env *tenv);
 void				msh_echo(char **eargv);
 int					msh_exec(char **args, t_env *tenv);
+////int					msh_exec(t_env *tenv);
 void				msh_setenv(t_env **tenv, char **args);
 void				msh_unsetenv(t_env **tenv, char **args);
 void				print_env(t_env *tenv);
