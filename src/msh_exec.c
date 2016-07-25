@@ -58,7 +58,7 @@ char		**tenv_to_star(t_env *tenv)
 	{
 		star[cnt] = (char *)malloc(sizeof(varlen + vallen + 2));
 		star[cnt] = ft_strjoin(tenv->var, "=");
-		star[cnt] = ft_strjoin(star[cnt], tenv->val);
+		star[cnt] = ft_strjoin(star[cnt], tenv->val);//strcat??
 		cnt++;
 		tenv = tenv->next;
 	}
