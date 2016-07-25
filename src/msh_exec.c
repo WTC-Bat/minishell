@@ -122,7 +122,9 @@ int			msh_exec(char **args, t_env *tenv)
 		free(path);
 		return (-1);
 	}
+	//-
 	env = tenv_to_star(tenv);
+	//-
 	pid = fork();
 	if (pid == 0)
 	{
