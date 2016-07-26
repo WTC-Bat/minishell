@@ -18,7 +18,7 @@ static int	handle_input(char **args, t_env *tenv)
 	if ((ft_strcmp(args[0], "env")) == 0)
 		print_env(tenv);
 	else if ((ft_strcmp(args[0], "echo")) == 0)
-		msh_echo(args);
+		msh_echo(tenv, args);
 	else if ((ft_strcmp(args[0], "setenv")) == 0)
 		msh_setenv(&tenv, args);
 	else if ((ft_strcmp(args[0], "unsetenv")) == 0)
