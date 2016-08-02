@@ -68,20 +68,14 @@ static char	*get_prog_path(t_env *tenv, char *pname)
 			if (access(fpath, F_OK) == 0)
 				if (access(fpath, X_OK) == 0)
 					break;
-			fpath = NULL;
+			free(fpath);//?
+			fpath = NULL;//?
 			//ft_strclr(fpath);
 			cnt++;
 		}
 		//free(pval);
 		//pval = NULL;
-		//free_star(paths);
-
-		//free(paths);
 		free_star(paths);
-
-		//if (paths != NULL)
-			//free_star(paths);
-			//free(paths);
 	}
 	return (fpath);
 }

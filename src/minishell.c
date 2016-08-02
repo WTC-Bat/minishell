@@ -50,10 +50,10 @@ static void	put_prompt(t_env *tenv)
 	prompt = ft_strcat(prompt, "@WTC $> ");
 	prompt = ft_strcat(prompt, COL_DEF);
 	ft_putstr(prompt);
-	prompt = NULL;
 	free(prompt);
-	user = NULL;
+	prompt = NULL;
 	free(user);
+	user = NULL;
 }
 
 static int	has_arg(char **argv, char c)
@@ -92,10 +92,12 @@ static int	loop(t_env *tenv)
 	{
 		args = ft_strsplit(input, ' ');
 		done = handle_input(args, tenv);
-		free(args);
+		//free(args);
+		free_star(args);
 	}
 	ft_strclr(input);
 	free(input);
+	input = NULL;
 	return (done);
 }
 

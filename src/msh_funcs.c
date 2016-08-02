@@ -48,8 +48,10 @@ void	free_tenv(t_env *tenv)
 	{
 		tmp = tenv;
 		tenv = tenv->next;
+		ft_strclr(tmp->var);
 		free(tmp->var);
 		tmp->var = NULL;//?
+		ft_strclr(tmp->val);
 		free(tmp->val);
 		tmp->val = NULL;//?
 		free(tmp);
@@ -65,6 +67,7 @@ void	free_star(char **star)
 	cnt = 0;
 	while (star[cnt] != NULL)
 	{
+		ft_strclr(star[cnt]);
 		free(star[cnt]);
 		star[cnt] = NULL;
 		cnt++;
