@@ -50,7 +50,8 @@ void		replace_var(t_env **tenv, char *var, char *val)
 		{
 			ft_strclr((*tenv)->val);
 			(*tenv)->val = ft_strdup(val);
-			return ;
+			//return ;
+			break;
 		}
 		*tenv = (*tenv)->next;
 	}

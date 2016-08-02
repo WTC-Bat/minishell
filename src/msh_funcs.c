@@ -31,7 +31,8 @@ char	*read_line(const int fd)
 	inchar = '0';
 	//line = ft_strnew(0);
 	//line = (char *)malloc(sizeof(char) * 2);
-	line = (char *)malloc(sizeof(char));
+	//line = (char *)malloc(sizeof(char));
+	line = (char *)malloc(sizeof(char) * 1024);
 	while (inchar != '\n' && inchar != '\0')
 	{
 		read(fd, &inchar, 1);

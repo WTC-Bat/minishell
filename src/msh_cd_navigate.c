@@ -52,17 +52,11 @@ void		cd_navigate(char *arg, t_env *tenv)
 	else
 	{
 		new_pwd = ft_strjoin(pwd, "/");
-		//new_pwd = ft_strjoin(new_pwd, arg);
 		new_pwd = ft_strcat(new_pwd, arg);
 	}
 	replace_var(&tenv, "OLDPWD", pwd);
-	ft_putstr("NEW_PWD");
-	ft_putendl(new_pwd);
 	replace_var(&tenv, "PWD", new_pwd);
-	//ft_putstr("NEW_PWD");
-	//ft_putendl(new_pwd);
 	chsuccess = chdir(new_pwd);
-	//chsuccess = chdir(get_env_val(tenv, "PWD"));
 	free(pwd);
 	free(new_pwd);
 	if (chsuccess == -1)
