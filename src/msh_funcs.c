@@ -6,7 +6,7 @@
 /*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 16:09:31 by mvanwyk           #+#    #+#             */
-/*   Updated: 2016/07/10 16:09:33 by mvanwyk          ###   ########.fr       */
+/*   Updated: 2016/08/02 14:02:11 by mvanwyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ void	free_tenv(t_env *tenv)
 	{
 		tmp = tenv;
 		tenv = tenv->next;
-		//free(tmp->var);
-		//free(tmp->val);
+		free(tmp->var);
+		free(tmp->val);
 		free(tmp);
 	}
 	tenv = NULL;

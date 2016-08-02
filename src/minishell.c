@@ -6,7 +6,7 @@
 /*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 16:07:04 by mvanwyk           #+#    #+#             */
-/*   Updated: 2016/07/26 14:38:33 by mvanwyk          ###   ########.fr       */
+/*   Updated: 2016/08/02 14:04:49 by mvanwyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ static void	put_prompt(t_env *tenv)
 	prompt = ft_strcat(prompt, "@WTC $> ");
 	prompt = ft_strcat(prompt, COL_DEF);
 	ft_putstr(prompt);
-	//prompt = NULL;
+	prompt = NULL;
 	free(prompt);
-	//user = NULL;
+	user = NULL;
 	free(user);
 }
 
