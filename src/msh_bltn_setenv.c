@@ -6,7 +6,7 @@
 /*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 16:13:49 by mvanwyk           #+#    #+#             */
-/*   Updated: 2016/07/26 15:00:25 by mvanwyk          ###   ########.fr       */
+/*   Updated: 2016/08/02 14:23:38 by mvanwyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void		replace_var(t_env **tenv, char *var, char *val)
 {
 	while (*tenv != NULL)
 	{
-		if (ft_strcmp((*tenv)->var, var) == 0)
+		//if (ft_strcmp((*tenv)->var, var) == 0)
+		if (ft_strequ((*tenv)->var, var) == 1)
 		{
 			ft_strclr((*tenv)->val);
 			(*tenv)->val = ft_strdup(val);
