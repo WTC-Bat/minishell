@@ -87,8 +87,6 @@ static int	loop(t_env *tenv)
 	done = 0;
 	put_prompt(tenv);
 	input = read_line(0);
-	ft_putstr("INPUT: ");
-	ft_putendl(input);
 	args = NULL;
 	if (input[0] != '\0' && input[0] != ' ' && input[0] != '\t')
 	{

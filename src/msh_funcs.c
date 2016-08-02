@@ -29,9 +29,6 @@ char	*read_line(const int fd)
 	char	*line;
 
 	inchar = '0';
-	//line = ft_strnew(0);
-	//line = (char *)malloc(sizeof(char) * 2);
-	//line = (char *)malloc(sizeof(char));
 	line = (char *)malloc(sizeof(char) * 1024);
 	while (inchar != '\n' && inchar != '\0')
 	{
@@ -52,8 +49,11 @@ void	free_tenv(t_env *tenv)
 		tmp = tenv;
 		tenv = tenv->next;
 		free(tmp->var);
+		tmp->var = NULL;//?
 		free(tmp->val);
+		tmp->val = NULL;//?
 		free(tmp);
+		tmp = NULL;//?
 	}
 	tenv = NULL;
 }
@@ -65,12 +65,12 @@ void	free_star(char **star)
 	cnt = 0;
 	while (star[cnt] != NULL)
 	{
-		//ft_strclr(star[cnt]);
 		free(star[cnt]);
 		star[cnt] = NULL;
 		cnt++;
 	}
-	////ft_putendl("STAR FREED");
+	free(star);
+	star = NULL;
 }
 
 void	clear_star(char **star)
@@ -84,24 +84,3 @@ void	clear_star(char **star)
 		cnt++;
 	}
 }
-
-/*
-void	clear_args(char ***args)
-{
-	int		scnt;
-	int		ccnt;
-
-	scnt = 0;
-	ccnt = 0;
-	while (*args[scnt] != NULL)
-	{
-		while (*args[scnt][ccnt] != '\0')
-		{
-			*args[scnt][ccnt] = '\0';
-			ccnt++;
-		}
-		ccnt = 0;
-		scnt++;
-	}
-}
-*/
