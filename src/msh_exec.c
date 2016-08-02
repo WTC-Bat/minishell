@@ -68,13 +68,13 @@ static char	*get_prog_path(t_env *tenv, char *pname)
 			if (access(fpath, F_OK) == 0)
 				if (access(fpath, X_OK) == 0)
 					break;
+			ft_strclr(fpath);//?
 			free(fpath);//?
 			fpath = NULL;//?
-			//ft_strclr(fpath);
 			cnt++;
 		}
-		//free(pval);
-		//pval = NULL;
+		free(pval);
+		pval = NULL;
 		free_star(paths);
 	}
 	return (fpath);
@@ -98,8 +98,6 @@ char		**tenv_to_star(t_env *tenv)
 		star[cnt] = (char *)malloc(sizeof(varlen + vallen + 2));
 		star[cnt] = ft_strjoin(tenv->var, "=");
 		star[cnt] = ft_strjoin(star[cnt], tenv->val);//strcat??
-		//star[cnt] = ft_strcat(star[cnt], tenv->val);
-		//ft_strcat(star[cnt], tenv->val);
 		cnt++;
 		tenv = tenv->next;
 	}
@@ -131,7 +129,9 @@ int			msh_exec(char **args, t_env *tenv)
 	}
 	if (pid > 0)
 		waitpid(pid, 0, 0);
+	ft_strclr(path);
 	free(path);
+	path = NULL;
 	free_star(env);//?
 	//free(env);//?
 	return (0);

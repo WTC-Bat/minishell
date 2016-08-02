@@ -41,7 +41,8 @@ void		cd_navigate(char *arg, t_env *tenv)
 
 	new_pwd = NULL;
 	pwd = NULL;
-	chsuccess = -1;
+	//chsuccess = -1;
+	chsuccess = 0;
 	pwd = get_env_val(tenv, "PWD");
 	if (ft_strcmp(arg, "~") == 0)
 		new_pwd = get_env_val(tenv, "HOME");

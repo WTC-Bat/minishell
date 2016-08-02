@@ -76,6 +76,7 @@ void	free_star(char **star)
 	star = NULL;
 }
 
+/*
 void	clear_star(char **star)
 {
 	int		cnt;
@@ -87,3 +88,4 @@ void	clear_star(char **star)
 		cnt++;
 	}
 }
+*/
