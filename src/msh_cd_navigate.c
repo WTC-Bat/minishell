@@ -6,7 +6,7 @@
 /*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 15:52:40 by mvanwyk           #+#    #+#             */
-/*   Updated: 2016/08/04 14:23:42 by mvanwyk          ###   ########.fr       */
+/*   Updated: 2016/08/04 14:39:19 by mvanwyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void		cd_navigate(char *arg, t_env *tenv)
 
 	new_pwd = NULL;
 	pwd = NULL;
-	//chsuccess = -1;
 	chsuccess = 0;
 	pwd = get_env_val(tenv, "PWD");
 	if (ft_strcmp(arg, "~") == 0)
@@ -53,12 +52,12 @@ void		cd_navigate(char *arg, t_env *tenv)
 	else
 	{
 		new_pwd = ft_strjoin(pwd, "/");
-		new_pwd = ft_strcat(new_pwd, arg);
+		//new_pwd = ft_strcat(new_pwd, arg);
+		new_pwd = ft_strjoin(new_pwd, arg);
 	}
-	//replace_var(&tenv, "OLDPWD", pwd);
 	replace_var(tenv, "OLDPWD", pwd);
-	//replace_var(&tenv, "PWD", new_pwd);
 	replace_var(tenv, "PWD", new_pwd);
+	ft_putendl(new_pwd);
 	chsuccess = chdir(new_pwd);
 	free(pwd);
 	free(new_pwd);

@@ -6,7 +6,7 @@
 /*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 16:13:49 by mvanwyk           #+#    #+#             */
-/*   Updated: 2016/08/04 14:30:22 by mvanwyk          ###   ########.fr       */
+/*   Updated: 2016/08/04 14:34:31 by mvanwyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ static void	add_new_var(t_env **tenv, char *var, char *val)
 	t_env	*new;
 
 	if (var_exists(*tenv, var) == 1)
-		//replace_var(tenv, var, val);
 		replace_var(*tenv, var, val);
 	else
 	{
