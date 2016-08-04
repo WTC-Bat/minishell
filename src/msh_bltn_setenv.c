@@ -6,7 +6,7 @@
 /*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 16:13:49 by mvanwyk           #+#    #+#             */
-/*   Updated: 2016/08/02 14:23:38 by mvanwyk          ###   ########.fr       */
+/*   Updated: 2016/08/04 14:30:22 by mvanwyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	setenv_args_valid(t_env *tenv, char **args)
 	return (1);
 }
 
+/*
 void		replace_var(t_env **tenv, char *var, char *val)
 {
 	while (*tenv != NULL)
@@ -54,6 +55,21 @@ void		replace_var(t_env **tenv, char *var, char *val)
 			break;
 		}
 		*tenv = (*tenv)->next;
+	}
+}
+*/
+
+void		replace_var(t_env *tenv, char *var, char *val)
+{
+	while (tenv != NULL)
+	{
+		if (ft_strcmp(tenv->var, var) == 0)
+		{
+			ft_strclr(tenv->val);
+			tenv->val = ft_strdup(val);
+			return ;
+		}
+		tenv = tenv->next;
 	}
 }
 
@@ -73,7 +89,8 @@ static void	add_new_var(t_env **tenv, char *var, char *val)
 	t_env	*new;
 
 	if (var_exists(*tenv, var) == 1)
-		replace_var(tenv, var, val);
+		//replace_var(tenv, var, val);
+		replace_var(*tenv, var, val);
 	else
 	{
 		new = (t_env *)malloc(sizeof(t_env));

@@ -6,7 +6,7 @@
 /*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 16:15:33 by mvanwyk           #+#    #+#             */
-/*   Updated: 2016/07/26 14:41:21 by mvanwyk          ###   ########.fr       */
+/*   Updated: 2016/08/04 14:23:05 by mvanwyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ void				msh_setenv(t_env **tenv, char **args);
 void				msh_unsetenv(t_env **tenv, char **args);
 void				print_env(t_env *tenv);
 char				*read_line(const int fd);
-void				replace_var(t_env **tenv, char *var, char *val);
+////void				replace_var(t_env **tenv, char *var, char *val);
+void				replace_var(t_env *tenv, char *var, char *val);
 int					strcnt(char **args);
 int					tenv_count(t_env *tenv);
 t_env				*t_env_reverse(t_env *tenv);
