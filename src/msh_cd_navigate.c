@@ -6,7 +6,7 @@
 /*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 15:52:40 by mvanwyk           #+#    #+#             */
-/*   Updated: 2016/08/04 14:39:19 by mvanwyk          ###   ########.fr       */
+/*   Updated: 2016/08/09 12:33:35 by mvanwyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void		cd_navigate(char *arg, t_env *tenv)
 	}
 	replace_var(tenv, "OLDPWD", pwd);
 	replace_var(tenv, "PWD", new_pwd);
-	ft_putendl(new_pwd);
 	chsuccess = chdir(new_pwd);
 	free(pwd);
 	free(new_pwd);
