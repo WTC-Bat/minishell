@@ -21,7 +21,7 @@ char	*ft_strnew(size_t size)
 	newstr = (char *)malloc(sizeof(char) * (size + 1));
 	if (newstr)
 	{
-		while (cnt < size + 2)
+		while (cnt <= size)
 		{
 			newstr[cnt] = '\0';
 			cnt++;

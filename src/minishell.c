@@ -30,7 +30,6 @@ static int	handle_input(char **args, t_env *tenv)
 	else
 	{
 		if (msh_exec(args, tenv) == -1)
-		//if (msh_exec(tenv) == -1)
 		{
 			ft_putstr(args[0]);
 			ft_putendl(": Unknown command");
@@ -92,7 +91,6 @@ static int	loop(t_env *tenv)
 	{
 		args = ft_strsplit(input, ' ');
 		done = handle_input(args, tenv);
-		//free(args);
 		free_star(args);
 	}
 	ft_strclr(input);

@@ -6,7 +6,7 @@
 /*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 15:52:40 by mvanwyk           #+#    #+#             */
-/*   Updated: 2016/08/09 12:33:35 by mvanwyk          ###   ########.fr       */
+/*   Updated: 2016/08/04 14:39:19 by mvanwyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ static char	*get_path_back(char *arg, char *pwd)
 	return (new_path);
 }
 
+static void	replacement(t_env *tenv, char *pwd, char *new_pwd)
+{
+	replace_var(tenv, "OLDPWD", pwd);
+	replace_var(tenv, "PWD", new_pwd);
+}
+
 void		cd_navigate(char *arg, t_env *tenv)
 {
 	char	*new_pwd;
@@ -40,7 +46,6 @@ void		cd_navigate(char *arg, t_env *tenv)
 	int		chsuccess;
 
 	new_pwd = NULL;
-	pwd = NULL;
 	chsuccess = 0;
 	pwd = get_env_val(tenv, "PWD");
 	if (ft_strcmp(arg, "~") == 0)
@@ -52,14 +57,13 @@ void		cd_navigate(char *arg, t_env *tenv)
 	else
 	{
 		new_pwd = ft_strjoin(pwd, "/");
-		//new_pwd = ft_strcat(new_pwd, arg);
 		new_pwd = ft_strjoin(new_pwd, arg);
 	}
-	replace_var(tenv, "OLDPWD", pwd);
-	replace_var(tenv, "PWD", new_pwd);
 	chsuccess = chdir(new_pwd);
+	if (chsuccess == 0)
+		replacement(tenv, pwd, new_pwd);
+	else
+		ft_putendl("Error: Unable to change directory");
 	free(pwd);
 	free(new_pwd);
-	if (chsuccess == -1)
-		ft_putendl("Error: Unable to change directory");
 }

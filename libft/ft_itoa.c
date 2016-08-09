@@ -17,12 +17,13 @@ char	*ft_itoa(int n)
 	char	*istr;
 
 	istr = (char *)malloc(sizeof(char) * 32);
+	if (n == 0)
+		*--istr = '0' + n;
 	if (n >= 0)
 	{
 		while (n != 0)
 		{
-			istr--;
-			*istr = '0' + (n % 10);
+			*--istr = '0' + (n % 10);
 			n = n / 10;
 		}
 	}
@@ -30,8 +31,7 @@ char	*ft_itoa(int n)
 	{
 		while (n != 0)
 		{
-			istr--;
-			*istr = '0' - (n % 10);
+			*--istr = '0' - (n % 10);
 			n = n / 10;
 		}
 		*--istr = '-';
