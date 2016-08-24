@@ -93,8 +93,10 @@ static void	add_new_var(t_env **tenv, char *var, char *val)
 	else
 	{
 		new = (t_env *)malloc(sizeof(t_env));
-		new->var = var;
-		new->val = val;
+		//new->var = var;
+		//new->val = val;
+		new->var = ft_strdup(var);
+		new->val = ft_strdup(val);
 		new->next = NULL;
 		while ((*tenv)->next != NULL)
 			*tenv = (*tenv)->next;
