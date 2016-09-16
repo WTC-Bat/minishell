@@ -75,17 +75,3 @@ void	free_star(char **star)
 	free(star);
 	star = NULL;
 }
-
-/*
-void	clear_star(char **star)
-{
-	int		cnt;
-
-	cnt = 0;
-	while (star[cnt] != NULL)
-	{
-		ft_strclr(star[cnt]);
-		cnt++;
-	}
-}
-*/
