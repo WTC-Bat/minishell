@@ -80,6 +80,26 @@ static char	*get_prog_path(t_env *tenv, char *pname)
 	return (fpath);
 }
 
+static char	*verify_path(t_env *tenv, char **args)
+{
+	char *path;
+
+
+	if ((path = get_prog_path(tenv, args[0])) != NULL)
+	{
+		return (path);
+	}
+	else if ((access(args[0], F_OK) == 0) && (access(args[0], X_OK) == 0))
+	{
+		path = ft_strdup(args[0]);
+		return (path);
+	}
+	else
+	{
+		return (NULL);
+	}
+}
+
 char		**tenv_to_star(t_env *tenv)
 {
 	char	**star;
@@ -112,12 +132,20 @@ int			msh_exec(char **args, t_env *tenv)
 	char	**env;
 	pid_t	pid;
 
+	path = verify_path(tenv, args);
+	if (path == NULL)
+	{
+		free(path);
+		return (-1);
+	}
+	/*
 	path = get_prog_path(tenv, args[0]);
 	if (path == NULL)
 	{
 		free(path);
 		return (-1);
 	}
+	*/
 	//-
 	env = tenv_to_star(tenv);
 	//-

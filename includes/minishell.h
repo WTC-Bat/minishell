@@ -33,6 +33,7 @@ void				free_star(char **star);
 void				free_tenv(t_env *tenv);
 t_env				*get_env();
 char				*get_env_val(t_env *tenv, char *varname);
+int					isdir(char *pth);
 void				msh_cd(char **args, t_env *tenv);
 void				cd_navigate(char *arg, t_env *tenv);
 void				msh_echo(t_env *tenv, char **eargv);
