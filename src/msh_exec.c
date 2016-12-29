@@ -13,31 +13,105 @@
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
-/* Rewrite this function!*/
+// static void	fpath_tmp_free(char **fpath, char **tmp)
+// {
+//
+// }
+
+/* 1 */
+// static char	*get_prog_path(t_env *tenv, char *pname)
+// {
+// 	char	**paths;
+// 	char	*pval;
+// 	char	*fpath;
+// 	int		cnt;
+// 	// another var for catting?
+//
+// 	fpath = NULL;
+// 	cnt = 0;
+// 	if ((pval = get_env_val(tenv, "PATH")) != NULL)
+// 	{
+// 		paths = ft_strsplit(pval, ':');
+// 		if (paths == NULL)
+// 			return (NULL);
+// 		while (paths[cnt] != NULL)
+// 		{
+// 			fpath = ft_strjoin(paths[cnt], "/");
+// 			ft_strcat(fpath, pname);
+// 			if (access(fpath, F_OK) == 0)
+// 				if (access(fpath, X_OK) == 0)
+// 					break;
+// 			ft_strdel(&fpath);
+// 			cnt++;
+// 		}
+// 		ft_strdel(&pval);
+// 		ft_starfree(paths);
+// 	}
+// 	return (fpath);
+// }
+
+/* 2 */
+// static char	*get_prog_path(t_env *tenv, char *pname)
+// {
+// 	char	**paths;
+// 	char	*pval;
+// 	char	*fpath;
+// 	char	*tmp;
+// 	int		cnt;
+//
+// 	fpath = NULL;
+// 	cnt = 0;
+// 	if ((pval = get_env_val(tenv, "PATH")) != NULL)
+// 	{
+// 		if ((paths = ft_strsplit(pval, ':')) == NULL)
+// 			return (NULL);
+// 		while (paths[cnt] != NULL)
+// 		{
+// 			tmp = ft_strjoin(paths[cnt], "/");
+// 			fpath = ft_strjoin(tmp, pname);
+// 			if (access(fpath, F_OK) == 0 && access(fpath, X_OK) == 0)
+// 			{
+// 				ft_strdel(&tmp);
+// 				break;
+// 			}
+// 			ft_strdel(&fpath);
+// 			fpath = NULL;
+// 			ft_strdel(&tmp);
+// 			cnt++;
+// 		}
+// 		ft_strdel(&pval);
+// 		ft_starfree(paths);
+// 	}
+// 	return (fpath);
+// }
+
+/* 3 */
 static char	*get_prog_path(t_env *tenv, char *pname)
 {
 	char	**paths;
 	char	*pval;
 	char	*fpath;
+	char	*tmp;
 	int		cnt;
-	// another var for catting?
 
 	fpath = NULL;
 	cnt = 0;
 	if ((pval = get_env_val(tenv, "PATH")) != NULL)
 	{
-		paths = ft_strsplit(pval, ':');
-		if (paths == NULL)
+		if ((paths = ft_strsplit(pval, ':')) == NULL)
 			return (NULL);
 		while (paths[cnt] != NULL)
 		{
-			fpath = ft_strjoin(paths[cnt], "/");
-			ft_strcat(fpath, pname);
-			if (access(fpath, F_OK) == 0)
-				if (access(fpath, X_OK) == 0)
-					break;
+			tmp = ft_strjoin(paths[cnt++], "/");
+			fpath = ft_strjoin(tmp, pname);
+			if (access(fpath, F_OK) == 0 && access(fpath, X_OK) == 0)
+			{
+				ft_strdel(&tmp);
+				break;
+			}
 			ft_strdel(&fpath);
-			cnt++;
+			fpath = NULL;
+			ft_strdel(&tmp);
 		}
 		ft_strdel(&pval);
 		ft_starfree(paths);
