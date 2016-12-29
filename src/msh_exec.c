@@ -46,6 +46,8 @@ static char	*get_prog_path(t_env *tenv, char *pname)
 }
 */
 
+/* Re-work all functions in this source? */
+
 static char	*get_prog_path(t_env *tenv, char *pname)
 {
 	char	**paths;
