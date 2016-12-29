@@ -74,7 +74,8 @@ static char	*get_prog_path(t_env *tenv, char *pname)
 		}
 		free(pval);
 		pval = NULL;
-		free_star(paths);
+		// free_star(paths);
+		ft_strdel(&paths);
 	}
 	return (fpath);
 }
@@ -151,7 +152,5 @@ int			msh_exec(char **args, t_env *tenv)
 	free(path);
 	path = NULL;
 	ft_starfree(env);
-	// free_star(env);//?
-	//free(env);//?
 	return (0);
 }
