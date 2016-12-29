@@ -42,17 +42,23 @@ static void	put_prompt(t_env *tenv)
 {
 	char	*prompt;
 	char	*user;
+	char	*tmp;
 
 	user = get_env_val(tenv, "USER");
-	prompt = ft_strdup(COL_HGRN_BLD);
-	prompt = ft_strcat(prompt, user);
-	prompt = ft_strcat(prompt, "@WTC $> ");
-	prompt = ft_strcat(prompt, COL_DEF);
+	tmp = ft_strdup(COL_HGRN_BLD);
+	prompt = ft_strjoin(tmp, user);
+	ft_strdel(&tmp);
+	tmp = ft_strdup(prompt);
+	ft_strdel(&prompt);
+	prompt = ft_strjoin(tmp, "@WTC $> ");
+	ft_strdel(&tmp);
+	tmp = ft_strdup(prompt);
+	ft_strdel(&prompt);
+	prompt = ft_strjoin(tmp, COL_DEF);
 	ft_putstr(prompt);
-	free(prompt);
-	prompt = NULL;
-	free(user);
-	user = NULL;
+	ft_strdel(&prompt);
+	ft_strdel(&tmp);
+	ft_strdel(&user);
 }
 
 static int	has_arg(char **argv, char c)
@@ -84,18 +90,23 @@ static int	loop(t_env *tenv)
 	int		done;
 
 	done = 0;
+	// ft_putendl("PUTTING PROMPT");
 	put_prompt(tenv);
+	// ft_putendl("READING LINER");
 	input = read_line(0);
-	args = NULL;
 	if (input[0] != '\0' && input[0] != ' ' && input[0] != '\t')
 	{
 		args = ft_strsplit(input, ' ');
 		done = handle_input(args, tenv);
-		free_star(args);
+		// ft_putendl("HANDLED");
+		// free_star(args);
+		ft_starfree(args);
+		// ft_putendl("STAR FREED");
 	}
 	ft_strclr(input);
 	free(input);
 	input = NULL;
+	// ft_putendl("INPUT FREED");
 	return (done);
 }
 
@@ -116,7 +127,6 @@ int			main(int argc, char **argv)
 		ft_putstr(TRM_CLR);
 	while (done == 0)
 		done = loop(tenv);
-	//free(tenv);
 	free_tenv(tenv);
 	return (0);
 }
