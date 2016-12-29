@@ -13,8 +13,7 @@
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
-/* Re-work all functions in this source? */
-
+/* Rewrite this function!*/
 static char	*get_prog_path(t_env *tenv, char *pname)
 {
 	char	**paths;
