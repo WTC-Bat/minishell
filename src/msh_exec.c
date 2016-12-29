@@ -52,6 +52,7 @@ static char	*get_prog_path(t_env *tenv, char *pname)
 	char	*pval;
 	char	*fpath;
 	int		cnt;
+	// another var for catting?
 
 	fpath = NULL;
 	cnt = 0;
@@ -67,13 +68,10 @@ static char	*get_prog_path(t_env *tenv, char *pname)
 			if (access(fpath, F_OK) == 0)
 				if (access(fpath, X_OK) == 0)
 					break;
-			ft_strclr(fpath);//?
-			free(fpath);//?
-			fpath = NULL;//?
+			ft_strdel(&fpath);
 			cnt++;
 		}
-		free(pval);
-		pval = NULL;
+		ft_strdel(&pval);
 		ft_starfree(paths);
 	}
 	return (fpath);
@@ -106,6 +104,7 @@ char		**tenv_to_star(t_env *tenv)
 	int		cnt;
 	size_t	varlen;
 	size_t	vallen;
+	// another var for catting?
 
 	len = tenv_count(tenv);
 	cnt = 0;
@@ -133,7 +132,7 @@ int			msh_exec(char **args, t_env *tenv)
 	path = verify_path(tenv, args);
 	if (path == NULL)
 	{
-		free(path);
+		ft_strdel(&path);
 		return (-1);
 	}
 	//-
@@ -147,9 +146,7 @@ int			msh_exec(char **args, t_env *tenv)
 	}
 	if (pid > 0)
 		waitpid(pid, 0, 0);
-	ft_strclr(path);
-	free(path);
-	path = NULL;
+	ft_strdel(&path);
 	ft_starfree(env);
 	return (0);
 }
