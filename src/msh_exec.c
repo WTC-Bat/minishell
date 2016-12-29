@@ -13,39 +13,6 @@
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
-/*
-static char	*get_prog_path(t_env *tenv, char *pname)
-{
-	char	**paths;
-	char	*pval;
-	char	*fpath;
-
-	fpath = NULL;
-	if ((pval = get_env_val(tenv, "PATH")) != NULL)
-	{
-		paths = ft_strsplit(pval, ':');
-		if (paths == NULL)
-			return (NULL);
-		while (*paths != NULL)
-		{
-			fpath = ft_strjoin(*paths, "/");
-			ft_strcat(fpath, pname);
-			if (access(fpath, F_OK) == 0)
-				if (access(fpath, X_OK) == 0)
-					break;
-			fpath = NULL;
-			paths++;
-		}
-		free(pval);
-		free_star(paths);
-		//if (paths != NULL)
-			//free_star(paths);
-			//free(paths);
-	}
-	return (fpath);
-}
-*/
-
 /* Re-work all functions in this source? */
 
 static char	*get_prog_path(t_env *tenv, char *pname)
@@ -99,25 +66,25 @@ static char	*verify_path(t_env *tenv, char **args)
 	}
 }
 
+/* NEW ATTEMPT */
 char		**tenv_to_star(t_env *tenv)
 {
 	char	**star;
-	int		len;
+	char	*tmp;
 	int		cnt;
 	size_t	varlen;
 	size_t	vallen;
-	// another var for catting?
 
-	len = tenv_count(tenv);
 	cnt = 0;
 	varlen = ft_strlen(tenv->var);
 	vallen = ft_strlen(tenv->val);
-	star = (char **)malloc(sizeof(char *) * len + 1);
+	star = (char **)malloc(sizeof(*star) * (tenv_count(tenv) + 1));
 	while (tenv != NULL)
 	{
-		star[cnt] = (char *)malloc(sizeof(varlen + vallen + 2));
-		star[cnt] = ft_strjoin(tenv->var, "=");
-		star[cnt] = ft_strjoin(star[cnt], tenv->val);//strcat??
+		star[cnt] = (char *)malloc(sizeof(varlen + vallen + 2));	//?
+		tmp = ft_strjoin(tenv->var, "=");
+		star[cnt] = ft_strjoin(tmp, tenv->val);
+		ft_strdel(&tmp);
 		cnt++;
 		tenv = tenv->next;
 	}
