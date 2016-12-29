@@ -42,9 +42,13 @@ t_env	*remove_var(t_env *tenv, char *varname)
 {
 	t_env	*tmp;
 
+	if (tenv == NULL)
+		return (NULL);
 	if ((ft_strequ(tenv->var, varname)) == 1)
 	{
 		tmp = tenv->next;
+		ft_strdel(&(tenv)->var);
+		ft_strdel(&(tenv)->val);
 		free(tenv);
 		return (tmp);
 	}
@@ -55,5 +59,5 @@ t_env	*remove_var(t_env *tenv, char *varname)
 void	msh_unsetenv(t_env **tenv, char **args)
 {
 	if (unsetenv_args_valid(*tenv, args) == 1)
-		remove_var(*tenv, args[1]);
+		*tenv = remove_var(*tenv, args[1]);
 }
