@@ -13,6 +13,15 @@
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
+/*
+**	cd ../		-	go back one folder
+**	cd /		-	go to root
+**	cd			-	go to home folder
+**	cd ~/path/	-	go to folder from home
+**	cd /path/	-	go to folder from root
+**	cd path/	-	go to folder from current position
+*/
+
 int		cd_args_valid(char *args)
 {
 	struct stat	st;
