@@ -74,8 +74,7 @@ static char	*get_prog_path(t_env *tenv, char *pname)
 		}
 		free(pval);
 		pval = NULL;
-		// free_star(paths);
-		ft_strdel(&paths);
+		ft_starfree(paths);
 	}
 	return (fpath);
 }
