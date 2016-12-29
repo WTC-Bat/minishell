@@ -15,6 +15,8 @@
 
 int		unsetenv_args_valid(t_env *tenv, char **args)
 {
+	char	*envval;
+
 	if ((ft_strequ(args[0], "unsetenv")) == 0)
 	{
 		ft_putendl("Error: Unexpected error!");
@@ -30,11 +32,13 @@ int		unsetenv_args_valid(t_env *tenv, char **args)
 		ft_putendl("Error: Too many arguments for \"unsetenv\"");
 		return (0);
 	}
-	if (get_env_val(tenv, args[1]) == NULL)
+	if ((envval = get_env_val(tenv, args[1])) == NULL)
 	{
 		ft_putendl("Error: Variable not found");
 		return (0);
 	}
+	else
+		ft_strdel(&envval);
 	return (1);
 }
 

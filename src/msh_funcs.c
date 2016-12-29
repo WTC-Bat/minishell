@@ -23,7 +23,6 @@ int		strcnt(char **args)
 	return (cnt);
 }
 
-/* NEW */
 char	*read_line(const int fd)
 {
 	char	*rline;

@@ -57,8 +57,6 @@ void		print_env(t_env *tenv)
 	}
 }
 
-/* NEW */
-/* no longer returns cnt + 1 */
 int			tenv_count(t_env *tenv)
 {
 	int		cnt;

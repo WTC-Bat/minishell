@@ -13,71 +13,6 @@
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
-/* 1 */
-// static char	*get_prog_path(t_env *tenv, char *pname)
-// {
-// 	char	**paths;
-// 	char	*pval;
-// 	char	*fpath;
-// 	int		cnt;
-// 	// another var for catting?
-//
-// 	fpath = NULL;
-// 	cnt = 0;
-// 	if ((pval = get_env_val(tenv, "PATH")) != NULL)
-// 	{
-// 		paths = ft_strsplit(pval, ':');
-// 		if (paths == NULL)
-// 			return (NULL);
-// 		while (paths[cnt] != NULL)
-// 		{
-// 			fpath = ft_strjoin(paths[cnt], "/");
-// 			ft_strcat(fpath, pname);
-// 			if (access(fpath, F_OK) == 0)
-// 				if (access(fpath, X_OK) == 0)
-// 					break;
-// 			ft_strdel(&fpath);
-// 			cnt++;
-// 		}
-// 		ft_strdel(&pval);
-// 		ft_starfree(paths);
-// 	}
-// 	return (fpath);
-// }
-
-/* 2 */
-// static char	*get_prog_path(t_env *tenv, char *pname)
-// {
-// 	char	**paths;
-// 	char	*pval;
-// 	char	*fpath;
-// 	char	*tmp;
-// 	int		cnt;
-//
-// 	fpath = NULL;
-// 	cnt = 0;
-// 	if ((pval = get_env_val(tenv, "PATH")) == NULL)
-// 		return (NULL);
-// 	if ((paths = ft_strsplit(pval, ':')) == NULL)
-// 		return (NULL);
-// 	while (paths[cnt] != NULL)
-// 	{
-// 		tmp = ft_strjoin(paths[cnt++], "/");
-// 		fpath = ft_strjoin(tmp, pname);
-// 		if (access(fpath, F_OK) == 0 && access(fpath, X_OK) == 0)
-// 		{
-// 			ft_strdel(&tmp);
-// 			break;
-// 		}
-// 		ft_strdel(&fpath);
-// 		fpath = NULL;
-// 		ft_strdel(&tmp);
-// 	}
-// 	ft_strdel(&pval);
-// 	ft_starfree(paths);
-// 	return (fpath);
-// }
-
 static char	*get_fpath(char *path, char *pname)
 {
 	char	*tmp;
@@ -95,8 +30,6 @@ static char	*get_fpath(char *path, char *pname)
 	return (NULL);
 }
 
-/* 3 */
-/* NEW */
 static char	*get_prog_path(t_env *tenv, char *pname)
 {
 	char	**paths;
@@ -141,7 +74,6 @@ static char	*verify_path(t_env *tenv, char **args)
 	}
 }
 
-/* NEW */
 char		**tenv_to_star(t_env *tenv)
 {
 	char	**star;
