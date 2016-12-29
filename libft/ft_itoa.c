@@ -12,30 +12,62 @@
 
 #include "libft.h"
 
-char	*ft_itoa(int n)
+static size_t	get_len(int n)
 {
-	char	*istr;
+	size_t	len;
 
-	istr = (char *)malloc(sizeof(char) * 32);
+	len = 0;
+	if (n < 0)
+		len++;
 	if (n == 0)
-		*--istr = '0' + n;
-	if (n >= 0)
+		return (1);
+	while (n != 0)
 	{
-		while (n != 0)
-		{
-			*--istr = '0' + (n % 10);
-			n = n / 10;
-		}
+		n = n / 10;
+		len++;
+	}
+	return (len);
+}
+
+static int		set_nbr(int n)
+{
+	int		nbr;
+
+	nbr = 0;
+	if (n < 0)
+	{
+		nbr = n;
+		nbr = -nbr;
 	}
 	else
+		nbr = n;
+	return (nbr);
+}
+
+char			*ft_itoa(int n)
+{
+	char	*istr;
+	int		nbr;
+	size_t	nlen;
+
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	nlen = get_len(n);
+	istr = (char *)malloc(sizeof(char) * (nlen + 1));
+	if (istr == NULL)
+		return (NULL);
+	nbr = set_nbr(n);
+	*istr = '\0';
+	if (n == 0)
+		*--istr = '0';
+	while (nbr != 0)
 	{
-		while (n != 0)
-		{
-			*--istr = '0' - (n % 10);
-			n = n / 10;
-		}
-		*--istr = '-';
+		*--istr = '0' + nbr % 10;
+		nbr = nbr / 10;
 	}
-	istr[ft_strlen(istr)] = '\0';
+	if (n < 0)
+		*--istr = '-';
+	if (n == (-2147483647 - 1))
+		istr[ft_strlen(istr) - 1] = '8';
 	return (istr);
 }

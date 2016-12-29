@@ -12,18 +12,24 @@
 
 #include "libft.h"
 
-int		ft_splitcnt(char *str, char c)
+/*
+**	Returns the amount of words after splitting at the character specified by
+**	'c'. If 's' is NULL or empty, or 'c' is '\0', 0 is returned.
+*/
+int		ft_splitcnt(char const *s, char c)
 {
 	int		cnt;
 	int		wcnt;
 
+	if (s == NULL || s[0] == '\0' || c == '\0')
+		return (0);
 	cnt = 0;
 	wcnt = 0;
-	while (str[cnt] != '\0')
+	while (s[cnt] != '\0')
 	{
-		if (str[cnt] != c && (str[cnt + 1] == c || str[cnt + 1] == '\0'))
+		if (s[cnt] == c && s[cnt - 1] != c && cnt > 0)
 			wcnt++;
 		cnt++;
 	}
-	return (wcnt);
+	return (wcnt + 1);
 }

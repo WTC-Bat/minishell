@@ -10,14 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 void	ft_striter(char *s, void (*f)(char *))
 {
 	int		cnt;
 
 	cnt = 0;
-	while (s[cnt] != '\0')
+	if (s != NULL)
 	{
-		f((char *)&s[cnt]);
-		cnt++;
+		while (s[cnt] != '\0')
+		{
+			f((char *)&(s[cnt]));
+			cnt++;
+		}
 	}
 }

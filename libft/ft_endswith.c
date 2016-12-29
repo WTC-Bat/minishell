@@ -12,23 +12,25 @@
 
 #include "libft.h"
 
-int		ft_endswith(char *str, char *end)
+/*
+**	Returns 1 if the c-string 'str' ends with the c-string 'start', otherwise
+**	0 is returned.
+*/
+int		ft_endswith(char const *str, char const *end)
 {
-	int		strlen;
-	int		endlen;
 	int		cnt;
-	int		ecnt;
+	int		endlen;
+	int		stridx;
 
-	strlen = ft_strlen(str);
+	cnt = 0;
 	endlen = ft_strlen(end);
-	cnt = strlen - endlen;
-	ecnt = 0;
-	while (cnt < strlen)
+	stridx = ft_strlen(str) - endlen;
+	while (str[stridx] != '\0' && end[cnt] != '\0' && cnt < endlen)
 	{
-		if (str[cnt] != end[ecnt])
+		if (str[stridx] != end[cnt])
 			return (0);
 		cnt++;
-		ecnt++;
+		stridx++;
 	}
 	return (1);
 }

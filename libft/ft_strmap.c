@@ -16,19 +16,17 @@ char	*ft_strmap(char const *s, char (*f)(char))
 {
 	char	*str;
 	int		cnt;
-	int		scnt;
 
-	cnt = 0;
-	scnt = 0;
-	if (!s || !f)
+	if (s == NULL || f == NULL)
 		return (NULL);
-	str = (char *)malloc(sizeof(char *) * ft_strlen(s) + 1);
+	if ((str = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1))) == NULL)
+		return (NULL);
+	cnt = 0;
 	while (s[cnt] != '\0')
 	{
-		str[scnt] = f((int)s[cnt]);
+		str[cnt] = f(s[cnt]);
 		cnt++;
-		scnt++;
 	}
-	str[scnt] = '\0';
+	str[cnt] = '\0';
 	return (str);
 }

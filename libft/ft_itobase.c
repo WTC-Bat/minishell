@@ -57,7 +57,7 @@ char		*ft_itobase(int n, int base)
 	}
 	if (n < 0 && base == 10)
 		*--out = '-';
-	if (n == -2147483648)
+	if (n == -2147483648 && base == 10)
 		out[ft_strlen(out) - 1] = '8';
 	return (out);
 }

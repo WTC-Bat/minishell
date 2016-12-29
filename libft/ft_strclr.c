@@ -17,9 +17,12 @@ void	ft_strclr(char *s)
 	int		cnt;
 
 	cnt = 0;
-	while (s[cnt] != '\0')
+	if (s != NULL)
 	{
-		s[cnt] = '\0';
-		cnt++;
+		while (s[cnt] != '\0')
+		{
+			s[cnt] = '\0';
+			cnt++;
+		}
 	}
 }
