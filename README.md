@@ -15,3 +15,5 @@
 -------------
 
 0	-	2 lost bytes after unsetenv
+
+0	-	lots of bytes lost when forking

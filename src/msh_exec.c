@@ -150,7 +150,8 @@ int			msh_exec(char **args, t_env *tenv)
 	ft_strclr(path);
 	free(path);
 	path = NULL;
-	free_star(env);//?
+	ft_starfree(env);
+	// free_star(env);//?
 	//free(env);//?
 	return (0);
 }
