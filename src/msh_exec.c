@@ -13,11 +13,6 @@
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
-// static void	fpath_tmp_free(char **fpath, char **tmp)
-// {
-//
-// }
-
 /* 1 */
 // static char	*get_prog_path(t_env *tenv, char *pname)
 // {
@@ -61,61 +56,68 @@
 //
 // 	fpath = NULL;
 // 	cnt = 0;
-// 	if ((pval = get_env_val(tenv, "PATH")) != NULL)
+// 	if ((pval = get_env_val(tenv, "PATH")) == NULL)
+// 		return (NULL);
+// 	if ((paths = ft_strsplit(pval, ':')) == NULL)
+// 		return (NULL);
+// 	while (paths[cnt] != NULL)
 // 	{
-// 		if ((paths = ft_strsplit(pval, ':')) == NULL)
-// 			return (NULL);
-// 		while (paths[cnt] != NULL)
+// 		tmp = ft_strjoin(paths[cnt++], "/");
+// 		fpath = ft_strjoin(tmp, pname);
+// 		if (access(fpath, F_OK) == 0 && access(fpath, X_OK) == 0)
 // 		{
-// 			tmp = ft_strjoin(paths[cnt], "/");
-// 			fpath = ft_strjoin(tmp, pname);
-// 			if (access(fpath, F_OK) == 0 && access(fpath, X_OK) == 0)
-// 			{
-// 				ft_strdel(&tmp);
-// 				break;
-// 			}
-// 			ft_strdel(&fpath);
-// 			fpath = NULL;
 // 			ft_strdel(&tmp);
-// 			cnt++;
+// 			break;
 // 		}
-// 		ft_strdel(&pval);
-// 		ft_starfree(paths);
+// 		ft_strdel(&fpath);
+// 		fpath = NULL;
+// 		ft_strdel(&tmp);
 // 	}
+// 	ft_strdel(&pval);
+// 	ft_starfree(paths);
 // 	return (fpath);
 // }
 
+static char	*get_fpath(char *path, char *pname)
+{
+	char	*tmp;
+	char	*fpath;
+
+	tmp = ft_strjoin(path, "/");
+	fpath = ft_strjoin(tmp, pname);
+	if (access(fpath, F_OK) == 0 && access(fpath, X_OK) == 0)
+	{
+		ft_strdel(&tmp);
+		return (fpath);
+	}
+	ft_strdel(&tmp);
+	ft_strdel(&fpath);
+	return (NULL);
+}
+
 /* 3 */
+/* NEW */
 static char	*get_prog_path(t_env *tenv, char *pname)
 {
 	char	**paths;
 	char	*pval;
 	char	*fpath;
-	char	*tmp;
 	int		cnt;
 
 	fpath = NULL;
 	cnt = 0;
-	if ((pval = get_env_val(tenv, "PATH")) != NULL)
+	if ((pval = get_env_val(tenv, "PATH")) == NULL)
+		return (NULL);
+	if ((paths = ft_strsplit(pval, ':')) == NULL)
+		return (NULL);
+	while (paths[cnt] != NULL)
 	{
-		if ((paths = ft_strsplit(pval, ':')) == NULL)
-			return (NULL);
-		while (paths[cnt] != NULL)
-		{
-			tmp = ft_strjoin(paths[cnt++], "/");
-			fpath = ft_strjoin(tmp, pname);
-			if (access(fpath, F_OK) == 0 && access(fpath, X_OK) == 0)
-			{
-				ft_strdel(&tmp);
-				break;
-			}
-			ft_strdel(&fpath);
-			fpath = NULL;
-			ft_strdel(&tmp);
-		}
-		ft_strdel(&pval);
-		ft_starfree(paths);
+		if ((fpath = get_fpath(paths[cnt], pname)) != NULL)
+			break;
+		cnt++;
 	}
+	ft_strdel(&pval);
+	ft_starfree(paths);
 	return (fpath);
 }
 
@@ -139,7 +141,7 @@ static char	*verify_path(t_env *tenv, char **args)
 	}
 }
 
-/* NEW ATTEMPT */
+/* NEW */
 char		**tenv_to_star(t_env *tenv)
 {
 	char	**star;
@@ -151,10 +153,9 @@ char		**tenv_to_star(t_env *tenv)
 	cnt = 0;
 	varlen = ft_strlen(tenv->var);
 	vallen = ft_strlen(tenv->val);
-	star = (char **)malloc(sizeof(*star) * (tenv_count(tenv) + 1));
+	star = (char **)malloc(sizeof(*star) * (tenv_count(tenv) + 1));	// +1 ?
 	while (tenv != NULL)
 	{
-		star[cnt] = (char *)malloc(sizeof(varlen + vallen + 2));	//?
 		tmp = ft_strjoin(tenv->var, "=");
 		star[cnt] = ft_strjoin(tmp, tenv->val);
 		ft_strdel(&tmp);
@@ -165,21 +166,44 @@ char		**tenv_to_star(t_env *tenv)
 	return (star);
 }
 
+/* 1 */
+// int			msh_exec(char **args, t_env *tenv)
+// {
+// 	char	*path;
+// 	char	**env;
+// 	pid_t	pid;
+//
+// 	path = verify_path(tenv, args);
+// 	if (path == NULL)
+// 	{
+// 		ft_strdel(&path);
+// 		return (-1);
+// 	}
+// 	//-
+// 	env = tenv_to_star(tenv);
+// 	//-
+// 	pid = fork();
+// 	if (pid == 0)
+// 	{
+// 		execve(path, args, env);
+// 		exit(0);
+// 	}
+// 	if (pid > 0)
+// 		waitpid(pid, 0, 0);
+// 	ft_strdel(&path);
+// 	ft_starfree(env);
+// 	return (0);
+// }
+
 int			msh_exec(char **args, t_env *tenv)
 {
 	char	*path;
 	char	**env;
 	pid_t	pid;
 
-	path = verify_path(tenv, args);
-	if (path == NULL)
-	{
-		ft_strdel(&path);
+	if ((path = verify_path(tenv, args)) == NULL)
 		return (-1);
-	}
-	//-
 	env = tenv_to_star(tenv);
-	//-
 	pid = fork();
 	if (pid == 0)
 	{

@@ -23,20 +23,17 @@ int		strcnt(char **args)
 	return (cnt);
 }
 
+/* NEW */
 char	*read_line(const int fd)
 {
-	char	inchar;
+	char	*rline;
 	char	*line;
 
-	inchar = '0';
-	line = (char *)malloc(sizeof(char) * 1024);
-	while (inchar != '\n' && inchar != '\0')
-	{
-		read(fd, &inchar, 1);
-		if (inchar != '\n' && inchar != '\0')
-			ft_strcat(line, &inchar);
-	}
-	line[ft_strlen(line)] = '\0';
+	rline = (char *)malloc(sizeof(char) * 1024);
+	ft_memset(rline, '\0', 1024);
+	read(fd, rline, 1024);
+	line = ft_strtrim(rline);
+	ft_strdel(&rline);
 	return (line);
 }
 

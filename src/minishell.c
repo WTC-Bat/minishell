@@ -90,23 +90,17 @@ static int	loop(t_env *tenv)
 	int		done;
 
 	done = 0;
-	// ft_putendl("PUTTING PROMPT");
 	put_prompt(tenv);
-	// ft_putendl("READING LINER");
 	input = read_line(0);
 	if (input[0] != '\0' && input[0] != ' ' && input[0] != '\t')
 	{
 		args = ft_strsplit(input, ' ');
 		done = handle_input(args, tenv);
-		// ft_putendl("HANDLED");
-		// free_star(args);
 		ft_starfree(args);
-		// ft_putendl("STAR FREED");
+		ft_strclr(input);
+		free(input);
+		input = NULL;
 	}
-	ft_strclr(input);
-	free(input);
-	input = NULL;
-	// ft_putendl("INPUT FREED");
 	return (done);
 }
 

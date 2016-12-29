@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static int	word_count(char const *s, char c)
+static int	wd_count(char const *s, char c)
 {
 	int		cnt;
 	int		wcnt;
@@ -48,7 +48,7 @@ char		**ft_strsplit(char const *s, char c)
 	scnt = 0;
 	start = 0;
 	strcnt = 0;
-	if ((strs = (char **)malloc(sizeof(*strs) * (word_count(s, c) + 1))) == NULL)
+	if ((strs = (char **)malloc(sizeof(*strs) * (wd_count(s, c) + 1))) == NULL)
 		return (NULL);
 	while (s[scnt] != '\0')
 	{
