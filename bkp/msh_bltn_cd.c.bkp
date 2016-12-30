@@ -22,12 +22,9 @@
 **	cd path/	-	go to folder from current position
 */
 
-/* ORIGINAL (in bkp) */
-
 int		cd_args_valid(char *args)
 {
 	struct stat	st;
-
 	stat(args, &st);
 	if (S_ISDIR(st.st_mode) > 0 || ft_strcmp(args, "~") == 0)
 		return (1);
@@ -46,37 +43,3 @@ void	msh_cd(char **args, t_env *tenv)
 			ft_putendl("Error: Invalid path");
 	}
 }
-
-/* Attempt 2 */
-
-// static int	cd_is_basic(char *arg)
-// {
-// 	else if (ft_strequ(arg, "../") == 1	|| ft_strequ(arg, "/") == 1
-// 		|| ft_strequ(arg, "-") == 1)
-// 	{
-// 		return (1);
-// 	}
-// 	return (0);
-// }
-//
-// static int	cd_args_valid(char *arg)
-// {
-// 	struct stat	st;
-// 	int			valid;
-//
-// 	st = (struct stat *)malloc(sizeof(struct stat));
-// 	valid = 0;
-// 	stat(args, &st);
-// 	if (S_ISDIR(st.st_mode) > 0 || cd_is_basic(arg) == 1)
-// 		valid = 1;
-// 	return (valid);
-// }
-//
-// void		msh_cd(char **args, t_env *tenv)
-// {
-// 	if (args[1] == NULL)
-// 		//go home
-// 	else if (cd_is_basic(args[1]) == 1)
-// 		//cd_basic(args[1])
-//
-// }
