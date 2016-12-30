@@ -94,8 +94,11 @@ void		cd_navigate(char *arg, t_env *tenv)
 	//
 	if (ft_startswith(arg, "../") == 1)
 	{
-		cd_go_back(arg);
+		// cd_go_back(arg);
+		char * bckpth = cd_get_back_path(tenv, arg);
+		ft_putendl(bckpth);
 	}
+	exit(0);
 	//
 
 	new_pwd = NULL;

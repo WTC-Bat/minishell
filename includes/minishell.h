@@ -49,4 +49,6 @@ int					tenv_count(t_env *tenv);
 t_env				*t_env_reverse(t_env *tenv);
 char				**tenv_to_star(t_env *tenv);
 
+char				*cd_get_back_path(t_env *tenv, char *arg);
+
 #endif
