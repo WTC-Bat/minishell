@@ -117,7 +117,8 @@ static int	cd_args_valid(char *arg)
 	st = (struct stat *)malloc(sizeof(struct stat));
 	valid = 0;
 	stat(arg, st);
-	if (S_ISDIR(st->st_mode) > 0 || ft_startswith(arg, "~/") == 1)
+	// if (S_ISDIR(st->st_mode) > 0 || ft_startswith(arg, "~/") == 1)
+	if (S_ISDIR(st->st_mode) > 0)
 		valid = 1;
 	free(st);
 	return (valid);
@@ -146,7 +147,9 @@ void		msh_cd(char **args, t_env *tenv)
 	{
 		ft_putendl("ARGS VALID");
 		//WORK//
+		cd_navigate(args[1], tenv);
 	}
+	// else if (args[1][0] == '~')
 	else
 	{
 		ft_putstr_fd("ERROR: No directory \"", 2);
