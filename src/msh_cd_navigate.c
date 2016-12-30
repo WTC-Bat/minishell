@@ -13,41 +13,7 @@
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
-/* WIP */
-// static char	*cd_go_back(char *arg)
-// {
-// 	char	**splits;
-//
-// 	splits = ft_strsplit(arg, '/');
-// }
 
-/* WIP [Still needs backward traversal and '-']*/
-// static void cd_navigate_basic(t_env *tenv, char *arg)
-// {
-// 	char	*pwd;
-// 	char	*new_pwd;
-// 	int		chsuccess;
-//
-// 	pwd = get_env_val(tenv, "PWD");
-// 	chsuccess = 0;
-// 	if (ft_strequ(arg, "/") == 1)
-// 		new_pwd = ft_strdup("/");
-// 	else if (arg == NULL || (ft_strequ(arg, "~") == 1))	//?
-// 		new_pwd = get_env_val(tenv, "HOME");
-// 	else if (ft_strequ(arg, "-") == 1)
-// 		new_pwd = get_env_val(tenv, "OLDPWD");
-// 	chsuccess = chdir(new_pwd);
-// 	if (chsuccess == 0)
-// 	{
-// 		replace_var(tenv, "OLDPWD", pwd);
-// 		replace_var(tenv, "PWD", new_pwd);
-// 	}
-// 	else
-// 		ft_putendl_fd("ERROR: Unable to change directory.", 2);
-// 	// what if no if statements pass?
-// 	ft_strdel(&pwd);
-// 	ft_strdel(&new_pwd);
-// }
 
 /*
 **	^
@@ -90,16 +56,6 @@ void		cd_navigate(char *arg, t_env *tenv)
 	char	*new_pwd;
 	char	*pwd;
 	int		chsuccess;
-
-	//
-	if (ft_startswith(arg, "../") == 1)
-	{
-		// cd_go_back(arg);
-		char * bckpth = cd_get_back_path(tenv, arg);
-		ft_putendl(bckpth);
-	}
-	exit(0);
-	//
 
 	new_pwd = NULL;
 	chsuccess = 0;

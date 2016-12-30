@@ -32,3 +32,6 @@ void	cd_navigate_root()
 		return (0);
 	return (1);
 }
+
+
+//////
