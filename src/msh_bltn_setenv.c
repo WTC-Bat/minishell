@@ -41,31 +41,13 @@ static int	setenv_args_valid(t_env *tenv, char **args)
 	return (1);
 }
 
-/*
-void		replace_var(t_env **tenv, char *var, char *val)
-{
-	while (*tenv != NULL)
-	{
-		//if (ft_strcmp((*tenv)->var, var) == 0)
-		if (ft_strequ((*tenv)->var, var) == 1)
-		{
-			ft_strclr((*tenv)->val);
-			(*tenv)->val = ft_strdup(val);
-			//return ;
-			break;
-		}
-		*tenv = (*tenv)->next;
-	}
-}
-*/
-
 void		replace_var(t_env *tenv, char *var, char *val)
 {
 	while (tenv != NULL)
 	{
-		if (ft_strcmp(tenv->var, var) == 0)
+		if (ft_strcmp(tenv->var, var) == 0)	// ft_strequ?
 		{
-			ft_strclr(tenv->val);
+			ft_strdel(&(tenv)->val);
 			tenv->val = ft_strdup(val);
 			return ;
 		}

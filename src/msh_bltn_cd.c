@@ -37,11 +37,9 @@ static int	cd_navigate_basic(t_env *tenv, char *arg)
 {
 	char	*pwd;
 	char	*new_pwd;
-	int		chsuccess;
 	int		success;
 
 	pwd = get_env_val(tenv, "PWD");
-	chsuccess = 0;
 	success = 0;
 	if (arg == NULL || ft_strequ(arg, "~") == 1 || ft_strequ(arg, "~/") == 1)
 		new_pwd = get_env_val(tenv, "HOME");
@@ -49,7 +47,7 @@ static int	cd_navigate_basic(t_env *tenv, char *arg)
 		new_pwd = get_env_val(tenv, "OLDPWD");
 	else if (ft_strequ(arg, "/") == 1)
 		new_pwd = ft_strdup("/");
-	if ((chsuccess = chdir(new_pwd)) == 0)
+	if (chdir(new_pwd) == 0)
 	{
 		replace_var(tenv, "PWD", new_pwd);
 		replace_var(tenv, "OLDPWD", pwd);
@@ -68,7 +66,6 @@ static int	cd_args_valid(char *arg)
 	st = (struct stat *)malloc(sizeof(struct stat));
 	valid = 0;
 	stat(arg, st);
-	// if (S_ISDIR(st->st_mode) > 0 || ft_startswith(arg, "~/") == 1)
 	if (S_ISDIR(st->st_mode) > 0)
 		valid = 1;
 	free(st);
@@ -78,7 +75,8 @@ static int	cd_args_valid(char *arg)
 static int	cd_is_basic(char *arg)
 {
 	if ((arg == NULL || ft_strequ(arg, "~") == 1 || ft_strequ(arg, "~/") == 1)
-		|| ft_strequ(arg, "/") == 1 || ft_strequ(arg, "-") == 1)
+		|| (ft_strequ(arg, "-") == 1 || ft_strequ(arg, "-/") == 1)
+		|| ft_strequ(arg, "/") == 1)
 	{
 		return (1);
 	}
@@ -96,7 +94,6 @@ void		msh_cd(char **args, t_env *tenv)
 	}
 	else if (cd_args_valid(args[1]) == 1)
 	{
-		ft_putendl("ARGS VALID");
 		cd_navigate(args[1], tenv);
 	}
 	// else if (args[1][0] == '~')

@@ -17,9 +17,8 @@ void	cd_navigate(char *arg, t_env *tenv)
 {
 	char	*pwd;
 	char	*new_pwd;
-	int		chsuccess;
 
-	if ((chsuccess = chdir(arg)) == 0)
+	if (chdir(arg) == 0)
 	{
 		pwd = get_env_val(tenv, "PWD");
 		new_pwd = (char *)malloc(sizeof(char) * 1024);
