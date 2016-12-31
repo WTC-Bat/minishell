@@ -13,11 +13,82 @@
 #include "../libft/libft.h"
 #include "../includes/minishell.h"
 
-void	cd_navigate(char *arg, t_env *tenv)
+static char	*cd_get_path_from_home(t_env *tenv, char *arg)
+{
+	char	*home;
+	char	*sub;
+	char	*path_from_home;
+	char	*tmp;
+	int		substart;
+
+	home = get_env_val(tenv, "HOME");
+	tmp = ft_strjoin(home, "/");
+	substart = 1;
+	if (arg[1] == '/')
+		substart = 2;
+	sub = ft_strsub(arg, substart, ft_strlen(arg) - substart);
+	path_from_home = ft_strjoin(tmp, sub);
+	ft_strdel(&home);
+	ft_strdel(&tmp);
+	ft_strdel(&sub);
+	return (path_from_home);
+}
+
+int			cd_navigate_origin_home(t_env *tenv, char *arg)
+{
+	char	*path;
+	char	*pwd;
+	int		success;
+
+	path = cd_get_path_from_home(tenv, arg);
+	pwd = get_env_val(tenv, "PWD");
+	success = 0;
+	if (cd_args_valid(path) == 1)
+	{
+		if (chdir(path) == 0)
+		{
+			replace_var(tenv, "PWD", path);
+			replace_var(tenv, "OLDPWD", pwd);
+			success = 1;
+		}
+	}
+	ft_strdel(&path);
+	ft_strdel(&pwd);
+	return (success);
+}
+
+int			cd_navigate_basic(t_env *tenv, char *arg)
 {
 	char	*pwd;
 	char	*new_pwd;
+	int		success;
 
+	pwd = get_env_val(tenv, "PWD");
+	success = 0;
+	if (arg == NULL || ft_strequ(arg, "~") == 1 || ft_strequ(arg, "~/") == 1)
+		new_pwd = get_env_val(tenv, "HOME");
+	else if (ft_strequ(arg, "-") == 1 || ft_strequ(arg, "-/") == 1)
+		new_pwd = get_env_val(tenv, "OLDPWD");
+	else if (ft_strequ(arg, "/") == 1)
+		new_pwd = ft_strdup("/");
+	if (chdir(new_pwd) == 0)
+	{
+		replace_var(tenv, "PWD", new_pwd);
+		replace_var(tenv, "OLDPWD", pwd);
+		success = 1;
+	}
+	ft_strdel(&pwd);
+	ft_strdel(&new_pwd);
+	return (success);
+}
+
+int			cd_navigate(char *arg, t_env *tenv)
+{
+	char	*pwd;
+	char	*new_pwd;
+	int		success;
+
+	success = 0;
 	if (chdir(arg) == 0)
 	{
 		pwd = get_env_val(tenv, "PWD");
@@ -27,78 +98,7 @@ void	cd_navigate(char *arg, t_env *tenv)
 		replace_var(tenv, "OLDPWD", pwd);
 		ft_strdel(&pwd);
 		ft_strdel(&new_pwd);
+		success = 1;
 	}
-	else
-		ft_putendl_fd("ERROR: Unable to change directory.", 2);
+	return (success);
 }
-
-
-
-
-
-/*
-**	^
-**	|
-**	new
-
-**
-
-**	old
-**	|
-**	v
-*/
-
-// static char	*get_path_back(char *arg, char *pwd)
-// {
-// 	int		back_steps;
-// 	char	*new_path;
-// 	int		slash;
-//
-// 	back_steps = ft_splitcnt(arg, '/');
-// 	new_path = ft_strdup(pwd);
-// 	slash = 0;
-// 	if (new_path[ft_strlen(new_path) - 1] == '/')
-// 		new_path[ft_strlen(new_path) - 1] = '\0';
-// 	while (back_steps > 0)
-// 	{
-// 		slash = ft_lindexof(new_path, '/');
-// 		new_path = ft_strsub(new_path, 0, slash);
-// 		back_steps--;
-// 	}
-// 	return (new_path);
-// }
-//
-// static void	replacement(t_env *tenv, char *pwd, char *new_pwd)
-// {
-// 	replace_var(tenv, "OLDPWD", pwd);
-// 	replace_var(tenv, "PWD", new_pwd);
-// }
-//
-// void		cd_navigate(char *arg, t_env *tenv)
-// {
-// 	char	*new_pwd;
-// 	char	*pwd;
-// 	int		chsuccess;
-//
-// 	new_pwd = NULL;
-// 	chsuccess = 0;
-// 	pwd = get_env_val(tenv, "PWD");
-// 	if (ft_strcmp(arg, "~") == 0)
-// 		new_pwd = get_env_val(tenv, "HOME");
-// 	else if (ft_strcmp(arg, "/") == 0)
-// 		new_pwd = ft_strdup("/");
-// 	else if (arg[0] == '.' && arg[1] == '.')
-// 		new_pwd = get_path_back(arg, pwd);
-// 	else
-// 	{
-// 		new_pwd = ft_strjoin(pwd, "/");
-// 		new_pwd = ft_strjoin(new_pwd, arg);
-// 	}
-// 	chsuccess = chdir(new_pwd);
-// 	if (chsuccess == 0)
-// 		replacement(tenv, pwd, new_pwd);
-// 	else
-// 		ft_putendl("Error: Unable to change directory");
-// 	free(pwd);
-// 	free(new_pwd);
-// }

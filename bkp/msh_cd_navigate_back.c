@@ -36,10 +36,24 @@
 
 ///////////////////////////////////////////////////////////////////////////////
 
+// static int	cd_back_only(char **splits)
+// {
+// 	int		cnt;
+//
+// 	cnt = 0;
+// 	while (splits[cnt] != NULL)
+// 	{
+// 		if (ft_strequ(splits[cnt], "..") == 0)
+// 			return (0);
+// 		cnt++;
+// 	}
+// 	return (1);
+// }
 
 /* A PROTOTYPE - 2 [Unrelated to functions above] */
 
-char	*cd_get_back_path(t_env *tenv, char *arg)	// have PWD var instead of 'arg' ?
+/* something is wrong. the < > part? */
+char		*cd_get_back_path(t_env *tenv, char *arg)	// have PWD var instead of 'arg' ?
 {
 	char	**splits;
 	char	*tmp;
@@ -54,6 +68,7 @@ char	*cd_get_back_path(t_env *tenv, char *arg)	// have PWD var instead of 'arg' 
 	tmp = NULL;
 	tmp2 = NULL;
 	idx = -1; // ?
+	cnt = 0;
 	pwd = get_env_val(tenv, "PWD");
 	while (ft_strequ(splits[cnt], "..") == 1)
 	{
@@ -61,7 +76,7 @@ char	*cd_get_back_path(t_env *tenv, char *arg)	// have PWD var instead of 'arg' 
 		{
 			tmp = ft_strdup(pwd);
 			idx = ft_lindexof(tmp, '/');
-			tmp2 = ft_strsub(pwd, 0, ((size_t)idx + 1));	// +1 ?
+			tmp2 = ft_strsub(tmp, 0, ((size_t)idx + 1));	// +1 ?
 		}
 		else
 		{

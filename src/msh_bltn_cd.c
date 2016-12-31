@@ -33,43 +33,9 @@
 **	BACK		=	../
 */
 
-static int	cd_navigate_basic(t_env *tenv, char *arg)
+static void	cd_error(void)
 {
-	char	*pwd;
-	char	*new_pwd;
-	int		success;
-
-	pwd = get_env_val(tenv, "PWD");
-	success = 0;
-	if (arg == NULL || ft_strequ(arg, "~") == 1 || ft_strequ(arg, "~/") == 1)
-		new_pwd = get_env_val(tenv, "HOME");
-	else if (ft_strequ(arg, "-") == 1 || ft_strequ(arg, "-/") == 1)
-		new_pwd = get_env_val(tenv, "OLDPWD");
-	else if (ft_strequ(arg, "/") == 1)
-		new_pwd = ft_strdup("/");
-	if (chdir(new_pwd) == 0)
-	{
-		replace_var(tenv, "PWD", new_pwd);
-		replace_var(tenv, "OLDPWD", pwd);
-		success = 1;
-	}
-	ft_strdel(&pwd);
-	ft_strdel(&new_pwd);
-	return (success);
-}
-
-static int	cd_args_valid(char *arg)
-{
-	struct stat	*st;
-	int			valid;
-
-	st = (struct stat *)malloc(sizeof(struct stat));
-	valid = 0;
-	stat(arg, st);
-	if (S_ISDIR(st->st_mode) > 0)
-		valid = 1;
-	free(st);
-	return (valid);
+	ft_putendl_fd("ERROR: Unable to change directory.", 2);
 }
 
 static int	cd_is_basic(char *arg)
@@ -83,20 +49,37 @@ static int	cd_is_basic(char *arg)
 	return (0);
 }
 
+int			cd_args_valid(char *arg)
+{
+	struct stat	*st;
+	int			valid;
+
+	st = (struct stat *)malloc(sizeof(struct stat));
+	valid = 0;
+	stat(arg, st);
+	if (S_ISDIR(st->st_mode) > 0)
+		valid = 1;
+	free(st);
+	return (valid);
+}
+
 void		msh_cd(char **args, t_env *tenv)
 {
 	if (cd_is_basic(args[1]) == 1)
 	{
-		if (cd_navigate_basic(tenv, args[1]) == 1)
-			return ;
-		else
-			ft_putendl_fd("ERROR: Unable to change directory.", 2);
+		if (cd_navigate_basic(tenv, args[1]) == 0)
+			cd_error();
 	}
 	else if (cd_args_valid(args[1]) == 1)
 	{
-		cd_navigate(args[1], tenv);
+		if (cd_navigate(args[1], tenv) == 0)
+			cd_error();
 	}
-	// else if (args[1][0] == '~')
+	else if (args[1][0] == '~')
+	{
+		if (cd_navigate_origin_home(tenv, args[1]) == 0)
+			cd_error();
+	}
 	else
 	{
 		ft_putstr_fd("ERROR: No directory \"", 2);
