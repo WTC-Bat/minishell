@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 static char	*get_fpath(char *path, char *pname)
 {

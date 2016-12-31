@@ -19,6 +19,7 @@
 
 # include <sys/wait.h>
 # include <sys/stat.h>
+# include "libft.h"
 
 typedef struct		s_env
 {

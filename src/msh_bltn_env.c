@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 t_env		*t_env_reverse(t_env *tenv)
 {

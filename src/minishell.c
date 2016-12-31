@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 static int	handle_input(char **args, t_env *tenv)
 {

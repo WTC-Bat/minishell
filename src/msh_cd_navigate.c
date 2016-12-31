@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 static char	*cd_get_path_from_home(t_env *tenv, char *arg)
 {
