@@ -33,55 +33,6 @@
 **	BACK		=	../
 */
 
-/* ORIGINAL (in bkp) */
-
-// int		cd_args_valid(char *args)
-// {
-// 	struct stat	st;
-//
-// 	stat(args, &st);
-// 	if (S_ISDIR(st.st_mode) > 0 || ft_strcmp(args, "~") == 0)
-// 		return (1);
-// 	return (0);
-// }
-//
-// void	msh_cd(char **args, t_env *tenv)
-// {
-// 	if (args[1] == NULL)
-// 		cd_navigate("~", tenv);
-// 	else
-// 	{
-// 		if (cd_args_valid(args[1]) == 1)
-// 			cd_navigate(args[1], tenv);
-// 		else
-// 			ft_putendl("Error: Invalid path");
-// 	}
-// }
-
-
-
-/* Attempt 2 */
-
-/*
-**	0	-	relative	(from current - 'path/') 	// ../ ?
-**	1	-	absolute	(from root - '/')
-**	2	-	(from home - '~/')
-**	3	-	(from oldpwd - '-')
-*/
-/*WIP*/
-/*???*/
-// static int	cd_navigation_origin(char *arg)
-// {
-// 	if (ft_startswith(arg, "/") == 1)
-// 		return (1);
-// 	else if (ft_startswith(arg, "~") == 1 || ft_startswith(arg, "~/") == 1)
-// 		return (2);
-// 	else if (ft_startswith(arg, "-") == 1 || ft_startswith(arg, "-/") == 1)	//	|| ft_startswith(arg, "../")
-// 		return (3);
-// 	else
-// 		return (0);
-// }
-
 static int	cd_navigate_basic(t_env *tenv, char *arg)
 {
 	char	*pwd;
@@ -146,7 +97,6 @@ void		msh_cd(char **args, t_env *tenv)
 	else if (cd_args_valid(args[1]) == 1)
 	{
 		ft_putendl("ARGS VALID");
-		//WORK//
 		cd_navigate(args[1], tenv);
 	}
 	// else if (args[1][0] == '~')

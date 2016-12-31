@@ -1,0 +1,19 @@
+/*
+**	0	-	relative	(from current - 'path/') 	// ../ ?
+**	1	-	absolute	(from root - '/')
+**	2	-	(from home - '~/')
+**	3	-	(from oldpwd - '-')
+*/
+/*WIP*/
+/*???*/
+// static int	cd_navigation_origin(char *arg)
+// {
+// 	if (ft_startswith(arg, "/") == 1)
+// 		return (1);
+// 	else if (ft_startswith(arg, "~") == 1 || ft_startswith(arg, "~/") == 1)
+// 		return (2);
+// 	else if (ft_startswith(arg, "-") == 1 || ft_startswith(arg, "-/") == 1)	//	|| ft_startswith(arg, "../")
+// 		return (3);
+// 	else
+// 		return (0);
+// }

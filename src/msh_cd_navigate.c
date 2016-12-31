@@ -33,12 +33,18 @@ void	cd_navigate(char *arg, t_env *tenv)
 		ft_putendl_fd("ERROR: Unable to change directory.", 2);
 }
 
+
+
+
+
 /*
 **	^
 **	|
 **	new
+
 **
-**	rework?
+
+**	old
 **	|
 **	v
 */
