@@ -45,7 +45,7 @@ static char	*get_prog_path(t_env *tenv, char *pname)
 	while (paths[cnt] != NULL)
 	{
 		if ((fpath = get_fpath(paths[cnt], pname)) != NULL)
-			break;
+			break ;
 		cnt++;
 	}
 	ft_strdel(&pval);
@@ -56,7 +56,6 @@ static char	*get_prog_path(t_env *tenv, char *pname)
 static char	*verify_path(t_env *tenv, char **args)
 {
 	char *path;
-
 
 	if ((path = get_prog_path(tenv, args[0])) != NULL)
 	{
@@ -84,7 +83,7 @@ char		**tenv_to_star(t_env *tenv)
 	cnt = 0;
 	varlen = ft_strlen(tenv->var);
 	vallen = ft_strlen(tenv->val);
-	star = (char **)malloc(sizeof(*star) * (tenv_count(tenv) + 1));	// +1 ?
+	star = (char **)malloc(sizeof(*star) * (tenv_count(tenv) + 1));
 	while (tenv != NULL)
 	{
 		tmp = ft_strjoin(tenv->var, "=");
@@ -96,35 +95,6 @@ char		**tenv_to_star(t_env *tenv)
 	star[cnt] = NULL;
 	return (star);
 }
-
-/* 1 */
-// int			msh_exec(char **args, t_env *tenv)
-// {
-// 	char	*path;
-// 	char	**env;
-// 	pid_t	pid;
-//
-// 	path = verify_path(tenv, args);
-// 	if (path == NULL)
-// 	{
-// 		ft_strdel(&path);
-// 		return (-1);
-// 	}
-// 	//-
-// 	env = tenv_to_star(tenv);
-// 	//-
-// 	pid = fork();
-// 	if (pid == 0)
-// 	{
-// 		execve(path, args, env);
-// 		exit(0);
-// 	}
-// 	if (pid > 0)
-// 		waitpid(pid, 0, 0);
-// 	ft_strdel(&path);
-// 	ft_starfree(env);
-// 	return (0);
-// }
 
 int			msh_exec(char **args, t_env *tenv)
 {

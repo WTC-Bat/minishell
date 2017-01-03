@@ -6,22 +6,20 @@
 /*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/05/11 15:02:41 by mvanwyk           #+#    #+#             */
-/*   Updated: 2016/05/15 15:12:11 by mvanwyk          ###   ########.fr       */
+/*   Updated: 2017/01/03 13:48:55 by mvanwyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	is_match(char *bigc, char *little, int cnt)	//ft_strnequ || ft_strncmp?
+static int	is_match(char *bigc, char *little, int cnt)
 {
 	int		mcnt;
 	int		len;
 
 	mcnt = cnt;
 	len = ft_strlen(little);
-	while (mcnt <= len)	//<=?
-	// while (mcnt < len && bigc[mcnt] != '\0')
-	// while (mcnt <= len && bigc[mcnt] != '\0')
+	while (mcnt <= len)
 	{
 		if (bigc[mcnt] != little[mcnt])
 			return (0);

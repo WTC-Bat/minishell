@@ -45,12 +45,12 @@ void	free_tenv(t_env *tenv)
 		tenv = tenv->next;
 		ft_strclr(tmp->var);
 		free(tmp->var);
-		tmp->var = NULL;//?
+		tmp->var = NULL;
 		ft_strclr(tmp->val);
 		free(tmp->val);
-		tmp->val = NULL;//?
+		tmp->val = NULL;
 		free(tmp);
-		tmp = NULL;//?
+		tmp = NULL;
 	}
 	tenv = NULL;
 }

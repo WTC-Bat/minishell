@@ -6,17 +6,12 @@
 /*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/06/03 14:07:34 by mvanwyk           #+#    #+#             */
-/*   Updated: 2016/06/03 14:35:59 by mvanwyk          ###   ########.fr       */
+/*   Updated: 2017/01/03 13:49:31 by mvanwyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-/*
-**	Mallocs and returns a new c-string containing the characters of 'str' in
-**	reverse. If memory allocation fails, or 'str' is NULL or empty, NULL is
-**	returned.
-*/
 char	*ft_strrev(char const *str)
 {
 	int		cnt;
