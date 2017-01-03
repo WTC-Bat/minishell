@@ -12,10 +12,6 @@
 
 #include "libft.h"
 
-/*
-**	Returns the index of the first occurence of the char 'c' in the c-string
-**	'str'. If 'str' is NULL or empty, or 'c' is '\0', -1 is returned.
-*/
 int		ft_indexof(char const *str, char c)
 {
 	int		cnt;

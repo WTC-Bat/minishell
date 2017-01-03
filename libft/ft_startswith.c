@@ -12,10 +12,6 @@
 
 #include "libft.h"
 
-/*
-**	Returns 1 if the c-string 'str' begins with the c-string 'start', otherwise
-**	0 is returned.
-*/
 int		ft_startswith(char const *str, char const *start)
 {
 	int		startlen;

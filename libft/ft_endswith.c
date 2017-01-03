@@ -12,10 +12,6 @@
 
 #include "libft.h"
 
-/*
-**	Returns 1 if the c-string 'str' ends with the c-string 'start', otherwise
-**	0 is returned.
-*/
 int		ft_endswith(char const *str, char const *end)
 {
 	int		cnt;
