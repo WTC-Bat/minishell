@@ -19,7 +19,7 @@ SRCS = ./ft_itoa.c ./ft_strcat.c ./ft_strchr.c ./ft_strcmp.c ./ft_strcpy.c \
 		./ft_lstiter.c ./ft_lstmap.c ./ft_indexof.c ./ft_lindexof.c \
 		./ft_startswith.c ./ft_endswith.c ./ft_strrev.c ./ft_splitcnt.c \
 		./ft_putnbr_endl.c ./ft_wordcnt.c ./ft_iswhitespace.c ./ft_starlen.c \
-		./ft_starfree.c
+		./ft_starfree.c ./ft_charcnt.c
 
 OBJS = ./ft_itoa.o ./ft_strcat.o ./ft_strchr.o ./ft_strcmp.o ./ft_strcpy.o \
 		./ft_strdup.o ./ft_strjoin.o ./ft_strmap.o ./ft_strmapi.o \
@@ -38,7 +38,7 @@ OBJS = ./ft_itoa.o ./ft_strcat.o ./ft_strchr.o ./ft_strcmp.o ./ft_strcpy.o \
 		./ft_lstiter.o ./ft_lstmap.o ./ft_indexof.o ./ft_lindexof.o \
 		./ft_startswith.o ./ft_endswith.o ./ft_strrev.o ./ft_splitcnt.o \
 		./ft_putnbr_endl.o ./ft_wordcnt.o ./ft_iswhitespace.o ./ft_starlen.o \
-		./ft_starfree.o
+		./ft_starfree.o ./ft_charcnt.o
 
 all: $(NAME)
 

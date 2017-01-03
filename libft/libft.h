@@ -47,6 +47,7 @@ char				*ft_strtrim(char const *s);
 char				ft_tolower(int c);
 char				ft_toupper(int c);
 int					ft_atoi(char *str);
+int					ft_charcnt(char const *str, char c);
 int					ft_isalnum(int c);
 int					ft_isalpha(int c);
 int					ft_isascii(int c);
