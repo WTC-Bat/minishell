@@ -44,6 +44,8 @@ static void	put_prompt(t_env *tenv)
 	char	*tmp;
 
 	user = get_env_val(tenv, "USER");
+	if (user == NULL)
+		user = ft_strdup("minishell");
 	tmp = ft_strdup(COL_HGRN_BLD);
 	prompt = ft_strjoin(tmp, user);
 	ft_strdel(&tmp);
