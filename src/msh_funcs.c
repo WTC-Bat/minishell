@@ -12,6 +12,20 @@
 
 #include "minishell.h"
 
+int			only_colon(char *input)
+{
+	int		cnt;
+
+	cnt = 0;
+	while (input[cnt] != '\0')
+	{
+		if (ft_iswhitespace(input[cnt]) == 0 && input[cnt] != ';')
+			return (0);
+		cnt++;
+	}
+	return (1);
+}
+
 int		strcnt(char **args)
 {
 	int		cnt;

@@ -12,29 +12,27 @@
 
 #include "minishell.h"
 
-static int	handle_input(char **args, t_env *tenv)
+static int	handle_multi_command(char *input, t_env *tenv)
 {
-	if ((ft_strcmp(args[0], "env")) == 0)
-		print_env(tenv);
-	else if ((ft_strcmp(args[0], "echo")) == 0)
-		msh_echo(tenv, args);
-	else if ((ft_strcmp(args[0], "setenv")) == 0)
-		msh_setenv(&tenv, args);
-	else if ((ft_strcmp(args[0], "unsetenv")) == 0)
-		msh_unsetenv(&tenv, args);
-	else if (ft_strcmp(args[0], "cd") == 0)
-		msh_cd(args, tenv);
-	else if ((ft_strcmp(args[0], "exit")) == 0)
-		return (1);
-	else
+	t_list	*cmds;
+	char	**args;
+	int		done;
+
+	cmds = msh_cmd_split(input);
+	// if (cmds == NULL)
+	// 	return (0);
+	done = 0;
+	while (cmds != NULL)
 	{
-		if (msh_exec(args, tenv) == -1)
-		{
-			ft_putstr(args[0]);
-			ft_putendl(": Unknown command");
-		}
+		args = ft_strsplit((char *)cmds->content, ' ');
+		done = msh_handle_input(args, tenv);
+		ft_starfree(args);
+		cmds = cmds->next;
+		if (done == 1)
+			return (1);
 	}
-	return (0);
+	cmds_free(cmds);
+	return (done);
 }
 
 static void	put_prompt(t_env *tenv)
@@ -84,6 +82,27 @@ static int	has_arg(char **argv, char c)
 	return (0);
 }
 
+// static int	loop(t_env *tenv)
+// {
+// 	char	*input;
+// 	char	**args;
+// 	int		done;
+//
+// 	done = 0;
+// 	put_prompt(tenv);
+// 	input = read_line(0);
+// 	if (input[0] != '\0' && input[0] != ' ' && input[0] != '\t')
+// 	{
+// 		args = ft_strsplit(input, ' ');
+// 		done = handle_input(args, tenv);
+// 		ft_starfree(args);
+// 		ft_strclr(input);
+// 		free(input);
+// 		input = NULL;
+// 	}
+// 	return (done);
+// }
+
 static int	loop(t_env *tenv)
 {
 	char	*input;
@@ -95,12 +114,26 @@ static int	loop(t_env *tenv)
 	input = read_line(0);
 	if (input[0] != '\0' && input[0] != ' ' && input[0] != '\t')
 	{
-		args = ft_strsplit(input, ' ');
-		done = handle_input(args, tenv);
-		ft_starfree(args);
-		ft_strclr(input);
-		free(input);
-		input = NULL;
+		if (ft_indexof(input, ';') >= 0)
+		{
+			if (only_colon(input) == 0)
+				done = handle_multi_command(input, tenv);
+		}
+		else
+		{
+			args = ft_strsplit(input, ' ');
+			done = msh_handle_input(args, tenv);
+			ft_starfree(args);
+		}
+		ft_strdel(&input);
+
+
+		// args = ft_strsplit(input, ' ');
+		// done = handle_input(args, tenv);
+		// ft_starfree(args);
+		// ft_strclr(input);
+		// free(input);
+		// input = NULL;
 	}
 	return (done);
 }
