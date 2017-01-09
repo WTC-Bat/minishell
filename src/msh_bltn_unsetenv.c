@@ -47,7 +47,7 @@ t_env	*remove_var(t_env *tenv, char *varname)
 
 	if (tenv == NULL)
 		return (NULL);
-	if (ft_strequ(varname, tenv->var) == 1)
+	if (ft_strcmp(tenv->var, varname) == 0)
 	{
 		tmp = tenv->next;
 		ft_strdel(&(tenv)->var);
