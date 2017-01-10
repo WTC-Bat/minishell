@@ -9,6 +9,7 @@ void		cmds_free(t_list *cmds)
 		tmp = cmds;
 		cmds = cmds->next;
 		ft_memdel(&(tmp)->content);
+		free(tmp);
 	}
 	free(cmds);
 }

@@ -15,13 +15,13 @@
 static int	handle_multi_command(char *input, t_env *tenv)
 {
 	t_list	*cmds;
+	t_list	*root;
 	char	**args;
 	int		done;
 
 	cmds = msh_cmd_split(input);
-	// if (cmds == NULL)
-	// 	return (0);
 	done = 0;
+	root = cmds;
 	while (cmds != NULL)
 	{
 		args = ft_strsplit((char *)cmds->content, ' ');
@@ -31,7 +31,7 @@ static int	handle_multi_command(char *input, t_env *tenv)
 		if (done == 1)
 			return (1);
 	}
-	cmds_free(cmds);
+	cmds_free(root);
 	return (done);
 }
 
