@@ -6,7 +6,8 @@ FLAGS = -Wall -Werror -Wextra
 SRCS = $(SRC)minishell.c $(SRC)msh_bltn_echo.c $(SRC)msh_bltn_env.c \
 	   $(SRC)msh_bltn_setenv.c $(SRC)msh_bltn_unsetenv.c $(SRC)msh_funcs.c \
 	   $(SRC)msh_exec.c $(SRC)msh_bltn_cd.c $(SRC)msh_cd_navigate.c \
-	   $(SRC)msh_cmd_split.c $(SRC)msh_handle_input.c
+	   $(SRC)msh_cmd_split.c $(SRC)msh_handle_input.c \
+	   $(SRC)msh_cmd_split_funcs.c
 
 all: $(NAME)
 

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   msh_cmd_split.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/01/11 07:37:28 by mvanwyk           #+#    #+#             */
+/*   Updated: 2017/01/11 07:37:31 by mvanwyk          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void		cmds_free(t_list *cmds)
+void			cmds_free(t_list *cmds)
 {
 	t_list	*tmp;
 
@@ -12,73 +24,6 @@ void		cmds_free(t_list *cmds)
 		free(tmp);
 	}
 	free(cmds);
-}
-
-static int	get_sc_split_count(char *input)
-{
-	char	**splits;
-	int		idx;
-	int		cidx;
-	int		cnt;
-
-	splits = ft_strsplit(input, ';');
-	idx = 0;
-	cidx = 0;
-	cnt = 0;
-	while (splits[idx] != NULL)
-	{
-		while (splits[idx][cidx] != '\0')
-		{
-			if (ft_isascii(splits[idx][cidx]) == 1
-				&& ft_iswhitespace(splits[idx][cidx++]) == 0)
-			{
-				cnt++;
-				break ;
-			}
-			cidx++;
-		}
-		cidx = 0;
-		idx++;
-	}
-	ft_starfree(splits);
-	return (cnt);
-}
-
-/*
-**	splits input at the sei colons. but still need to check if the semi colon
-**	is enclosed in quotes
-*/
-static char	**semicolon_split(char *input)
-{
-	int		idx;
-	int		cidx;
-	int		scnt;
-	char	**splits;
-	char	**rawsplits;
-
-	idx = 0;
-	cidx = 0;
-	scnt = 0;
-	splits = (char **)malloc(sizeof(*splits) * get_sc_split_count(input) + 1);
-	rawsplits = ft_strsplit(input, ';');
-	while (rawsplits[idx] != NULL)
-	{
-		while (rawsplits[idx][cidx] != '\0')
-		{
-			if (ft_isascii(rawsplits[idx][cidx]) == 1
-				&& ft_iswhitespace(rawsplits[idx][cidx++]) == 0)
-			{
-				splits[scnt++] = ft_strtrim(rawsplits[idx]);
-				break ;
-			}
-			cidx++;
-		}
-		cidx = 0;
-		idx++;
-	}
-	splits[scnt] = NULL;
-	ft_starfree(rawsplits);
-	return (splits);
 }
 
 static t_list	*cmds_reverse(t_list *cmds)
@@ -98,8 +43,7 @@ static t_list	*cmds_reverse(t_list *cmds)
 	return (new);
 }
 
-/* Rewrite using ft_lstnew with ft_lstadd? */
-t_list	*msh_cmd_split(char *input)
+t_list			*msh_cmd_split(char *input)
 {
 	t_list	*cmds;
 	t_list	*root;
@@ -112,7 +56,6 @@ t_list	*msh_cmd_split(char *input)
 	cnt = 0;
 	while (scsplits[cnt] != NULL)
 	{
-		/*?-- check quotes? --?*/
 		trim = ft_strtrim(scsplits[cnt]);
 		cmds = ft_lstnew((void *)trim, ft_strlen(trim));
 		cmds->next = root;

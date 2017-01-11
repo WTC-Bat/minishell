@@ -82,27 +82,6 @@ static int	has_arg(char **argv, char c)
 	return (0);
 }
 
-// static int	loop(t_env *tenv)
-// {
-// 	char	*input;
-// 	char	**args;
-// 	int		done;
-//
-// 	done = 0;
-// 	put_prompt(tenv);
-// 	input = read_line(0);
-// 	if (input[0] != '\0' && input[0] != ' ' && input[0] != '\t')
-// 	{
-// 		args = ft_strsplit(input, ' ');
-// 		done = handle_input(args, tenv);
-// 		ft_starfree(args);
-// 		ft_strclr(input);
-// 		free(input);
-// 		input = NULL;
-// 	}
-// 	return (done);
-// }
-
 static int	loop(t_env *tenv)
 {
 	char	*input;
@@ -126,14 +105,6 @@ static int	loop(t_env *tenv)
 			ft_starfree(args);
 		}
 		ft_strdel(&input);
-
-
-		// args = ft_strsplit(input, ' ');
-		// done = handle_input(args, tenv);
-		// ft_starfree(args);
-		// ft_strclr(input);
-		// free(input);
-		// input = NULL;
 	}
 	return (done);
 }

@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int			only_colon(char *input)
+int		only_colon(char *input)
 {
 	int		cnt;
 
