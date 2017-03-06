@@ -87,3 +87,34 @@ char		**semicolon_split(char *input)
 	ft_starfree(rawsplits);
 	return (splits);
 }
+
+int			scolon_is_in_quote(int col_idx, char *input)
+{
+	int		idx;
+	char	curquot;
+
+	idx = 0;
+	curquot = '\0';
+	while (input[idx] != '\0')
+	{
+		if (input[idx] == '\'' || input[idx] == '\"')
+		{
+			if (curquot == '\0')
+				curquot = input[idx];
+			else if (curquot == input[idx])
+				curquot = '\0';
+		}
+		if (idx == col_idx)
+		{
+			if (curquot != '\0')
+			{
+				ft_putendl("IS IN QUOTE");
+				return (1);
+			}
+			else
+				return (0);
+		}
+		idx++;
+	}
+	return (-1);
+}

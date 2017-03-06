@@ -47,22 +47,47 @@ t_list			*msh_cmd_split(char *input)
 {
 	t_list	*cmds;
 	t_list	*root;
-	char	**scsplits;
+	char	**splits;
 	char	*trim;
-	int		cnt;
+	int		scnt;
+	int		idx;
 
-	root = NULL;
-	scsplits = semicolon_split(input);
-	cnt = 0;
-	while (scsplits[cnt] != NULL)
+	scnt = get_split_count(input);
+	splits = split_indices(input);
+	idx = 0;
+	while (idx < scnt)
 	{
-		trim = ft_strtrim(scsplits[cnt]);
+		trim = ft_strtrim(splits[idx]);
 		cmds = ft_lstnew((void *)trim, ft_strlen(trim));
 		cmds->next = root;
 		root = cmds;
 		ft_strdel(&trim);
-		cnt++;
+		idx++;
 	}
-	ft_starfree(scsplits);
+	ft_starfree(splits);
 	return (cmds_reverse(root));
 }
+
+// t_list			*msh_cmd_split(char *input)
+// {
+// 	t_list	*cmds;
+// 	t_list	*root;
+// 	char	**scsplits;
+// 	char	*trim;
+// 	int		cnt;
+//
+// 	root = NULL;
+// 	scsplits = semicolon_split(input);
+// 	cnt = 0;
+// 	while (scsplits[cnt] != NULL)
+// 	{
+// 		trim = ft_strtrim(scsplits[cnt]);
+// 		cmds = ft_lstnew((void *)trim, ft_strlen(trim));
+// 		cmds->next = root;
+// 		root = cmds;
+// 		ft_strdel(&trim);
+// 		cnt++;
+// 	}
+// 	ft_starfree(scsplits);
+// 	return (cmds_reverse(root));
+// }

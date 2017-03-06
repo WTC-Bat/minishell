@@ -56,4 +56,10 @@ int					tenv_count(t_env *tenv);
 t_env				*t_env_reverse(t_env *tenv);
 char				**tenv_to_star(t_env *tenv);
 
+char				**msh_sort_quote(char *input);
+int					scolon_is_in_quote(int col_idx, char *input);
+int					has_cmd_splitter(char *input);
+char				**split_indices(char *input);
+int					get_split_count(char *input);
+
 #endif
