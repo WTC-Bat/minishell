@@ -62,7 +62,8 @@ static char		*quote_trim(char *str, char quote)
 	tridx = 0;
 	first = ft_indexof(str, quote);
 	last = ft_lindexof(str, quote);
-	trim = (char *)malloc(sizeof(char) * (ft_strlen(str) + 2) - 1);
+	// trim = (char *)malloc(sizeof(char) * (ft_strlen(str) + 2) - 1);
+	trim = (char *)malloc(sizeof(char) * (ft_strlen(str) - 2) + 1);
 	while (str[idx] != '\0')
 	{
 		if (idx != first && idx != last)
@@ -72,6 +73,7 @@ static char		*quote_trim(char *str, char quote)
 		}
 		idx++;
 	}
+	trim[tridx] = '\0';
 	return (trim);
 }
 
@@ -179,7 +181,14 @@ char		**msh_sort_quote(char *input)
 		if (input[idx] != ' ' && wstart == -1)
 			wstart = idx;
 		if (input[idx] == ' ' && curquot == '\0' && idx > 0)
+		{
 			wend = idx - 1;
+		}
+		// else if (input[idx] == ';')
+		// {
+		// 	if (scolon_is_in_quote(idx, input) == 0)
+		// 		wend = idx - 1;
+		// }
 		else if (input[idx + 1] == '\0')
 			wend = idx;
 		if (wstart > -1 && wend > -1)

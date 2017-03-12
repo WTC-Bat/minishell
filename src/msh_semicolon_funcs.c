@@ -83,10 +83,12 @@ char			**split_indices(char *input)
 	splits = (char **)malloc(sizeof(*splits) * split_cnt + 1);
 	idx = 0;
 	spos = 0;
+	// ft_putnbr(split_cnt);
+	// ft_putchar('\n');
 	while (idx < split_cnt)
 	{
 		if (split_indices[idx] == -1)
-			splits[idx] = trim_split(input, spos, ft_strlen(input) - spos);//+1
+			splits[idx] = trim_split(input, spos, ft_strlen(input) - spos + 1);//+1
 		else
 			splits[idx] = trim_split(input, spos, split_indices[idx] - spos);
 		spos = split_indices[idx] + 1;

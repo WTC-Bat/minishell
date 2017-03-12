@@ -11,3 +11,8 @@
 0	-	if arguments to command contain ';', an error will occur
 
 0	-	ft_strequ might be able to be improved
+
+
+0	-	COMPLICATIONS WHEN USING MULTI-COMMANDS !!!!
+		- start at handle_multi_command -?
+		- msh_cmd_split?

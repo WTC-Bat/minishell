@@ -55,6 +55,7 @@ t_list			*msh_cmd_split(char *input)
 	scnt = get_split_count(input);
 	splits = split_indices(input);
 	idx = 0;
+	root = NULL;
 	while (idx < scnt)
 	{
 		trim = ft_strtrim(splits[idx]);
@@ -64,7 +65,7 @@ t_list			*msh_cmd_split(char *input)
 		ft_strdel(&trim);
 		idx++;
 	}
-	ft_starfree(splits);
+	// ft_starfree(splits);
 	return (cmds_reverse(root));
 }
 

@@ -45,10 +45,23 @@ static int	handle_multi_command(char *input, t_env *tenv)
 	cmds = msh_cmd_split(input);
 	done = 0;
 	root = cmds;
+	ft_putendl("MCMD");
 	while (cmds != NULL)
 	{
 		// args = ft_strsplit((char *)cmds->content, ' ');
 		args = msh_sort_quote((char *)cmds->content);
+
+		//
+		// int i = 0;
+		// ft_putendl("ARGS");
+		// while (args[i] != NULL)
+		// {
+		// 	ft_putendl(args[i]);
+		// 	i++;
+		// }
+		// exit(1);
+		//
+
 		done = msh_handle_input(args, tenv);
 		ft_starfree(args);
 		cmds = cmds->next;
