@@ -42,7 +42,20 @@ static int	handle_multi_command(char *input, t_env *tenv)
 	char	**args;
 	int		done;
 
+	ft_putendl("SPLIT");
 	cmds = msh_cmd_split(input);
+	ft_putendl("WAS SPLIT");
+
+	//
+	// t_list	*t = cmds;
+	// ft_putendl("CMDS");
+	// while (t != NULL)
+	// {
+	// 	ft_putendl(t->content);
+	// 	t = t->next;
+	// }
+	//
+
 	done = 0;
 	root = cmds;
 	ft_putendl("MCMD");

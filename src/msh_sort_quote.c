@@ -93,23 +93,6 @@ static char		quote_char(char *str)
 	return ('\0');
 }
 
-// static int		wrapped(char *str)
-// {
-// 	if (ft_indexof(str, '\'') > -1 || ft_indexof(str, '\"') > -1)
-// 		return (1);
-// 	return (0);
-//
-// 	// int		end;
-// 	//
-// 	// end = (int)ft_strlen(str) - 1;
-// 	// if ((str[0] == '\'' && str[end] == '\'')
-// 	// 	|| (str[0] == '\"' && str[end] == '\"'))
-// 	// {
-// 	// 	return (1);
-// 	// }
-// 	// return (0);
-// }
-
 /*
 **	-----------------------------------------------
 **	are the alternative quotes being handled
@@ -176,14 +159,32 @@ char		**msh_sort_quote(char *input)
 	wend = -1;
 	qcnt = 0;
 	sorted = (char **)malloc(sizeof(*sorted) * wdcnt(input) + 1);
+
+	ft_putchar('\n');
+
+	/*
+	**	starts and ends need adjusting
+	**	problems seem to come from quotes
+	*/
 	while (input[idx] != '\0')
 	{
 		if (input[idx] != ' ' && wstart == -1)
 			wstart = idx;
+
+		//???
+		// if (curquot == '\0' && input[idx] != '\'' && input[idx] != '\"' && wstart == -1)
+		// 	wstart = idx;
+
+		//???
+		// if (curquot == '\0' && (input[idx] == '\'' || input[idx] == '\"'))
+		// 	wstart = idx;
+
 		if (input[idx] == ' ' && curquot == '\0' && idx > 0)
 		{
 			wend = idx - 1;
 		}
+		// else if (input[idx] == ';' && curquot == '\0')
+		// 	wend = idx; //idx - 1?
 		// else if (input[idx] == ';')
 		// {
 		// 	if (scolon_is_in_quote(idx, input) == 0)
@@ -194,10 +195,27 @@ char		**msh_sort_quote(char *input)
 		if (wstart > -1 && wend > -1)
 		{
 			sub = ft_strsub(input, wstart, (wend - wstart + 1));
+
+			//
+			ft_putstr("Sub: |");
+			ft_putstr(sub);
+			ft_putendl("|");
+			//
+
 			if (quote_char(sub) != '\0')
+			{
 				sorted[qcnt] = quote_trim(sub, quote_char(sub));
+				// ft_putstr("Sorted (QTRIM): ");
+				// ft_putendl(sorted[qcnt]);
+			}
 			else
+			{
 				sorted[qcnt] = ft_strdup(sub);
+				// ft_putstr("Sorted (DUP): ");
+				// ft_putendl(sorted[qcnt]);
+			}
+			// ft_putstr("Sorted: ");
+			// ft_putendl(sorted[qcnt]);
 			ft_strdel(&sub);
 			qcnt++;
 			reset_start_end(&wstart, &wend);
@@ -205,6 +223,7 @@ char		**msh_sort_quote(char *input)
 		curquot = check_quote(input[idx], curquot);
 		idx++;
 	}
+	ft_putchar('\n');
 	sorted[qcnt] = NULL;
 	return (sorted);
 }

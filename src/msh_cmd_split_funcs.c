@@ -106,7 +106,8 @@ int			scolon_is_in_quote(int col_idx, char *input)
 		}
 		if (idx == col_idx)
 		{
-			if (curquot != '\0')
+			// if (curquot != '\0')
+			if (curquot != '\0' && input[idx] == ';')
 			{
 				// ft_putendl("IS IN QUOTE");
 				return (1);
