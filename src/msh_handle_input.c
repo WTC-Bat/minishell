@@ -14,7 +14,7 @@
 
 int		msh_handle_input(char **args, t_env *tenv)
 {
-	ft_putendl("HANDLE_INPUT");
+	// ft_putendl("HANDLE_INPUT");
 	if ((ft_strcmp(args[0], "env")) == 0)
 		print_env(tenv);
 	else if ((ft_strcmp(args[0], "echo")) == 0)

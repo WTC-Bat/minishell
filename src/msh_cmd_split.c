@@ -26,22 +26,22 @@ void			cmds_free(t_list *cmds)
 	free(cmds);
 }
 
-// static t_list	*cmds_reverse(t_list *cmds)
-// {
-// 	t_list	*tmp;
-// 	t_list	*new;
-//
-// 	tmp = NULL;
-// 	new = NULL;
-// 	while (cmds != NULL)
-// 	{
-// 		tmp = cmds->next;
-// 		cmds->next = new;
-// 		new = cmds;
-// 		cmds = tmp;
-// 	}
-// 	return (new);
-// }
+static t_list	*cmds_reverse(t_list *cmds)
+{
+	t_list	*tmp;
+	t_list	*new;
+
+	tmp = NULL;
+	new = NULL;
+	while (cmds != NULL)
+	{
+		tmp = cmds->next;
+		cmds->next = new;
+		new = cmds;
+		cmds = tmp;
+	}
+	return (new);
+}
 
 t_list			*msh_cmd_split(char *input)
 {
@@ -54,62 +54,23 @@ t_list			*msh_cmd_split(char *input)
 
 	scnt = get_split_count(input);
 	splits = split_indices(input);
-	ft_putendl("SPLIT WORK");
-
-	//
-	// int i = 0;
-	// ft_putendl("SPLITS:");
-	// while (splits[i] != NULL)
-	// {
-	// 	ft_putendl(splits[i]);
-	// 	i++;
-	// }
-	//
 
 	idx = 0;
 	root = NULL;
 	while (idx < scnt)
 	{
+		// ft_putstr("SPLITS[IDX]: ");
+		// ft_putendl(splits[idx]);
 		trim = ft_strtrim(splits[idx]);
-		// ft_putstr("TRIM: ");
+		// ft_putstr("SPLIT_TRIM: ");
 		// ft_putendl(trim);
-		cmds = ft_lstnew((void *)trim, ft_strlen(trim));	//+1?
+		cmds = ft_lstnew((void *)trim, ft_strlen(trim) + 1);	//+1?
+		// ft_putstr("CMDS_NEW: ");
+		// ft_putendl(cmds->content);
 		cmds->next = root;
 		root = cmds;
 		ft_strdel(&trim);
 		idx++;
 	}
-	// ft_putendl("TRIMMED:");
-	// while (root != NULL)
-	// {
-	// 	ft_putendl((char *)root->content);
-	// 	root = root->next;
-	// }
-	// ft_starfree(splits);
-	return (root);
-	// return (cmds_reverse(root));
+	return (cmds_reverse(root));
 }
-
-// t_list			*msh_cmd_split(char *input)
-// {
-// 	t_list	*cmds;
-// 	t_list	*root;
-// 	char	**scsplits;
-// 	char	*trim;
-// 	int		cnt;
-//
-// 	root = NULL;
-// 	scsplits = semicolon_split(input);
-// 	cnt = 0;
-// 	while (scsplits[cnt] != NULL)
-// 	{
-// 		trim = ft_strtrim(scsplits[cnt]);
-// 		cmds = ft_lstnew((void *)trim, ft_strlen(trim));
-// 		cmds->next = root;
-// 		root = cmds;
-// 		ft_strdel(&trim);
-// 		cnt++;
-// 	}
-// 	ft_starfree(scsplits);
-// 	return (cmds_reverse(root));
-// }

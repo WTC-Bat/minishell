@@ -12,11 +12,16 @@
 
 0	-	ft_strequ might be able to be improved
 
+0	-	SEGFAULT when command ends with ';'
+
+
+
+
 
 0	-	COMPLICATIONS WHEN USING MULTI-COMMANDS !!!!
 		- start at handle_multi_command -?
 		- msh_cmd_split?
-		- MANUAL_TRACE:
+		- MANUAL_TRACE:	(FOUND!)
 			-	(1)
 			-	file:	msh_sort_quote.c
 				-	function:	msh_sort_quote()

@@ -34,14 +34,14 @@ static int	wdcnt(char *input)
 		if (input[idx] == ' ' && curquot == '\0')
 			wcnt++;
 		if (input[idx] == curquot)
-		{//-
+		{
 			if (input[idx + 1] == ' ')
 			{
 				wcnt++;
 				curquot = '\0';
 				idx++;
 			}
-		}//-
+		}
 		curquot = check_quote(input[idx], curquot);
 		idx++;
 	}
@@ -62,7 +62,6 @@ static char		*quote_trim(char *str, char quote)
 	tridx = 0;
 	first = ft_indexof(str, quote);
 	last = ft_lindexof(str, quote);
-	// trim = (char *)malloc(sizeof(char) * (ft_strlen(str) + 2) - 1);
 	trim = (char *)malloc(sizeof(char) * (ft_strlen(str) - 2) + 1);
 	while (str[idx] != '\0')
 	{
@@ -93,54 +92,6 @@ static char		quote_char(char *str)
 	return ('\0');
 }
 
-/*
-**	-----------------------------------------------
-**	are the alternative quotes being handled
-**	properly?
-**	-----------------------------------------------
-**	no "dquot" handling (odd number of the same quote)
-**	-----------------------------------------------
-**	handle empty input
-**	-----------------------------------------------
-*/
-// char		**msh_sort_quote(char *input)
-// {
-// 	char	**sorted;
-// 	char	curquot;
-// 	int		idx;
-// 	int		wstart;
-// 	int		wend;
-// 	int		qcnt;
-//
-// 	if (input == NULL || input[0] == '\0')
-// 		return (NULL);
-// 	curquot = '\0';
-// 	idx = 0;
-// 	wstart = -1;
-// 	wend = -1;
-// 	qcnt = 0;
-// 	sorted = (char **)malloc(sizeof(*sorted) * wdcnt(input) + 1);
-// 	while (input[idx] != '\0')
-// 	{
-// 		if (input[idx] != ' ' && wstart == -1)
-// 			wstart = idx;
-// 		if (input[idx] == ' ' && curquot == '\0' && idx > 0)
-// 			wend = idx - 1;
-// 		else if (input[idx + 1] == '\0')
-// 			wend = idx;
-// 		if (wstart > -1 && wend > -1)
-// 		{
-// 			sorted[qcnt] = ft_strsub(input, wstart, (wend - wstart + 1));
-// 			qcnt++;
-// 			reset_start_end(&wstart, &wend);
-// 		}
-// 		curquot = check_quote(input[idx], curquot);
-// 		idx++;
-// 	}
-// 	sorted[qcnt] = NULL;
-// 	return (sorted);
-// }
-
 char		**msh_sort_quote(char *input)
 {
 	char	**sorted;
@@ -160,25 +111,14 @@ char		**msh_sort_quote(char *input)
 	qcnt = 0;
 	sorted = (char **)malloc(sizeof(*sorted) * wdcnt(input) + 1);
 
-	ft_putchar('\n');
-
 	/*
 	**	starts and ends need adjusting
-	**	problems seem to come from quotes
+	**	problems seem to come from quotes??? MAYBE?? THINK FIXED?!?!
 	*/
 	while (input[idx] != '\0')
 	{
 		if (input[idx] != ' ' && wstart == -1)
 			wstart = idx;
-
-		//???
-		// if (curquot == '\0' && input[idx] != '\'' && input[idx] != '\"' && wstart == -1)
-		// 	wstart = idx;
-
-		//???
-		// if (curquot == '\0' && (input[idx] == '\'' || input[idx] == '\"'))
-		// 	wstart = idx;
-
 		if (input[idx] == ' ' && curquot == '\0' && idx > 0)
 		{
 			wend = idx - 1;
@@ -194,22 +134,13 @@ char		**msh_sort_quote(char *input)
 			wend = idx;
 		if (wstart > -1 && wend > -1)
 		{
-			ft_putstr("INPUT: ");
-			ft_putendl(input);
+			// ft_putstr("INPUT: ");
+			// ft_putendl(input);
 			sub = ft_strsub(input, wstart, (wend - wstart + 1));
-			// sub = ft_strsub(input, wstart, (wend - wstart));
-
-			//
-			ft_putstr("Sub: |");
-			ft_putstr(sub);
-			ft_putendl("|");
-			//
 
 			if (quote_char(sub) != '\0')
 			{
 				sorted[qcnt] = quote_trim(sub, quote_char(sub));
-				// ft_putstr("Sorted (QTRIM): ");
-				// ft_putendl(sorted[qcnt]);
 			}
 			else
 			{
@@ -226,7 +157,6 @@ char		**msh_sort_quote(char *input)
 		curquot = check_quote(input[idx], curquot);
 		idx++;
 	}
-	ft_putchar('\n');
 	sorted[qcnt] = NULL;
 	return (sorted);
 }
