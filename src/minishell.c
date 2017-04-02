@@ -61,6 +61,8 @@ static int	handle_multi_command(char *input, t_env *tenv)
 	ft_putendl("MCMD");
 	while (cmds != NULL)
 	{
+		ft_putstr("CMDS->CONTENT: ");
+		ft_putendl((char *)cmds->content);
 		// args = ft_strsplit((char *)cmds->content, ' ');
 		args = msh_sort_quote((char *)cmds->content);
 

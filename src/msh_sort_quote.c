@@ -194,7 +194,10 @@ char		**msh_sort_quote(char *input)
 			wend = idx;
 		if (wstart > -1 && wend > -1)
 		{
+			ft_putstr("INPUT: ");
+			ft_putendl(input);
 			sub = ft_strsub(input, wstart, (wend - wstart + 1));
+			// sub = ft_strsub(input, wstart, (wend - wstart));
 
 			//
 			ft_putstr("Sub: |");
