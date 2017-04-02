@@ -45,6 +45,13 @@ char	*read_line(const int fd)
 	ft_memset(rline, '\0', 1024);
 	read(fd, rline, 1024);
 	line = ft_strtrim(rline);
+	if (line[0] == ';')
+	{
+		ft_putendl_fd("Unexpected character: ';'", 2);
+		ft_strdel(&rline);
+		ft_strdel(&line);
+		return (NULL);
+	}
 	ft_strdel(&rline);
 	return (line);
 }

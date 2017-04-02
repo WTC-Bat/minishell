@@ -57,7 +57,8 @@ t_list			*msh_cmd_split(char *input)
 
 	idx = 0;
 	root = NULL;
-	while (idx < scnt)
+	// while (idx < scnt)
+	while (idx < scnt - 1)
 	{
 		// ft_putstr("SPLITS[IDX]: ");
 		// ft_putendl(splits[idx]);

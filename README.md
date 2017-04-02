@@ -12,10 +12,25 @@
 
 0	-	ft_strequ might be able to be improved
 
-0	-	SEGFAULT when command ends with ';'
+0	-	SEGFAULT - two or more consecutive ';' ("echo ;;")
+
+0	-	function line length, headers!
+		-	line length:
+			-	msh_sort_quote.c	->	msh_sort_quote()	( + vars )
+			-	msh_cmd_split.c		->	msh_cmd_split()		( vars )
+
+0	-	incomplete words will still run command with closest match
+		-	(exi	- will run exit)
 
 
 
+
+
+0	-	SEMI-COLON ENDING TRACE:	(FOUND!)
+		-	file:	minishell.c
+			-	function:	msh_cmd_split()
+		-	file:	msh_cmd_split.c
+			-	function:	msh_cmd_split()
 
 
 0	-	COMPLICATIONS WHEN USING MULTI-COMMANDS !!!!

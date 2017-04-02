@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   minishell.c 	                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/10 16:07:04 by mvanwyk           #+#    #+#             */
-/*   Updated: 2016/08/02 14:04:49 by mvanwyk          ###   ########.fr       */
+/*   Updated: 2016/07/14 14:03:21 by mvanwyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int	handle_multi_command(char *input, t_env *tenv)
 	char	**args;
 	int		done;
 
+	ft_putendl(input);
 	cmds = msh_cmd_split(input);
 
 	done = 0;
@@ -88,13 +89,13 @@ static int	loop(t_env *tenv)
 {
 	char	*input;
 	char	**args;
-	int		col_idx;
 	int		done;
 
-	col_idx = -1;
 	done = 0;
 	put_prompt(tenv);
 	input = read_line(0);
+	if (input == NULL)
+		return (0);
 	if (input[0] != '\0' && input[0] != ' ' && input[0] != '\t')
 	{
 		if (has_cmd_splitter(input) == 1)
