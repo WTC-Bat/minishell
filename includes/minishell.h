@@ -62,4 +62,6 @@ int					has_cmd_splitter(char *input);
 char				**split_indices(char *input);
 int					get_split_count(char *input);
 
+int					check_input(char *input);
+
 #endif

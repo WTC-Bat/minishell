@@ -54,11 +54,10 @@ t_list			*msh_cmd_split(char *input)
 
 	scnt = get_split_count(input);
 	splits = split_indices(input);
-
 	idx = 0;
 	root = NULL;
-	// while (idx < scnt)
-	while (idx < scnt - 1)
+	while (idx < scnt)
+	// while (idx < scnt - 1)
 	{
 		// ft_putstr("SPLITS[IDX]: ");
 		// ft_putendl(splits[idx]);

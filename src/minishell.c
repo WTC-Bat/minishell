@@ -96,7 +96,8 @@ static int	loop(t_env *tenv)
 	input = read_line(0);
 	if (input == NULL)
 		return (0);
-	if (input[0] != '\0' && input[0] != ' ' && input[0] != '\t')
+	// if (input[0] != '\0' && input[0] != ' ' && input[0] != '\t')
+	if (check_input(input) == 1)
 	{
 		if (has_cmd_splitter(input) == 1)
 		{

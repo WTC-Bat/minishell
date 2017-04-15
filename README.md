@@ -12,7 +12,7 @@
 
 0	-	ft_strequ might be able to be improved
 
-0	-	SEGFAULT - two or more consecutive ';' ("echo ;;")
+FIXED?	-	SEGFAULT - two or more consecutive ';' ("echo ;;")
 
 0	-	function line length, headers!
 		-	line length:
