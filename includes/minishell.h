@@ -64,4 +64,10 @@ int					get_split_count(char *input);
 
 int					check_input(char *input);
 
+void				wdcnt_setvars(int *wcnt, char *curquot, int *idx);
+void				reset_start_end(int *wstart, int *wend);
+char				check_quote(char in_idx, char curquot);
+int					wdcnt(char *input);
+char				*quote_trim(char *str, char quote);
+
 #endif

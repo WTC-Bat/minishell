@@ -5,38 +5,38 @@
 0	-	SHLVL=2 ???
 
 
+?	-	if arguments to command contain ';', an error will occur
 
-0	-	Think I need to rework the 'remove_var' function in 'msh_bltn_unsetenv'
+FIXED	-	ft_strequ might be able to be improved
 
-0	-	if arguments to command contain ';', an error will occur
+FIXED	-	SEGFAULT - two or more consecutive ';' ("echo ;;")
 
-0	-	ft_strequ might be able to be improved
+0	-	Error when (multi?) command ends with semi-colon
 
-FIXED?	-	SEGFAULT - two or more consecutive ';' ("echo ;;")
+0	-	'inner' quotes don't work
 
-0	-	Error when multi-command ends with semi-colon
+FIXED?	-	Memory leaks. Check within functions pertaining to semicolon funcs and
+			sort quote funcs
 
-0	-	Memory leaks. Check within functions pertaining to semicolon funcs and
-		sort quote funcs
-		FIXED???
+FIXED	-	function line length, headers!
+			-	msh_sort_quote.c
+				-	msh_sort_quote()
+					-	Lines
+					-	Variables
+				-	wdcnt()
+					-	Lines - FIXED
+			-	msh_cmd_split.c
+				-	msh_cmd_split()
+					-	Variables - FIXED
 
-0	-	function line length, headers!
-		-	msh_sort_quote.c
-			-	msh_sort_quote()
-				-	Lines
-				-	Variables
-			-	wdcnt()
-				-	Lines
-		-	msh_cmd_split.c
-			-	msh_cmd_split()
-				-	Variables
-
-0	-	incomplete words will still run command with closest match
-		-	(exi	- will run exit)
+FIXED	-	incomplete words will still run command with closest match
+			-	(exi	- will run exit)
 
 
 
-
+//////////
+MYTRACE
+//////////
 
 0	-	SEMI-COLON ENDING TRACE:	(FOUND!)
 		-	file:	minishell.c

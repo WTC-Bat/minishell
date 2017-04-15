@@ -40,9 +40,9 @@ int			check_input(char *input)
 	if (input[0] != '\0' && input[0] != ' ' && input[0] != '\t')
 	{
 		if (has_double_scolon(input) == 0)
-		{
 			return (1);
-		}
+		else
+			ft_strdel(&input);
 	}
 	return (0);
 }

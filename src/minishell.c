@@ -107,8 +107,8 @@ static int	loop(t_env *tenv)
 			done = msh_handle_input(args, tenv);
 			ft_starfree(args);
 		}
+		ft_strdel(&input);
 	}
-	ft_strdel(&input);
 	return (done);
 }
 
