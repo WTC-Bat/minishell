@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/02/07 16:15:33 by mvanwyk           #+#    #+#             */
+/*   Updated: 2017/02/07 16:15:37 by mvanwyk          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static void	reset_start_end(int *wstart, int *wend)
@@ -111,10 +123,6 @@ char		**msh_sort_quote(char *input)
 	qcnt = 0;
 	sorted = (char **)malloc(sizeof(*sorted) * wdcnt(input) + 1);
 
-	/*
-	**	starts and ends need adjusting
-	**	problems seem to come from quotes??? MAYBE?? THINK FIXED?!?!
-	*/
 	while (input[idx] != '\0')
 	{
 		if (input[idx] != ' ' && wstart == -1)
@@ -123,33 +131,15 @@ char		**msh_sort_quote(char *input)
 		{
 			wend = idx - 1;
 		}
-		// else if (input[idx] == ';' && curquot == '\0')
-		// 	wend = idx; //idx - 1?
-		// else if (input[idx] == ';')
-		// {
-		// 	if (scolon_is_in_quote(idx, input) == 0)
-		// 		wend = idx - 1;
-		// }
 		else if (input[idx + 1] == '\0')
 			wend = idx;
 		if (wstart > -1 && wend > -1)
 		{
-			// ft_putstr("INPUT: ");
-			// ft_putendl(input);
 			sub = ft_strsub(input, wstart, (wend - wstart + 1));
-
 			if (quote_char(sub) != '\0')
-			{
 				sorted[qcnt] = quote_trim(sub, quote_char(sub));
-			}
 			else
-			{
 				sorted[qcnt] = ft_strdup(sub);
-				// ft_putstr("Sorted (DUP): ");
-				// ft_putendl(sorted[qcnt]);
-			}
-			// ft_putstr("Sorted: ");
-			// ft_putendl(sorted[qcnt]);
 			ft_strdel(&sub);
 			qcnt++;
 			reset_start_end(&wstart, &wend);

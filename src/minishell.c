@@ -19,9 +19,7 @@ static int	handle_multi_command(char *input, t_env *tenv)
 	char	**args;
 	int		done;
 
-	ft_putendl(input);
 	cmds = msh_cmd_split(input);
-
 	done = 0;
 	root = cmds;
 	while (cmds != NULL)
@@ -96,7 +94,6 @@ static int	loop(t_env *tenv)
 	input = read_line(0);
 	if (input == NULL)
 		return (0);
-	// if (input[0] != '\0' && input[0] != ' ' && input[0] != '\t')
 	if (check_input(input) == 1)
 	{
 		if (has_cmd_splitter(input) == 1)
@@ -110,8 +107,8 @@ static int	loop(t_env *tenv)
 			done = msh_handle_input(args, tenv);
 			ft_starfree(args);
 		}
-		ft_strdel(&input);
 	}
+	ft_strdel(&input);
 	return (done);
 }
 

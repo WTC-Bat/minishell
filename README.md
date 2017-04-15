@@ -14,10 +14,22 @@
 
 FIXED?	-	SEGFAULT - two or more consecutive ';' ("echo ;;")
 
+0	-	Error when multi-command ends with semi-colon
+
+0	-	Memory leaks. Check within functions pertaining to semicolon funcs and
+		sort quote funcs
+		FIXED???
+
 0	-	function line length, headers!
-		-	line length:
-			-	msh_sort_quote.c	->	msh_sort_quote()	( + vars )
-			-	msh_cmd_split.c		->	msh_cmd_split()		( vars )
+		-	msh_sort_quote.c
+			-	msh_sort_quote()
+				-	Lines
+				-	Variables
+			-	wdcnt()
+				-	Lines
+		-	msh_cmd_split.c
+			-	msh_cmd_split()
+				-	Variables
 
 0	-	incomplete words will still run command with closest match
 		-	(exi	- will run exit)

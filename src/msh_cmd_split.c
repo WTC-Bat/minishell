@@ -57,20 +57,14 @@ t_list			*msh_cmd_split(char *input)
 	idx = 0;
 	root = NULL;
 	while (idx < scnt)
-	// while (idx < scnt - 1)
 	{
-		// ft_putstr("SPLITS[IDX]: ");
-		// ft_putendl(splits[idx]);
 		trim = ft_strtrim(splits[idx]);
-		// ft_putstr("SPLIT_TRIM: ");
-		// ft_putendl(trim);
 		cmds = ft_lstnew((void *)trim, ft_strlen(trim) + 1);	//+1?
-		// ft_putstr("CMDS_NEW: ");
-		// ft_putendl(cmds->content);
 		cmds->next = root;
 		root = cmds;
 		ft_strdel(&trim);
 		idx++;
 	}
+	ft_starfree(splits);
 	return (cmds_reverse(root));
 }
