@@ -20,7 +20,7 @@ int				has_cmd_splitter(char *input)
 	while (input[cnt] != '\0')
 	{
 		if (input[cnt] == ';')
-			if (scolon_is_in_quote(cnt, input) == 0)
+			if (char_is_in_quote(input[cnt], cnt, input) == 0)
 				return (1);
 		cnt++;
 	}
@@ -38,7 +38,7 @@ int				get_split_count(char *input)
 	{
 		if (input[idx] == ';' && input[idx + 1] != '\0')
 		{
-			if (scolon_is_in_quote(idx, input) == 0)
+			if (char_is_in_quote(input[idx], idx, input) == 0)
 				cnt++;
 		}
 		idx++;
@@ -70,7 +70,7 @@ static int		*get_split_indices(char *input)
 	{
 		if (input[idx] == ';')
 		{
-			if (scolon_is_in_quote(idx, input) == 0)
+			if (char_is_in_quote(input[idx], idx, input) == 0)
 			{
 				indices[icnt] = idx;
 				icnt++;

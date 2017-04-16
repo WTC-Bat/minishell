@@ -78,10 +78,3 @@ char		*quote_trim(char *str, char quote)
 	trim[tridx] = '\0';
 	return (trim);
 }
-
-// msh_quote_funcs.c ?
-// Use for 'inner' quotes
-// int		char_is_in_quote(char c, int cidx, char *input)
-// {
-//		//check scolon_is_in_quote
-// }

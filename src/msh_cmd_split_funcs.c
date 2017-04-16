@@ -88,7 +88,7 @@ char		**semicolon_split(char *input)
 	return (splits);
 }
 
-int			scolon_is_in_quote(int col_idx, char *input)
+int		char_is_in_quote(char c, int cidx, char *input)
 {
 	int		idx;
 	char	curquot;
@@ -97,16 +97,16 @@ int			scolon_is_in_quote(int col_idx, char *input)
 	curquot = '\0';
 	while (input[idx] != '\0')
 	{
-		if (input[idx] == '\'' || input[idx] == '\"')
+		if (input[idx] == '\'' && input[idx] == '\"')
 		{
 			if (curquot == '\0')
 				curquot = input[idx];
 			else if (curquot == input[idx])
 				curquot = '\0';
 		}
-		if (idx == col_idx)
+		if (idx == cidx)
 		{
-			if (curquot != '\0' && input[idx] == ';')
+			if (curquot != '\0' && input[idx] == c)
 				return (1);
 			else
 				return (0);

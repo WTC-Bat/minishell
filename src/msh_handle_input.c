@@ -19,11 +19,11 @@ static int	has_double_scolon(char *input)
 	cnt = 0;
 	while (input[cnt] != '\0')
 	{
-		if (input[cnt] == ';' && scolon_is_in_quote(cnt, input) == 0)
+		if (input[cnt] == ';' && char_is_in_quote(input[cnt], cnt, input) == 0)
 		{
 			if (input[cnt + 1] != '\0' && input[cnt + 1] == ';')
 			{
-				if (scolon_is_in_quote(cnt + 1, input) == 0)
+				if (char_is_in_quote(input[cnt + 1], cnt + 1, input) == 0)
 				{
 					ft_putendl_fd("Unexpected character ';;'", 2);
 					return (1);

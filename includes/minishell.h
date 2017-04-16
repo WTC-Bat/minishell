@@ -57,7 +57,6 @@ t_env				*t_env_reverse(t_env *tenv);
 char				**tenv_to_star(t_env *tenv);
 
 char				**msh_sort_quote(char *input);
-int					scolon_is_in_quote(int col_idx, char *input);
 int					has_cmd_splitter(char *input);
 char				**split_indices(char *input);
 int					get_split_count(char *input);
@@ -69,5 +68,7 @@ void				reset_start_end(int *wstart, int *wend);
 char				check_quote(char in_idx, char curquot);
 int					wdcnt(char *input);
 char				*quote_trim(char *str, char quote);
+
+int					char_is_in_quote(char c, int cidx, char *input);
 
 #endif
