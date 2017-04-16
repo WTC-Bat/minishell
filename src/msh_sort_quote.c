@@ -28,6 +28,28 @@ static char		quote_char(char *str)
 	return ('\0');
 }
 
+// static char		quote_char(char *str)
+// {
+// 	int		first;
+// 	int		last;
+//
+// 	first = ft_indexof(str, '\'');
+// 	last = ft_lindexof(str, '\'');
+// 	if (first > -1 && last > -1 && first != last)
+// 	{
+// 		if (char_is_in_quote('\'', first, str) == 0)
+// 			return ('\'');
+// 	}
+// 	first = ft_indexof(str, '\"');
+// 	last = ft_lindexof(str, '\"');
+// 	if (first > -1 && last > -1 && first != last)
+// 	{
+// 		if (char_is_in_quote('\"', first, str) == 0)
+// 			return ('\"');
+// 	}
+// 	return ('\0');
+// }
+
 static void	set_start_end(char *input, int *start, int *end, int idx, char quot)
 {
 	if (input[idx] != ' ' && *start == -1)
