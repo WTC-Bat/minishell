@@ -36,7 +36,7 @@ int				get_split_count(char *input)
 	idx = 0;
 	while (input[idx] != '\0')
 	{
-		if (input[idx] == ';')
+		if (input[idx] == ';' && input[idx + 1] != '\0')
 		{
 			if (scolon_is_in_quote(idx, input) == 0)
 				cnt++;

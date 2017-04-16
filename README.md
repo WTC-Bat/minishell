@@ -11,7 +11,7 @@ FIXED	-	ft_strequ might be able to be improved
 
 FIXED	-	SEGFAULT - two or more consecutive ';' ("echo ;;")
 
-0	-	Error when (multi?) command ends with semi-colon
+FIXED	-	Error when (multi?) command ends with semi-colon
 
 0	-	'inner' quotes don't work
 
