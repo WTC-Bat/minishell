@@ -21,6 +21,12 @@ FIXED?	-	Memory leaks. Check within functions pertaining to semicolon funcs and
 0		-	quote chars placed directly after a closing quote will be printed
 			[echo "Cheese"''	=	prints: Cheese'']
 
+0		-	single quote before string will print string
+			[echo "Cheese	=	prints: Cheese]
+
+0		-	single quote after string will print string and quote
+			[echo Cheese"	=	prints: Cheese"]
+
 FIXED	-	function line length, headers!
 			-	msh_sort_quote.c
 				-	msh_sort_quote()
