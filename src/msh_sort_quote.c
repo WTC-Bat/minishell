@@ -12,47 +12,9 @@
 
 #include "minishell.h"
 
-static char		quote_char(char *str)
-{
-	int		first;
-	int		last;
-
-	first = ft_indexof(str, '\'');
-	last = ft_lindexof(str, '\'');
-	if (first > -1 && last > -1 && first != last)
-		return ('\'');
-	first = ft_indexof(str, '\"');
-	last = ft_lindexof(str, '\"');
-	if (first > -1 && last > -1 && first != last)
-		return ('\"');
-	return ('\0');
-}
-
-// static char		quote_char(char *str)
-// {
-// 	int		first;
-// 	int		last;
-//
-// 	first = ft_indexof(str, '\'');
-// 	last = ft_lindexof(str, '\'');
-// 	if (first > -1 && last > -1 && first != last)
-// 	{
-// 		if (char_is_in_quote('\'', first, str) == 0)
-// 			return ('\'');
-// 	}
-// 	first = ft_indexof(str, '\"');
-// 	last = ft_lindexof(str, '\"');
-// 	if (first > -1 && last > -1 && first != last)
-// 	{
-// 		if (char_is_in_quote('\"', first, str) == 0)
-// 			return ('\"');
-// 	}
-// 	return ('\0');
-// }
-
 static void	set_start_end(char *input, int *start, int *end, int idx, char quot)
 {
-	if (input[idx] != ' ' && *start == -1)
+	if (input[idx] != '\0' && input[idx] != ' ' && *start == -1)
 		*start = idx;
 	if (input[idx] == ' ' && quot == '\0' && idx > 0)
 		*end = idx - 1;
@@ -68,8 +30,8 @@ static char	*get_sorted_segment(char *input, int wstart, int wend)
 	if (input == NULL)
 		return (NULL);
 	sub = ft_strsub(input, wstart, (wend - wstart + 1));
-	if (quote_char(sub) != '\0')
-		sort = quote_trim(sub, quote_char(sub));
+	if (sub[0] == '\'' || sub[0] == '\"')
+		sort = quote_trim(sub, sub[0]);
 	else
 		sort = ft_strdup(sub);
 	ft_strdel(&sub);

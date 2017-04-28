@@ -13,10 +13,13 @@ FIXED	-	SEGFAULT - two or more consecutive ';' ("echo ;;")
 
 FIXED	-	Error when (multi?) command ends with semi-colon
 
-0	-	'inner' quotes don't work
+FIXED	-	'inner' quotes don't work
 
 FIXED?	-	Memory leaks. Check within functions pertaining to semicolon funcs and
 			sort quote funcs
+
+0		-	quote chars placed directly after a closing quote will be printed
+			[echo "Cheese"''	=	prints: Cheese'']
 
 FIXED	-	function line length, headers!
 			-	msh_sort_quote.c
