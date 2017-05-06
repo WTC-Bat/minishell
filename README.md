@@ -18,8 +18,13 @@ FIXED	-	'inner' quotes don't work
 FIXED?	-	Memory leaks. Check within functions pertaining to semicolon funcs and
 			sort quote funcs
 
-0		-	quote chars placed directly after a closing quote will be printed
+FIXED		-	quote chars placed directly after a closing quote will be printed
 			[echo "Cheese"''	=	prints: Cheese'']
+
+0		-	quotes not separated by a space are considered part of the string
+			[echo Cheese''	=	prints: Cheese'']
+			[SEE: msh_sort_quote.c -> get_sorted() -> wstart + wend]
+			[? set_start_end() ?]
 
 0		-	single quote before string will print string
 			[echo "Cheese	=	prints: Cheese]

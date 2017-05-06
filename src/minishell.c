@@ -104,6 +104,14 @@ static int	loop(t_env *tenv)
 		else
 		{
 			args = msh_sort_quote(input);
+			//
+			// int i = 0;
+			// while (args[i] != NULL)
+			// {
+			// 	ft_putendl(args[i]);
+			// 	i++;
+			// }
+			//
 			done = msh_handle_input(args, tenv);
 			ft_starfree(args);
 		}
