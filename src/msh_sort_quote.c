@@ -13,43 +13,42 @@
 #include "minishell.h"
 
 //#1
+// static void	set_start_end(char *input, int *start, int *end, int idx, char quot)
+// {
+// 	if (input[idx] != '\0' && input[idx] != ' ' && *start == -1)
+// 		*start = idx;
+// 	if (input[idx] == ' ' && quot == '\0' && idx > 0)
+// 		*end = idx - 1;
+// 	else if (input[idx + 1] == '\0' || input[idx] == quot)
+// 		*end = idx;
+// }
+
+//#2?
 static void	set_start_end(char *input, int *start, int *end, int idx, char quot)
 {
 	if (input[idx] != '\0' && input[idx] != ' ' && *start == -1)
 		*start = idx;
-	if (input[idx] == ' ' && quot == '\0' && idx > 0)
-		*end = idx - 1;
-	else if (input[idx + 1] == '\0' || input[idx] == quot)
+	if (input[idx + 1] == '\0')
 		*end = idx;
+	if (quot == '\0')
+	{
+		if (input[idx] == ' ' && idx > 0)
+			*end = idx - 1;
+		// below: and also check if the next character is a quote?
+		else if ((input[idx] == '\'' || input[idx] == '\"') && idx != *start)
+			*end = idx - 1;
+	}
+	else
+	{
+		if (input[idx] == quot)
+			*end = idx;
+	}
 }
-
-//#2?
-// static void	set_start_end(char *input, int *start, int *end, int idx, char quot)
-// {
-// 	if (input[idx] != '\0' && input[idx] != ' ' && *start == -1)
-// 	{
-// 		if (quot == '\0')
-// 			*start = idx;
-// 	}
-// 	if (input[idx] == ' ' && quot == '\0' && idx > 0)
-// 	{
-// 		*end = idx - 1;
-// 	}
-// 	else if (input[idx + 1] == '\0' || input[idx] == quot)
-// 	{
-// 		*end = idx;
-// 	}
-// }
-
-// static void	set_start_end(char *input, int *start, int *end, int idx, char quot)
-// {
-//
-// }
 
 static char	*get_sorted_segment(char *input, int wstart, int wend)
 {
-	char *sub;
-	char *sort;
+	char	*sub;
+	char	*sort;
 
 	if (input == NULL)
 		return (NULL);
@@ -93,6 +92,7 @@ static char	**get_sorted(char *input, int *wstart, int *wend, int *qcnt)
 	char	**sorted;
 	int		idx;
 	char	curquot;
+	char	*tmp;
 
 	idx = 0;
 	sorted = (char **)malloc(sizeof(*sorted) * wdcnt(input) + 1);
@@ -102,13 +102,20 @@ static char	**get_sorted(char *input, int *wstart, int *wend, int *qcnt)
 		set_start_end(input, wstart, wend, idx, curquot);
 		if (*wstart > -1 && *wend > -1)
 		{
-			//
-			// ft_putnbr_endl(*wstart);
-			// ft_putnbr_endl(*wend);
-			//
-			sorted[*qcnt] = get_sorted_segment(input, *wstart, *wend);
-			*qcnt += 1;
-			reset_start_end(wstart, wend);
+			tmp = get_sorted_segment(input, *wstart, *wend);
+			if (tmp[0] != '\0')
+			{
+				sorted[*qcnt] = ft_strdup(tmp);
+				*qcnt += 1;
+				reset_start_end(wstart, wend);
+			}
+			ft_strdel(&tmp);
+
+			//////
+			// sorted[*qcnt] = get_sorted_segment(input, *wstart, *wend);
+			// *qcnt += 1;
+			// reset_start_end(wstart, wend);
+			//////
 		}
 		curquot = check_quote(input[idx], curquot);
 		idx++;

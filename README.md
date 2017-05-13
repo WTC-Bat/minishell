@@ -21,10 +21,14 @@ FIXED?	-	Memory leaks. Check within functions pertaining to semicolon funcs and
 FIXED		-	quote chars placed directly after a closing quote will be printed
 			[echo "Cheese"''	=	prints: Cheese'']
 
-0		-	quotes not separated by a space are considered part of the string
+FIXED		-	quotes not separated by a space are considered part of the string
 			[echo Cheese''	=	prints: Cheese'']
 			[SEE: msh_sort_quote.c -> get_sorted() -> wstart + wend]
 			[? set_start_end() ?]
+
+0		-	If a pair of empty quotes appears after a space, a segfault will
+			occur.
+			[echo "Cheese" ''	=	SEGFAULT]
 
 0		-	single quote before string will print string
 			[echo "Cheese	=	prints: Cheese]
