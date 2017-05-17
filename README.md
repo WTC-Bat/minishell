@@ -21,17 +21,29 @@ FIXED?	-	Memory leaks. Check within functions pertaining to semicolon funcs and
 FIXED		-	quote chars placed directly after a closing quote will be printed
 			[echo "Cheese"''	=	prints: Cheese'']
 
-0		-	quotes not separated by a space are considered part of the string
+FIXED		-	quotes not separated by a space are considered part of the string
 			[echo Cheese''	=	prints: Cheese'']
 			[SEE: msh_sort_quote.c -> get_sorted() -> wstart + wend]
 			[? set_start_end() ?]
 
-0		-	single quote before string will print string
+FIXED		-	single quote before string will print string
 			[echo "Cheese	=	prints: Cheese]
 			[echo "Cheese ''	=	prints: Cheese '']
 
-0		-	single quote after string will print string and quote
+FIXED		-	single quote after string will print string and quote
 			[echo Cheese"	=	prints: Cheese"]
+
+0		-	a string after a quoted string will be separated by a spce
+			[echo "Cheese"Crackers	=	prints: Cheese Crackers]
+			[It should print: CheeseCrackers]
+
+0		-	a string before a quoted string will result in the quotes remaining
+			[echo Cheese"Crackers"	=	prints: Cheese"Crackers"]
+			[It should print: CheeseCrackers]
+
+0		-	[echo "Cheese" and	=	SEGFAULT]
+			(with or without a trailing space)
+			(only if "Cheese" is quoted)
 
 FIXED	-	function line length, headers!
 			-	msh_sort_quote.c
@@ -49,9 +61,9 @@ FIXED	-	incomplete words will still run command with closest match
 
 
 
-//////////
+///////
 MYTRACE
-//////////
+///////
 
 0	-	SEMI-COLON ENDING TRACE:	(FOUND!)
 		-	file:	minishell.c
