@@ -35,7 +35,6 @@ static int	handle_multi_command(char *input, t_env *tenv)
 	return (done);
 }
 
-
 static void	put_prompt(t_env *tenv)
 {
 	char	*prompt;
@@ -104,14 +103,6 @@ static int	loop(t_env *tenv)
 		else
 		{
 			args = msh_sort_quote(input);
-			//
-			// int i = 0;
-			// while (args[i] != NULL)
-			// {
-			// 	ft_putendl(args[i]);
-			// 	i++;
-			// }
-			//
 			done = msh_handle_input(args, tenv);
 			ft_starfree(args);
 		}
