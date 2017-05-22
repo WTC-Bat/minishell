@@ -43,11 +43,6 @@ static void	check_start_end(t_quot *tquot, int *start, int *end)
 		*end = -1;
 }
 
-// static void	set_extra()
-// {
-//
-// }
-
 void		set_start_end(t_quot *tquot, int *start, int *end, char quot)
 {
 	set_start(tquot, start);

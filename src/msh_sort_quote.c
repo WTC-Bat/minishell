@@ -49,6 +49,14 @@ static char	*get_sorted_work(char *input, int *wstart, int *wend)
 
 static void	set_sorted(char **sorted, int *qcnt, char *tmp)
 {
+	//
+	// if (needs_cleaning(tmp) == 1)
+	// {
+	// 	sorted[*qcnt] = clean_sorted(tmp);
+	// }
+	// else
+	// {
+	//
 	sorted[*qcnt] = ft_strdup(tmp);
 	*qcnt += 1;
 	ft_strdel(&tmp);

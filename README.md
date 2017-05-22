@@ -64,14 +64,10 @@ FIXED	-	incomplete words will still run command with closest match
 			-	(exi	- will run exit)
 
 
-
-////////////
-GIT BRANCHES
-////////////
-0	-	quote2 merged into master
-0	-	master-bkp is a backup of master (after quote2 merge)	(22-05-2017)
-
-
+//////
+BRANCH
+//////
+THIS BRANCH HAS NO SIGNIFICANT CHANGES TO "quote"
 
 ///////
 MYTRACE
