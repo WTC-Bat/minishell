@@ -70,7 +70,7 @@ FIXED	-	incomplete words will still run command with closest match
 GIT BRANCHES
 ////////////
 0	-	quote2 merged into master
-0	-	quote2bkp is a backup of quote2 pre-merge (22-05-2017)
+0	-	master-bkp is a backup of master (after quote2 merge)	(22-05-2017)
 
 
 
