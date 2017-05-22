@@ -28,7 +28,32 @@ static char	*get_sorted_segment(char *input, int wstart, int wend)
 	return (sort);
 }
 
-//38 lines
+static char	*get_sorted_work(char *input, int *wstart, int *wend)
+{
+	char	*tmp;
+	char	*trim;
+
+	trim = NULL;
+	if (*wstart > -1 && *wend > -1)
+	{
+		tmp = get_sorted_segment(input, *wstart, *wend);
+		if (tmp != NULL && tmp[0] != '\0')
+		{
+			trim = ft_strtrim(tmp);
+			reset_start_end(wstart, wend);
+			ft_strdel(&tmp);
+		}
+	}
+	return (trim);
+}
+
+static void	set_sorted(char **sorted, int *qcnt, char *tmp)
+{
+	sorted[*qcnt] = ft_strdup(tmp);
+	*qcnt += 1;
+	ft_strdel(&tmp);
+}
+
 static char	**get_sorted(char *input, int *wstart, int *wend, int *qcnt)
 {
 	char	**sorted;
@@ -46,17 +71,9 @@ static char	**get_sorted(char *input, int *wstart, int *wend, int *qcnt)
 	{
 		tquot->idx = idx;
 		set_start_end(tquot, wstart, wend, curquot);
-		if (*wstart > -1 && *wend > -1)
-		{
-			tmp = get_sorted_segment(input, *wstart, *wend);
-			if (tmp != NULL && tmp[0] != '\0')
-			{
-				sorted[*qcnt] = ft_strtrim(tmp);
-				*qcnt += 1;
-				reset_start_end(wstart, wend);
-				ft_strdel(&tmp);
-			}
-		}
+		tmp = get_sorted_work(input, wstart, wend);
+		if (tmp != NULL && tmp[0] != '\0')
+			set_sorted(sorted, qcnt, tmp);
 		curquot = check_quote(input[idx], curquot);
 		idx++;
 	}
