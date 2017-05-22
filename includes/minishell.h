@@ -28,6 +28,14 @@ typedef struct		s_env
 	struct s_env	*next;
 }					t_env;
 
+//
+typedef struct		s_quot
+{
+	char			*input;
+	int				idx;
+}					t_quot;
+//
+
 int					cd_args_valid(char *arg);
 int					cd_navigate(char *arg, t_env *tenv);
 int					cd_navigate_basic(t_env *tenv, char *arg);
@@ -70,5 +78,8 @@ int					wdcnt(char *input);
 char				*quote_trim(char *str, char quote);
 
 int					char_is_in_quote(char c, int cidx, char *input);
+
+t_quot				*tquot_init(char *input);
+void				tquot_free(t_quot *tquot);
 
 #endif

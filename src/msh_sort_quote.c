@@ -12,29 +12,60 @@
 
 #include "minishell.h"
 
-static void	set_start_end(char *input, int *start, int *end, int idx, char quot)
+// static void	set_start_end(char *input, int *start, int *end, int idx, char quot)
+// {
+// 	if (input[idx] != '\0' && input[idx] != ' ' && *start == -1)
+// 		*start = idx;
+// 	if (input[idx] == ' ' && quot == '\0' && idx > 0)
+// 		*end = idx - 1;
+// 	else if (input[idx + 1] == '\0' || input[idx] == quot)
+// 		*end = idx;
+// 	if (input[idx] == '\'' || input[idx] == '\"')
+// 	{
+// 		if (quot == '\0')
+// 		{
+// 			if (input[idx] == '\'' && input[idx + 1] == '\'')
+// 				*end = idx - 1;
+// 			else if (input[idx] == '\"' && input[idx + 1] == '\"')
+// 				*end = idx - 1;
+// 		}
+// 	}
+// 	if (*end == *start + 1)
+// 	{
+// 		if (input[*start] == '\'' && input[*end] == '\'')
+// 			*start = -1;
+// 		else if (input[*start] == '\"' && input[*end] == '\"')
+// 			*start = -1;
+// 	}
+// }
+
+//26 lines
+static void	set_start_end(t_quot *tquot, int *start, int *end, char quot)
 {
-	if (input[idx] != '\0' && input[idx] != ' ' && *start == -1)
+	int		idx;
+
+	idx = tquot->idx;
+	if (tquot->input[idx] != '\0' && tquot->input[idx] != ' ' && *start == -1)
 		*start = idx;
-	if (input[idx] == ' ' && quot == '\0' && idx > 0)
+	if (tquot->input[idx] == ' ' && quot == '\0' && idx > 0)
 		*end = idx - 1;
-	else if (input[idx + 1] == '\0' || input[idx] == quot)
+	else if (tquot->input[idx + 1] == '\0' || tquot->input[idx] == quot)
 		*end = idx;
-	if (input[idx] == '\'' || input[idx] == '\"')
+	if (tquot->input[idx] == '\'' || tquot->input[idx] == '\"')
 	{
 		if (quot == '\0')
 		{
-			if (input[idx] == '\'' && input[idx + 1] == '\'')
+			if (tquot->input[idx] == '\'' && tquot->input[idx + 1] == '\'')
 				*end = idx - 1;
-			else if (input[idx] == '\"' && input[idx + 1] == '\"')
+			else if (tquot->input[idx] == '\"' && tquot->input[idx + 1] == '\"')
 				*end = idx - 1;
 		}
 	}
 	if (*end == *start + 1)
 	{
-		if (input[*start] == '\'' && input[*end] == '\'')
+		if (tquot->input[*start] == '\'' && tquot->input[*end] == '\'')
 			*start = -1;
-		else if (input[*start] == '\"' && input[*end] == '\"')
+		else if (tquot->input[*start] == '\"' && tquot->input[*end] == '\"')
 			*start = -1;
 	}
 }
@@ -55,20 +86,28 @@ static char	*get_sorted_segment(char *input, int wstart, int wend)
 	return (sort);
 }
 
+//38 lines
 static char	**get_sorted(char *input, int *wstart, int *wend, int *qcnt)
 {
 	char	**sorted;
 	int		idx;
 	char	curquot;
 	char	*tmp;
+	t_quot	*tquot;
 
 	idx = 0;
 	sorted = (char **)malloc(sizeof(*sorted) * wdcnt(input) + 1);
 	curquot = '\0';
 	tmp = NULL;
+	//
+	// tquot = (t_quot *)malloc(sizeof(t_quot));
+	// tquot->input = ft_strdup(input);
+	tquot = tquot_init(input);
+	//
 	while (input[idx] != '\0')
 	{
-		set_start_end(input, wstart, wend, idx, curquot);
+		tquot->idx = idx;
+		set_start_end(tquot, wstart, wend, curquot);
 		if (*wstart > -1 && *wend > -1)
 		{
 			tmp = get_sorted_segment(input, *wstart, *wend);
@@ -83,6 +122,13 @@ static char	**get_sorted(char *input, int *wstart, int *wend, int *qcnt)
 		curquot = check_quote(input[idx], curquot);
 		idx++;
 	}
+	//
+	// ft_strclr(tquot->input);
+	// free(tquot->input);
+	// tquot->input = NULL;
+	// tquot = NULL;
+	tquot_free(tquot);
+	//
 	sorted[*qcnt] = NULL;
 	return (sorted);
 }
