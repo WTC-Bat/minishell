@@ -98,7 +98,7 @@ char			**split_indices(char *input)
 	while (idx < split_cnt)
 	{
 		if (split_indices[idx] == -1)
-			splits[idx] = trim_split(input, spos, ft_strlen(input) - spos + 1);//+1
+			splits[idx] = trim_split(input, spos, ft_strlen(input) - spos + 1);
 		else
 			splits[idx] = trim_split(input, spos, split_indices[idx] - spos);
 		spos = split_indices[idx] + 1;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   msh_sort_quote_funcs.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/05/22 10:51:24 by mvanwyk           #+#    #+#             */
+/*   Updated: 2017/05/22 10:51:29 by mvanwyk          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	wdcnt_setvars(int *wcnt, char *curquot, int *idx)
@@ -25,7 +37,7 @@ char	check_quote(char in_idx, char curquot)
 	return (curquot);
 }
 
-int	wdcnt(char *input)
+int		wdcnt(char *input)
 {
 	char	curquot;
 	int		idx;
@@ -53,7 +65,7 @@ int	wdcnt(char *input)
 	return (wcnt);
 }
 
-char		*quote_trim(char *str, char quote)
+char	*quote_trim(char *str, char quote)
 {
 	int		idx;
 	int		tridx;

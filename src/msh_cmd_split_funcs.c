@@ -88,7 +88,7 @@ char		**semicolon_split(char *input)
 	return (splits);
 }
 
-int		char_is_in_quote(char c, int cidx, char *input)
+int			char_is_in_quote(char c, int cidx, char *input)
 {
 	int		idx;
 	char	curquot;

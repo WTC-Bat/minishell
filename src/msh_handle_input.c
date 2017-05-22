@@ -47,7 +47,7 @@ int			check_input(char *input)
 	return (0);
 }
 
-int		msh_handle_input(char **args, t_env *tenv)
+int			msh_handle_input(char **args, t_env *tenv)
 {
 	if ((ft_strequ(args[0], "env")) == 1)
 		print_env(tenv);

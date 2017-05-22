@@ -6,28 +6,20 @@
 /*   By: mvanwyk <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/07 16:15:33 by mvanwyk           #+#    #+#             */
-/*   Updated: 2017/02/07 16:15:37 by mvanwyk          ###   ########.fr       */
+/*   Updated: 2017/05/22 10:52:03 by mvanwyk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//#1
 static void	set_start_end(char *input, int *start, int *end, int idx, char quot)
 {
 	if (input[idx] != '\0' && input[idx] != ' ' && *start == -1)
 		*start = idx;
 	if (input[idx] == ' ' && quot == '\0' && idx > 0)
 		*end = idx - 1;
-	// else if (input[idx + 1] == '\0')
 	else if (input[idx + 1] == '\0' || input[idx] == quot)
 		*end = idx;
-	// else if (input[idx] == quot)
-	// {
-	// 	if (input[idx + 1] == '\0' || input[idx + 1] == ' ')
-	// 		*end = idx;
-	// }
-	/* this prevents [echo Cheese''	==	Cheese''] */
 	if (input[idx] == '\'' || input[idx] == '\"')
 	{
 		if (quot == '\0')
@@ -38,9 +30,6 @@ static void	set_start_end(char *input, int *start, int *end, int idx, char quot)
 				*end = idx - 1;
 		}
 	}
-	/* check if start is valid. this prevents [echo ''"Cheese"	==	"Cheese"] */
-	// if (*end == *start + 1)
-	// 	*start = -1;
 	if (*end == *start + 1)
 	{
 		if (input[*start] == '\'' && input[*end] == '\'')
@@ -82,31 +71,14 @@ static char	**get_sorted(char *input, int *wstart, int *wend, int *qcnt)
 		set_start_end(input, wstart, wend, idx, curquot);
 		if (*wstart > -1 && *wend > -1)
 		{
-			//
-			// ft_putchar('\n');
-			// ft_putendl("start_end:");
-			// ft_putnbr_endl(*wstart);
-			// ft_putnbr_endl(*wend);
-			// ft_putchar('\n');
-			//
-
 			tmp = get_sorted_segment(input, *wstart, *wend);
-			// if (tmp != NULL)
 			if (tmp != NULL && tmp[0] != '\0')
 			{
-				// sorted[*qcnt] = ft_strdup(tmp);
 				sorted[*qcnt] = ft_strtrim(tmp);
 				*qcnt += 1;
 				reset_start_end(wstart, wend);
 				ft_strdel(&tmp);
 			}
-			// ft_strdel(&tmp);
-
-			//////OG
-			// sorted[*qcnt] = get_sorted_segment(input, *wstart, *wend);
-			// *qcnt += 1;
-			// reset_start_end(wstart, wend);
-			//////
 		}
 		curquot = check_quote(input[idx], curquot);
 		idx++;
@@ -128,17 +100,5 @@ char		**msh_sort_quote(char *input)
 	wend = -1;
 	qcnt = 0;
 	sorted = get_sorted(input, &wstart, &wend, &qcnt);
-	//
-	// int i = 0;
-	// ft_putendl("SORTED:");
-	// while (sorted[i] != NULL)
-	// {
-	// 	ft_putchar('|');
-	// 	ft_putstr(sorted[i]);
-	// 	ft_putchar('|');
-	// 	ft_putchar('\n');
-	// 	i++;
-	// }
-	//
 	return (sorted);
 }
