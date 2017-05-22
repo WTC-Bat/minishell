@@ -41,7 +41,7 @@ FIXED		-	single quote after string will print string and quote
 			[echo Cheese"Crackers"	=	prints: Cheese"Crackers"]
 			[It should print: CheeseCrackers]
 
-0		-	[echo "Cheese" and	=	SEGFAULT]
+FIXED		-	[echo "Cheese" and	=	SEGFAULT]
 			(with or without a trailing space)
 			(only if "Cheese" is quoted)
 

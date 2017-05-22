@@ -30,7 +30,7 @@ static void	set_end(t_quot *tquot, int *end, char quot)
 	}
 }
 
-static void	check_start(t_quot *tquot, int *start, int *end)
+static void	check_start_end(t_quot *tquot, int *start, int *end)
 {
 	if (*end == *start + 1)
 	{
@@ -39,6 +39,8 @@ static void	check_start(t_quot *tquot, int *start, int *end)
 		else if (tquot->input[*start] == '\"' && tquot->input[*end] == '\"')
 			*start = -1;
 	}
+	if (*end < *start)
+		*end = -1;
 }
 
 // static void	set_extra()
@@ -50,7 +52,7 @@ void		set_start_end(t_quot *tquot, int *start, int *end, char quot)
 {
 	set_start(tquot, start);
 	set_end(tquot, end, quot);
-	check_start(tquot, start, end);
+	check_start_end(tquot, start, end);
 }
 
 
