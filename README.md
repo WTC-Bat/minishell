@@ -41,12 +41,13 @@ FIXED		-	single quote after string will print string and quote
 			[echo Cheese"Crackers"	=	prints: Cheese"Crackers"]
 			[It should print: CheeseCrackers]
 
-0		-	[echo "Cheese" and	=	SEGFAULT]
+FIXED		-	[echo "Cheese" and	=	SEGFAULT]
 			(with or without a trailing space)
 			(only if "Cheese" is quoted)
 
-0		-	NORME:	msh_sort_quote.c -> set_start_end()	has 5 parameters, only 4 allowed
-					msh_sort_quote.c -> get_sorted()	has 28 lines
+FIXED		-	NORME:	msh_sort_quote.c -> set_start_end()	has 5 parameters,
+						only 4 allowed
+						msh_sort_quote.c -> get_sorted()	has 28 lines
 
 FIXED	-	function line length, headers!
 			-	msh_sort_quote.c
