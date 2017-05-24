@@ -61,3 +61,42 @@ void		set_start_end(t_quot *tquot, int *start, int *end, char quot)
 	set_end(tquot, end, quot);
 	check_start_end(tquot, start, end);
 }
+
+
+
+
+/*
+**	Original basis for funtions above. This version DOES NOT have fixes for
+**	[echo Cheese"Crackers"]
+**	[echo "Cheese"Crackers]
+**	[echo "Cheese" and]
+*/
+// static void	set_start_end(t_quot *tquot, int *start, int *end, char quot)
+// {
+// 	int		idx;
+//
+// 	idx = tquot->idx;
+// 	if (tquot->input[idx] != '\0' && tquot->input[idx] != ' ' && *start == -1)
+// 		*start = idx;
+// 	if (tquot->input[idx] == ' ' && quot == '\0' && idx > 0)
+// 		*end = idx - 1;
+// 	else if (tquot->input[idx + 1] == '\0' || tquot->input[idx] == quot)
+// 		*end = idx;
+// 	if (tquot->input[idx] == '\'' || tquot->input[idx] == '\"')
+// 	{
+// 		if (quot == '\0')
+// 		{
+// 			if (tquot->input[idx] == '\'' && tquot->input[idx + 1] == '\'')
+// 				*end = idx - 1;
+// 			else if (tquot->input[idx] == '\"' && tquot->input[idx + 1] == '\"')
+// 				*end = idx - 1;
+// 		}
+// 	}
+// 	if (*end == *start + 1)
+// 	{
+// 		if (tquot->input[*start] == '\'' && tquot->input[*end] == '\'')
+// 			*start = -1;
+// 		else if (tquot->input[*start] == '\"' && tquot->input[*end] == '\"')
+// 			*start = -1;
+// 	}
+// }
